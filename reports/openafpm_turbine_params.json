@@ -1,0 +1,20 @@
+{
+    "RotorDiskRadius": 0.187,
+    "RotorDiskInnerRadius": 0.137,
+    "MagnetLength": 0.05,
+    "MagnetWidth": 0.07,
+    "MagnetThickness": 0.01,
+    "MagnetMaterial": "NdFeB N40",
+    "NumberMagnet": 16,
+    "CoilType": 3,
+    "WireDiameter": 0.0015,
+    "TurnsPerCoil": 25,
+    "TargetRPM": 300.0,
+    "CalculatedValues": {
+        "EstimatedPowerW": 593.9050207290284,
+        "EstimatedVoltageV": 38.807348037213835,
+        "CoilResistanceOhm": 0.0851548093407417,
+        "MagnetFluxT": 0.373134328358209,
+        "FrequencyHz": 40.0
+    }
+}

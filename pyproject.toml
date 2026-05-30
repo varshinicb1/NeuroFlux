@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "neuroflux"
+version = "0.1.0"
+description = "Autonomous Engineering Discovery System for Axial-Flux Permanent Magnet (AFPM) Machines"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Varshini", email = "varshini@vidyuthlabs.com"},
+]
+keywords = ["AFPM", "axial-flux", "permanent-magnet", "simulation", "digital-twin", "engineering"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+femm = ["pyfemm>=0.1"]
+pyleecan = ["pyleecan>=1.5"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+]
+all = ["neuroflux[femm,pyleecan,dev]"]
+
+[project.urls]
+Homepage = "https://github.com/varshinicb1/NeuroFlux"
+Repository = "https://github.com/varshinicb1/NeuroFlux"
+
+[tool.setuptools.packages.find]
+include = ["neuroflux*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
