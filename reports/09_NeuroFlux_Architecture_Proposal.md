@@ -3,7 +3,7 @@
 
 **Version:** 0.1 (Foundation)
 **Date:** 2026-05-30
-**Alignment:** Extends Parakram Studio (visual low-code embedded/IoT/firmware) + EIS-RV (physics digital twin) into full engineering discovery platform. Generalizable beyond AFPM to motors, power electronics, materials, sensors, and full energy systems.
+**Alignment:** Extends Parakram Studio (visual low-code embedded/IoT/firmware) + EIS-RV (physics digital twin) into full engineering discovery platform. Generalizable beyond AFPM to motors, power electronics, materials, sensors, full energy systems.
 
 ## Core Philosophy & Principles (Inspired by agents.md constitution style)
 - **First-Principles Grounded**: Every proposal, simulation, optimization respects Maxwell's equations, magnetic circuit theory, thermodynamic/structural constraints. No black-box without explainability or physics residual checks.

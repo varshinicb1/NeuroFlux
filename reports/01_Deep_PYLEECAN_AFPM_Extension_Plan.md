@@ -20,7 +20,7 @@
 
 ### 1.1 Class System & Code Generation (Critical for Extension)
 - **Core Mechanism**: Most classes in `pyleecan/Classes/` are **auto-generated** from CSV definitions in `pyleecan/Generator/ClassesRef/`.
-  - Example: `Machine.py` header explicitly states: "File generated according to Generator/ClassesRef/Machine/Machine.csv". **WARNING: All changes made in this file will be lost!**
+  - Example: `Machine.py` header explicitly states: "File generated according to Generator/ClassesRef/Machine/Machine.csv". **WARNING: Manual edits will be lost.**
   - There is a `pyleecan/Generator/` directory responsible for this (code generation scripts).
 - **Base Classes**:
   - `Machine.py` (abstract): Common properties (frame, shaft, name, desc, type_machine, logger_name). Many methods delegated to `Methods/Machine/Machine/*.py` (build_geometry, check, comp_masses, plot, get_lam_list, comp_periodicity_*, etc.).
@@ -33,6 +33,7 @@
   - `MagFEMM.py` / `OutMagFEMM.py` (2D primarily, widely used).
   - `MagElmer.py` / `StructElmer.py` / `ElmerResults*` (better multi-physics and some 3D potential).
   - `Simulation.py`, `Simu1.py`, `VarSimu.py`, `VarOpti.py` for orchestration and optimization.
+- **Methods Directory**: Logic lives in `pyleecan/Methods/<Class>/<method>.py`. This is where AFPM-specific computations (e.g., axial force calculation, disc-specific flux linkage, 3D leakage models, thermal for pancake geometry) will be implemented as overrides or new methods.
 - **Other Key**: `Output.py` / `Out*` hierarchy for results; `Material.py` + magnetic/electrical/structural/HT models; `Loss*` models (Bertotti, Joule, Magnet, etc. — some may need AFPM-specific eddy current enhancements for disc magnets/rotors); GUI components.
 
 **Conclusion from Audit**: PYLEECAN is **not AFPM-ready** today. The radial-flux-centric assumptions (cylindrical coordinates, radial airgap length, typical slot/hole patterns for radial machines) dominate. However, the modular, generated-class architecture + existing Elmer support makes a clean, maintainable extension highly feasible without forking.

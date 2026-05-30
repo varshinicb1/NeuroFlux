@@ -106,8 +106,8 @@ A 2025 paper on coreless stator AFPM compares several of these analytical quasi-
 
 **Limitations**:
 - Assumes **no significant radial flux flow** between adjacent slices (main approximation).
-- Accuracy decreases in highly saturated designs or when strong 3D end-effects/leakage is dominant.
-- Requires careful choice of number of slices (`N`) and slice thickness.
+- Accuracy decreases in highly saturated designs or when strong 3D end-effects/leakage exist.
+- Requires careful selection of number of slices (`N`) and slice thickness.
 - Less accurate than full 3D FEA for final verification (should be validated with FEA or measurements).
 
 ---
