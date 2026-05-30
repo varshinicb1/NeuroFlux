@@ -30,9 +30,10 @@ Build the "AlphaFold for Engineering Design" — a system capable of:
 
 **Long-term:** Generalize the discovery engine across electrical machines, power electronics, and energy systems.
 
-## Current Status (v0.1 — Deep Investigation Phase 1)
+## Current Status (v0.1 — Engine + Discovery Foundation)
 
-This repository contains the foundational research, analysis, and architectural blueprints from the initial deep-dive investigation.
+This repository contains the foundational research, analysis, architecture blueprints,
+and an initial tested Python implementation of the NeuroFlux engine stack.
 
 ### Key Deliverables (Phase 1)
 
@@ -42,6 +43,8 @@ This repository contains the foundational research, analysis, and architectural 
 | 2 | AFPM State-of-the-Art & Ecosystem | ✅ | `reports/00_Master_Index_and_Vision.md` |
 | 3 | White-Space Opportunity Report | ✅ | `reports/07_White_Space_Opportunity_Report.md` |
 | 4 | NeuroFlux Architecture Proposal | ✅ | `reports/09_NeuroFlux_Architecture_Proposal.md` |
+| 5 | Layer 1 analytical engine + engine wrappers | ✅ | `neuroflux/` |
+| 6 | Requirements-to-ranked-candidates discovery workflow | ✅ | `neuroflux/discovery/workflow.py` |
 
 *Additional reports (Patent Landscape, Simulation Ecosystem, Knowledge Graph, Novel Inventions, Roadmap) will be added iteratively.*
 
@@ -52,15 +55,20 @@ NeuroFlux/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
+├── pyproject.toml
+├── neuroflux/
+│   ├── analytical/      # Quasi-3D, MEC, coreless, Halbach, loss models
+│   ├── core/            # Shared data models, materials, engine contracts
+│   ├── discovery/       # End-to-end requirements -> ranked candidates workflow
+│   ├── engines/         # Analytical, FEMM, Elmer, PYLEECAN, MagGen, OpenAFPM wrappers
+│   └── utils/
 ├── reports/
 │   ├── 00_Master_Index_and_Vision.md
 │   ├── 01_Deep_PYLEECAN_AFPM_Extension_Plan.md
 │   ├── 07_White_Space_Opportunity_Report.md
 │   └── 09_NeuroFlux_Architecture_Proposal.md
-├── src/                 # Future: parametric generators, simulation wrappers, NeuroFlux agents
-├── data/                # Future: curated papers, patents, benchmark geometries
-├── knowledge_graph/     # Future: structured ontology + graph implementation
-└── docs/                # Future: extended documentation & tutorials
+├── tests/
+└── external_repos/      # Optional external engines and reference repositories
 ```
 
 ## Getting Started (Research Use)
@@ -70,7 +78,32 @@ NeuroFlux/
    git clone https://github.com/varshinicb1/NeuroFlux.git
    cd NeuroFlux
    ```
-2. Explore the reports in the `reports/` directory for deep analysis of:
+2. Install in editable mode and run tests
+   ```bash
+   pip install -e ".[dev]"
+   pytest
+   ```
+3. Run the first end-to-end discovery workflow
+   ```python
+   from neuroflux.core.models import AFPMTopology
+   from neuroflux.discovery import DesignRequirements, DiscoveryWorkflow
+
+   result = DiscoveryWorkflow().run(
+       DesignRequirements(
+           target_power_w=250.0,
+           target_speed_rpm=600.0,
+           target_voltage_v=48.0,
+           max_outer_diameter_m=0.32,
+           min_efficiency=0.50,
+           topology=AFPMTopology.DSSR_SLOTTED,
+           num_candidates=4,
+       )
+   )
+
+   print(result.best_candidate.candidate_id)
+   print(result.best_candidate.analytical_result.torque_nm)
+   ```
+4. Explore the reports in the `reports/` directory for deep analysis of:
    - PYLEECAN architecture and AFPM extension strategy
    - AFPM ecosystem, topologies, challenges, and mathematical foundations
    - White-space opportunities for novel invention
@@ -78,7 +111,7 @@ NeuroFlux/
 
 ## Roadmap Highlights
 
-- **Phase 1 (Current)**: Knowledge foundation, PYLEECAN AFPM extension plan, white-space identification
+- **Phase 1 (Current)**: Knowledge foundation, engine contracts, analytical engine, tested discovery workflow
 - **Phase 2**: Parametric AFPM geometry + simulation pipeline prototype (Gmsh + Elmer/GetDP)
 - **Phase 3**: Generative agents + patent graph integration
 - **Phase 4**: NeuroFlux visual designer integration (Parakram extension) + digital twin runtime

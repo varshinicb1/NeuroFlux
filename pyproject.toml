@@ -42,12 +42,16 @@ all = ["neuroflux[femm,pyleecan,dev]"]
 Homepage = "https://github.com/varshinicb1/NeuroFlux"
 Repository = "https://github.com/varshinicb1/NeuroFlux"
 
+[project.scripts]
+neuroflux-lab = "neuroflux.lab.cli:main"
+
 [tool.setuptools.packages.find]
 include = ["neuroflux*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-v --tb=short"
+addopts = "-v --tb=short -p no:nengo"
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.ruff]
 target-version = "py310"

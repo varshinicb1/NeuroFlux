@@ -19,8 +19,9 @@ References:
 
 from __future__ import annotations
 
-import time
 import math
+import shutil
+import time
 
 from pydantic import BaseModel, Field
 
@@ -62,6 +63,10 @@ class AutocoilOutput(BaseModel):
     )
     pcb_file_path: str = Field(default="", description="Path to generated PCB layout")
     copper_area_m2: float = Field(default=0.0, description="Total copper area [m²]")
+    warnings: list[str] = Field(
+        default_factory=list,
+        description="Non-fatal warnings, including analytical fallback reasons",
+    )
     computation_time_ms: float = Field(default=0.0)
 
 
@@ -100,56 +105,59 @@ class AutocoilEngine(Engine[AutocoilInput, AutocoilOutput]):
 
     def run(self, input_data: AutocoilInput) -> AutocoilOutput:
         """Runs the autocoil PCB stator generator and computes electrical properties.
-        
+
         Uses the cloned autocoil repository to construct the physical spiral layouts
         and write a KiCad PCB layout file, then estimates resistance and inductance.
         """
         start_time = time.perf_counter()
-        
+
         # Add the external_repos/autocoil directory to sys.path to import its modules
         import sys
         from pathlib import Path
         project_root = Path(__file__).parent.parent.parent
         autocoil_path = project_root / "external_repos" / "autocoil"
-        
+
         if str(autocoil_path.resolve()) not in sys.path:
             sys.path.append(str(autocoil_path.resolve()))
-            
+
         try:
-            import pcb_json
             import kicad_funcs
+            import pcb_json
         except ImportError as e:
-            raise RuntimeError(
-                f"Failed to import autocoil packages. Ensure the repository is present in external_repos/autocoil. Details: {e}"
-            ) from e
-            
+            return self._run_analytical_fallback(
+                input_data,
+                start_time,
+                "External autocoil modules unavailable; used analytical PCB estimate. "
+                f"Details: {e}",
+            )
+
         # Map parameters
         # Dimensions are in meters for AutocoilInput, but autocoil script expects mm
         inner_r_mm = input_data.inner_radius * 1000.0
         outer_r_mm = input_data.outer_radius * 1000.0
         width_mm = outer_r_mm - inner_r_mm
-        
+
         # Assume num_copies (number of coils) is determined from pole/phase count
         # For a standard 3-phase concentrated winding: num_coils = num_poles * num_phases / 2
         num_copies = int(round(input_data.num_poles * input_data.num_phases / 2.0))
         if num_copies <= 0:
             num_copies = 12
-            
+
         # Maximum width (tangential spacing) of the coil at the outer radius
         # Circumference at outer radius is 2 * pi * outer_r_mm
         # Max height per coil is slot pitch: 2 * pi * outer_r_mm / num_copies
         # We take 90% of it to leave some space between coils
         height_mm = 0.90 * (2.0 * math.pi * outer_r_mm / num_copies)
-        
+
         spacing_mm = (input_data.trace_width + input_data.trace_spacing) * 1000.0
         trace_width_mm = input_data.trace_width * 1000.0
-        
-        # Estimate maximum number of turns that can fit in the available coil height (winding window)
+
+        # Estimate maximum turns that fit in the available coil height.
         # One turn has a width of spacing_mm.
         # Winding width is height_mm / 2.
         max_turns = int((height_mm / 2.0 - trace_width_mm) / spacing_mm)
         turns = max(1, min(20, max_turns))
-        
+
         # Call generate_coil_array from autocoil
         coil_stacks = pcb_json.generate_coil_array(
             width=width_mm,
@@ -164,12 +172,12 @@ class AutocoilEngine(Engine[AutocoilInput, AutocoilOutput]):
             center_y=height_mm / 2.0,
             start_angle=0.0
         )
-        
+
         # Calculate resistance of one coil by summing up distances between points in layers
         total_length_m = 0.0
         for stack, info_dict in coil_stacks:
             for section in stack.sections:
-                # Apply rounding to match physical layout (0.0 disables rounding and prevents segment size exceptions)
+                # 0.0 disables rounding and prevents segment size exceptions.
                 pts = kicad_funcs.round_corners(section.points, 0.0, closed_loop=False)
                 # Compute Euclidean length in meters (pts are in mm)
                 layer_len_mm = 0.0
@@ -179,74 +187,129 @@ class AutocoilEngine(Engine[AutocoilInput, AutocoilOutput]):
                     layer_len_mm += math.sqrt(dx*dx + dy*dy)
                 total_length_m += layer_len_mm / 1000.0
             break # We only need to calculate for one coil, as they are identical
-            
+
         # Resistivity of copper at 20C: 1.72e-8 Ohm-m
         rho_copper = 1.72e-8
         wire_area_m2 = input_data.trace_width * input_data.copper_thickness
         r_coil = rho_copper * total_length_m / wire_area_m2
-        
+
         # Total phase resistance (assuming coils in series per phase)
         coils_per_phase = num_copies / input_data.num_phases
         phase_resistance = r_coil * coils_per_phase
-        
+
         # Estimate inductance using Modified Wheeler formula for planar inductors
         d_out = 2.0 * input_data.outer_radius
         d_in = 2.0 * input_data.inner_radius
         d_avg = (d_out + d_in) / 2.0
         fill_factor = (d_out - d_in) / (d_out + d_in)
-        
+
         # Constants for circular/approx-circular planar loop (c1=1.00, c2=2.46, c3=0.0, c4=0.20)
         c1, c2, c3, c4 = 1.0, 2.46, 0.0, 0.20
         mu0 = 4.0 * math.pi * 1e-7
-        
+
         # Inductance of a single layer
-        L_layer = (mu0 * (turns**2) * d_avg * c1 / 2.0) * (
+        l_layer = (mu0 * (turns**2) * d_avg * c1 / 2.0) * (
             math.log(c2 / fill_factor) + c3 * fill_factor + c4 * (fill_factor**2)
         )
-        
+
         # Mutual coupling coefficient between layers (approx 0.6)
         k_coupling = 0.6
-        L_coil = L_layer * input_data.num_layers * (1.0 + k_coupling * (input_data.num_layers - 1))
-        phase_inductance = L_coil * coils_per_phase
-        
+        l_coil = l_layer * input_data.num_layers * (
+            1.0 + k_coupling * (input_data.num_layers - 1)
+        )
+        phase_inductance = l_coil * coils_per_phase
+
         # Total copper area [m2] (cross section area * length * number of coils)
         total_copper_area = wire_area_m2 * total_length_m * num_copies
-        
+
         # Generate the KiCad PCB file in the reports/ directory
         reports_dir = project_root / "reports"
         reports_dir.mkdir(exist_ok=True)
         pcb_file_path = reports_dir / "pcb_stator_layout.kicad_pcb"
-        
+
         # Template file from autocoil package
         template_file = autocoil_path / "mycoil" / "mycoil.kicad_pcb"
-        
+
         try:
             # Copy template to target location first
             shutil.copy2(template_file, pcb_file_path)
-            
+
             # Process sections to generate KiCAD representation (0.0 corner_radius)
             all_coil_sections, stack_uuids = pcb_json.process_coil_sections(coil_stacks, 0.0)
-            
+
             # Write to output file
             kicad_funcs.write_coils_to_file(
-                str(pcb_file_path.resolve()), 
-                all_coil_sections, 
+                str(pcb_file_path.resolve()),
+                all_coil_sections,
                 stack_uuids,
                 num_sections_per_stack=input_data.num_layers,
                 stack_name="Multi-Layer Coil Array"
             )
-        except Exception as e:
+        except Exception:
             # If KiCad write fails, we log it and keep the fallback file path empty/mocked
             pcb_file_path = Path("")
-            
+
         computation_time_ms = (time.perf_counter() - start_time) * 1000.0
-        
+
         return AutocoilOutput(
             total_turns=turns * input_data.num_layers * int(coils_per_phase),
             phase_resistance_ohm=phase_resistance,
             estimated_inductance_h=phase_inductance,
             pcb_file_path=str(pcb_file_path.resolve()) if pcb_file_path else "",
             copper_area_m2=total_copper_area,
-            computation_time_ms=computation_time_ms
+            computation_time_ms=computation_time_ms,
+        )
+
+    def _run_analytical_fallback(
+        self,
+        input_data: AutocoilInput,
+        start_time: float,
+        warning: str,
+    ) -> AutocoilOutput:
+        """Estimate PCB stator winding values without the external autocoil package."""
+        radial_width = input_data.outer_radius - input_data.inner_radius
+        mean_radius = (input_data.outer_radius + input_data.inner_radius) / 2.0
+        num_coils = max(1, int(round(input_data.num_poles * input_data.num_phases / 2.0)))
+        coils_per_phase = max(1, num_coils // input_data.num_phases)
+
+        pitch_at_mean_radius = 2.0 * math.pi * mean_radius / num_coils
+        turn_pitch = input_data.trace_width + input_data.trace_spacing
+        radial_turn_capacity = max(1, int(radial_width / (2.0 * turn_pitch)))
+        tangential_turn_capacity = max(1, int(pitch_at_mean_radius / (4.0 * turn_pitch)))
+        turns_per_layer = max(1, min(20, radial_turn_capacity, tangential_turn_capacity))
+
+        # Approximate one planar spiral turn as an annular rectangular loop.
+        average_turn_length = 2.0 * radial_width + 2.0 * pitch_at_mean_radius
+        coil_length_m = average_turn_length * turns_per_layer * input_data.num_layers
+
+        copper_cross_section_m2 = input_data.trace_width * input_data.copper_thickness
+        rho_copper = 1.72e-8
+        coil_resistance = rho_copper * coil_length_m / copper_cross_section_m2
+        phase_resistance = coil_resistance * coils_per_phase
+
+        d_out = 2.0 * input_data.outer_radius
+        d_in = 2.0 * input_data.inner_radius
+        d_avg = (d_out + d_in) / 2.0
+        fill_factor = max(1e-6, (d_out - d_in) / (d_out + d_in))
+        mu0 = 4.0 * math.pi * 1e-7
+        layer_inductance = (mu0 * turns_per_layer**2 * d_avg / 2.0) * (
+            math.log(2.46 / fill_factor) + 0.20 * fill_factor**2
+        )
+        coupling_factor = 0.6
+        coil_inductance = layer_inductance * input_data.num_layers * (
+            1.0 + coupling_factor * (input_data.num_layers - 1)
+        )
+        phase_inductance = coil_inductance * coils_per_phase
+
+        copper_area = copper_cross_section_m2 * coil_length_m * num_coils
+
+        return AutocoilOutput(
+            total_turns=turns_per_layer * input_data.num_layers * coils_per_phase,
+            phase_resistance_ohm=phase_resistance,
+            estimated_inductance_h=phase_inductance,
+            pcb_file_path="",
+            copper_area_m2=copper_area,
+            warnings=[warning],
+            computation_time_ms=(time.perf_counter() - start_time) * 1000.0,
         )
 

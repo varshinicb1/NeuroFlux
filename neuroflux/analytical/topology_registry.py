@@ -12,16 +12,23 @@ from __future__ import annotations
 
 import math
 import time
-from typing import Callable, Dict
+from typing import Callable
+
 import numpy as np
 
-from neuroflux.core.models import AFPMTopology, AnalyticalEngineInput, EngineResult, OperatingPoint, PlaneResult, FidelityLevel
-from neuroflux.analytical.quasi3d import generate_planes, compute_carter_coefficient
-from neuroflux.analytical.magnetic_circuit import MagneticCircuitSolver, MECResult
 from neuroflux.analytical.coreless_field import HagueCorelessSolver
 from neuroflux.analytical.halbach import HalbachArraySolver
 from neuroflux.analytical.losses import LossModelEvaluator
-from neuroflux.analytical.performance import PerformanceAggregator
+from neuroflux.analytical.magnetic_circuit import MagneticCircuitSolver
+from neuroflux.analytical.quasi3d import generate_planes
+from neuroflux.core.models import (
+    AFPMTopology,
+    AnalyticalEngineInput,
+    EngineResult,
+    FidelityLevel,
+    OperatingPoint,
+    PlaneResult,
+)
 
 
 class TopologyRegistry:
@@ -29,16 +36,31 @@ class TopologyRegistry:
     Main registry linking AFPMTopology choices to specialized solver execution paths.
     """
 
-    _registry: Dict[AFPMTopology, Callable[[AnalyticalEngineInput, OperatingPoint], EngineResult]] = {}
+    _registry: dict[
+        AFPMTopology,
+        Callable[[AnalyticalEngineInput, OperatingPoint], EngineResult],
+    ] = {}
 
     @classmethod
-    def register(cls, topology: AFPMTopology, handler: Callable[[AnalyticalEngineInput, OperatingPoint], EngineResult]):
+    def register(
+        cls,
+        topology: AFPMTopology,
+        handler: Callable[[AnalyticalEngineInput, OperatingPoint], EngineResult],
+    ) -> None:
         cls._registry[topology] = handler
 
     @classmethod
-    def dispatch(cls, topology: AFPMTopology, config: AnalyticalEngineInput, op: OperatingPoint) -> EngineResult:
+    def dispatch(
+        cls,
+        topology: AFPMTopology,
+        config: AnalyticalEngineInput,
+        op: OperatingPoint,
+    ) -> EngineResult:
         if topology not in cls._registry:
-            raise ValueError(f"Topology {topology} is not currently registered or supported by the Analytical Engine.")
+            raise ValueError(
+                f"Topology {topology} is not currently registered or supported by the "
+                "Analytical Engine."
+            )
         return cls._registry[topology](config, op)
 
 
@@ -50,29 +72,40 @@ def solve_dssr_slotted(config: AnalyticalEngineInput, op: OperatingPoint) -> Eng
     Uses quasi-3D multi-plane non-linear MEC reluctance network.
     """
     start_time = time.perf_counter()
-    
+
     # 1. Plane generation
     planes = generate_planes(config.geometry, num_planes=config.num_planes)
-    
+
     # 2. Iterate planes and solve magnetic reluctance network
     torque_total = 0.0
     b_peak_max = 0.0
     plane_results = []
-    
+
     solver = MagneticCircuitSolver()
-    
+
     for i, plane in enumerate(planes):
         # Solve reluctance network
         mec_res = solver.solve_plane(plane, config.geometry, config.materials)
         b_peak_max = max(b_peak_max, mec_res.B_g)
-        
+
         # Linear current density calculation: A = (2 * m * N * I) / (2 * pi * r)
-        linear_current_density = (2.0 * config.winding.phases * config.winding.turns_per_phase * op.I_rms) / (2.0 * math.pi * plane.r_mean)
-        
+        linear_current_density = (
+            2.0
+            * config.winding.phases
+            * config.winding.turns_per_phase
+            * op.I_rms
+            / (2.0 * math.pi * plane.r_mean)
+        )
+
         # Compute plane torque contribution
-        t_plane = solver.compute_torque_contribution(mec_res, plane, config.geometry, linear_current_density)
+        t_plane = solver.compute_torque_contribution(
+            mec_res,
+            plane,
+            config.geometry,
+            linear_current_density,
+        )
         torque_total += t_plane
-        
+
         # Plane breakdown result
         plane_results.append(
             PlaneResult(
@@ -85,7 +118,7 @@ def solve_dssr_slotted(config: AnalyticalEngineInput, op: OperatingPoint) -> Eng
                 flux_densities={"teeth": mec_res.B_teeth, "yoke": mec_res.B_yoke},
             )
         )
-        
+
     # 3. Loss computation
     losses_eval = LossModelEvaluator(config)
     r_dc = 0.05
@@ -93,13 +126,13 @@ def solve_dssr_slotted(config: AnalyticalEngineInput, op: OperatingPoint) -> Eng
     core_losses = losses_eval.compute_core_losses(op, b_peak_max)
     rotor_pm_loss = losses_eval.compute_rotor_losses(op, b_peak_max)
     mech_losses = losses_eval.compute_mechanical_losses(op.speed_rpm)
-    
+
     p_cu = copper_losses["p_copper_total"]
     p_fe = core_losses["p_core_total"]
     p_rotor = rotor_pm_loss
     p_mech = mech_losses["p_mechanical_total"]
     total_losses = p_cu + p_fe + p_rotor + p_mech
-    
+
     # 4. Mechanical Power and efficiency
     omega = op.speed_rad_s
     p_shaft = torque_total * omega
@@ -109,9 +142,9 @@ def solve_dssr_slotted(config: AnalyticalEngineInput, op: OperatingPoint) -> Eng
     else:
         p_elec = 0.0
         efficiency = 0.0
-        
+
     efficiency = max(0.0, min(1.0, efficiency))
-    
+
     return EngineResult(
         torque_nm=torque_total,
         power_w=p_elec,
@@ -137,39 +170,33 @@ def solve_coreless(config: AnalyticalEngineInput, op: OperatingPoint) -> EngineR
     Solves coreless/slotless stator structures using Hague's 3D analytical equations.
     """
     start_time = time.perf_counter()
-    
-    # Hague solver setup
-    # Make a dummy geometric translation to accommodate coreless Hague solver
-    config.geometry.r_ext = config.geometry.r_out
-    config.geometry.r_int = config.geometry.r_in
-    config.geometry.stator_thickness = config.geometry.winding_thickness if config.geometry.winding_thickness else 0.01
-    
+
     solver = HagueCorelessSolver(config)
     r_avg = (config.geometry.r_out + config.geometry.r_in) / 2.0
     theta = np.linspace(0, 2 * math.pi, 100)
-    
+
     fields = solver.compute_flux_density(r_avg, theta, z=0.0)
     b_peak = float(np.max(np.abs(fields["Bz"])))
-    
+
     losses_eval = LossModelEvaluator(config)
     r_dc = 0.04
     copper_losses = losses_eval.compute_copper_losses(op, r_dc)
     rotor_pm_loss = losses_eval.compute_rotor_losses(op, b_peak)
     mech_losses = losses_eval.compute_mechanical_losses(op.speed_rpm)
-    
+
     p_cu = copper_losses["p_copper_total"]
     p_fe = 0.0
     p_rotor = rotor_pm_loss
     p_mech = mech_losses["p_mechanical_total"]
     total_losses = p_cu + p_fe + p_rotor + p_mech
-    
+
     # Approximate torque under slotless conditions
     omega = op.speed_rad_s
     torque = 3.0 * 80.0 * op.I_rms / omega if omega > 0 else 0.0
     p_shaft = torque * omega
     p_elec = max(0.0, p_shaft - total_losses)
     efficiency = (p_elec / p_shaft) if p_shaft > 0 else 0.0
-    
+
     return EngineResult(
         torque_nm=torque,
         power_w=p_elec,
@@ -195,38 +222,32 @@ def solve_halbach(config: AnalyticalEngineInput, op: OperatingPoint) -> EngineRe
     Solves highly sinusoidal Halbach permanent magnet array structures.
     """
     start_time = time.perf_counter()
-    
-    config.geometry.r_ext = config.geometry.r_out
-    config.geometry.r_int = config.geometry.r_in
-    config.geometry.magnet_thickness = config.geometry.l_PM
-    config.geometry.airgap = config.geometry.g
-    config.geometry.poles = config.geometry.p * 2
-    
+
     solver = HalbachArraySolver(config)
     r_avg = (config.geometry.r_out + config.geometry.r_in) / 2.0
     theta = np.linspace(0, 2 * math.pi, 100)
-    
+
     fields = solver.compute_airgap_field(r_avg, theta, z=0.0)
     b_peak = float(np.max(np.abs(fields["Bz"])))
-    
+
     losses_eval = LossModelEvaluator(config)
     r_dc = 0.045
     copper_losses = losses_eval.compute_copper_losses(op, r_dc)
     rotor_pm_loss = losses_eval.compute_rotor_losses(op, b_peak)
     mech_losses = losses_eval.compute_mechanical_losses(op.speed_rpm)
-    
+
     p_cu = copper_losses["p_copper_total"]
     p_fe = 0.0
     p_rotor = rotor_pm_loss
     p_mech = mech_losses["p_mechanical_total"]
     total_losses = p_cu + p_fe + p_rotor + p_mech
-    
+
     omega = op.speed_rad_s
     torque = 3.0 * 90.0 * op.I_rms / omega if omega > 0 else 0.0
     p_shaft = torque * omega
     p_elec = max(0.0, p_shaft - total_losses)
     efficiency = (p_elec / p_shaft) if p_shaft > 0 else 0.0
-    
+
     return EngineResult(
         torque_nm=torque,
         power_w=p_elec,
