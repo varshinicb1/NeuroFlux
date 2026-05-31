@@ -30,10 +30,10 @@ Build the "AlphaFold for Engineering Design" — a system capable of:
 
 **Long-term:** Generalize the discovery engine across electrical machines, power electronics, and energy systems.
 
-## Current Status (v0.1 — Engine + Discovery Foundation)
+## Current Status (v0.1 — Unified Design Engine Foundation)
 
 This repository contains the foundational research, analysis, architecture blueprints,
-and an initial tested Python implementation of the NeuroFlux engine stack.
+and a tested Python + Rust implementation of the first NeuroFlux design stack.
 
 ### Key Deliverables (Phase 1)
 
@@ -45,8 +45,14 @@ and an initial tested Python implementation of the NeuroFlux engine stack.
 | 4 | NeuroFlux Architecture Proposal | ✅ | `reports/09_NeuroFlux_Architecture_Proposal.md` |
 | 5 | Layer 1 analytical engine + engine wrappers | ✅ | `neuroflux/` |
 | 6 | Requirements-to-ranked-candidates discovery workflow | ✅ | `neuroflux/discovery/workflow.py` |
+| 7 | Unified AFPM generator design engine + artifacts | ✅ | `neuroflux/design/engine.py` |
+| 8 | Autonomous lab loop with seeded patent knowledge graph | ✅ | `neuroflux/lab/` |
+| 9 | Rust desktop dashboard for lab/design manifests | ✅ | `gui/neuroflux-gui/` |
 
-*Additional reports (Patent Landscape, Simulation Ecosystem, Knowledge Graph, Novel Inventions, Roadmap) will be added iteratively.*
+The current implementation is intentionally honest about fidelity: analytical
+physics, deterministic thermal screening, CAD/scene artifacts, seeded prior-art
+scoring, and external-engine fallbacks are working; live patent ingestion and
+production 3D FEA require external services/solvers to be configured.
 
 ## Repository Structure
 
@@ -59,9 +65,13 @@ NeuroFlux/
 ├── neuroflux/
 │   ├── analytical/      # Quasi-3D, MEC, coreless, Halbach, loss models
 │   ├── core/            # Shared data models, materials, engine contracts
+│   ├── design/          # Single-input AFPM generator design package engine
 │   ├── discovery/       # End-to-end requirements -> ranked candidates workflow
 │   ├── engines/         # Analytical, FEMM, Elmer, PYLEECAN, MagGen, OpenAFPM wrappers
+│   ├── lab/             # Autonomous iteration loop, scientist, patent graph
 │   └── utils/
+├── gui/
+│   └── neuroflux-gui/   # Rust egui dashboard for lab/design manifests
 ├── reports/
 │   ├── 00_Master_Index_and_Vision.md
 │   ├── 01_Deep_PYLEECAN_AFPM_Extension_Plan.md
@@ -83,7 +93,34 @@ NeuroFlux/
    pip install -e ".[dev]"
    pytest
    ```
-3. Run the first end-to-end discovery workflow
+3. Run the unified AFPM generator design engine
+   ```bash
+   python -m neuroflux.lab.cli design \
+     --output design_runs \
+     --name low-speed-250w-afpm-generator \
+     --target-power-w 250 \
+     --target-speed-rpm 600 \
+     --target-voltage-v 48 \
+     --max-outer-diameter-m 0.32 \
+     --min-efficiency 0.50 \
+     --iterations 3 \
+     --num-candidates 6 \
+     --num-planes 7
+   ```
+   This writes a complete design package:
+   - `design_manifest.json`: unified machine-readable output
+   - `design_report.md`: human-readable engineering report
+   - `geometry.geo`: Gmsh/OpenCASCADE geometry handoff
+   - `scene3d.json`: deterministic 3D scene model
+   - `viewer.html`: Three.js browser viewer for the 3D scene
+   - `thermal_analysis.json`: lumped steady-state thermal screen
+   - `parameters.csv`: manufacturing/design parameter table
+4. Run the Rust desktop dashboard
+   ```bash
+   cargo run --manifest-path gui/neuroflux-gui/Cargo.toml -- \
+     design_runs/low-speed-250w-afpm-generator/design_manifest.json
+   ```
+5. Run the lower-level discovery workflow from Python
    ```python
    from neuroflux.core.models import AFPMTopology
    from neuroflux.discovery import DesignRequirements, DiscoveryWorkflow
@@ -103,7 +140,7 @@ NeuroFlux/
    print(result.best_candidate.candidate_id)
    print(result.best_candidate.analytical_result.torque_nm)
    ```
-4. Explore the reports in the `reports/` directory for deep analysis of:
+6. Explore the reports in the `reports/` directory for deep analysis of:
    - PYLEECAN architecture and AFPM extension strategy
    - AFPM ecosystem, topologies, challenges, and mathematical foundations
    - White-space opportunities for novel invention
@@ -111,9 +148,9 @@ NeuroFlux/
 
 ## Roadmap Highlights
 
-- **Phase 1 (Current)**: Knowledge foundation, engine contracts, analytical engine, tested discovery workflow
-- **Phase 2**: Parametric AFPM geometry + simulation pipeline prototype (Gmsh + Elmer/GetDP)
-- **Phase 3**: Generative agents + patent graph integration
+- **Phase 1 (Current)**: Knowledge foundation, engine contracts, analytical engine, tested discovery workflow, unified design package engine
+- **Phase 2**: External-solver-backed Gmsh + Elmer/GetDP 3D validation pipeline
+- **Phase 3**: Live patent ingestion, retrieval-backed novelty scoring, and richer design-space exploration
 - **Phase 4**: NeuroFlux visual designer integration (Parakram extension) + digital twin runtime
 - **Phase 5**: Generalization to motors, power electronics, and full energy systems
 

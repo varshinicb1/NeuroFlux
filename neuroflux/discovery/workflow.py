@@ -104,8 +104,6 @@ class DiscoveryWorkflow:
         evaluated: list[DesignCandidate] = []
 
         for index, engine_input in enumerate(self._generate_inputs(requirements), start=1):
-            if len(evaluated) >= requirements.num_candidates:
-                break
             candidate_id = f"NF-{requirements.topology.value}-{index:02d}"
             try:
                 analytical_result = self.analytical_engine.run(engine_input)
@@ -147,10 +145,11 @@ class DiscoveryWorkflow:
             )
 
         evaluated.sort(key=lambda candidate: candidate.score, reverse=True)
+        ranked = evaluated[: requirements.num_candidates]
         return DiscoveryResult(
             requirements=requirements,
-            candidates=evaluated,
-            best_candidate=evaluated[0] if evaluated else None,
+            candidates=ranked,
+            best_candidate=ranked[0] if ranked else None,
             computation_time_ms=(time.perf_counter() - start) * 1000.0,
             warnings=warnings,
         )
@@ -309,6 +308,8 @@ class DiscoveryWorkflow:
             + 0.35 * min(torque_ratio, 1.5)
             + 0.20 * min(efficiency_ratio, 1.3)
         )
+        score -= 0.18 * max(0.0, power_ratio - 1.15)
+        score -= 0.12 * max(0.0, torque_ratio - 1.25)
 
         reasons: list[str] = []
         if analytical_result.power_w < requirements.target_power_w:
