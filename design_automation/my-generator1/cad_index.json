@@ -1,0 +1,31 @@
+{
+  "formats": {
+    "browser_viewer": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\viewer.html",
+    "gmsh_geo": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\geometry.geo",
+    "openscad": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\assembly.scad",
+    "scene3d": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\scene3d.json",
+    "stl": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\assembly.stl"
+  },
+  "parts": [
+    {
+      "inner_radius_m": 0.0725,
+      "material": "electrical_steel",
+      "name": "rotor_back_iron",
+      "outer_radius_m": 0.125
+    },
+    {
+      "inner_radius_m": 0.07395,
+      "material": "copper_and_steel",
+      "name": "stator_active_region",
+      "outer_radius_m": 0.1225,
+      "slot_count": 48
+    },
+    {
+      "magnet_thickness_m": 0.0045,
+      "material": "ndfeb",
+      "name": "permanent_magnet_array",
+      "pole_count": 16
+    }
+  ],
+  "units": "m"
+}

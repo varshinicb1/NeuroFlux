@@ -1,0 +1,9 @@
+{
+  "topology": "SSDR_CORELESS",
+  "power_w": 4741.96578797659,
+  "torque_nm": 25.464790894703256,
+  "efficiency": 0.9879095391617896,
+  "total_losses_w": 58.03421202341019,
+  "copper_loss_w": 0,
+  "iron_loss_w": 0
+}

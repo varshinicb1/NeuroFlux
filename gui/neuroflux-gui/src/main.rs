@@ -1,7 +1,11 @@
 use eframe::egui;
 use serde::Deserialize;
 use serde_json::Value;
-use std::{env, fs};
+use std::{
+    env, fs,
+    path::{Path, PathBuf},
+    process::Command,
+};
 
 fn main() -> eframe::Result {
     let manifest_path = env::args()
@@ -39,7 +43,7 @@ impl NeuroFluxApp {
         match fs::read_to_string(&self.manifest_path) {
             Ok(content) => match serde_json::from_str::<Value>(&content) {
                 Ok(value) => {
-                    self.scene = load_scene_from_manifest(&value);
+                    self.scene = load_scene_from_manifest(&value, &self.manifest_path);
                     self.manifest = Some(value);
                     self.error = None;
                 }
@@ -90,6 +94,8 @@ impl eframe::App for NeuroFluxApp {
             render_thermal(ui, manifest);
             ui.separator();
             render_artifacts(ui, manifest);
+            ui.separator();
+            render_external_tools(ui, manifest, &self.manifest_path);
             ui.separator();
             render_scene_inspector(ui, self.scene.as_ref());
             ui.separator();
@@ -178,7 +184,82 @@ fn render_artifacts(ui: &mut egui::Ui, manifest: &Value) {
     ui.label(format!("Report: {}", text(artifacts, &["report_md"])));
     ui.label(format!("3D scene: {}", text(artifacts, &["scene3d_json"])));
     ui.label(format!("Viewer: {}", text(artifacts, &["viewer_html"])));
-    ui.label(format!("Gmsh geometry: {}", text(artifacts, &["geometry_geo"])));
+    ui.label(format!(
+        "Gmsh geometry: {}",
+        text(artifacts, &["geometry_geo"])
+    ));
+}
+
+fn render_external_tools(ui: &mut egui::Ui, manifest: &Value, manifest_path: &str) {
+    ui.heading("External Solvers And Viewers");
+    let tools = [
+        ("Gmsh", find_executable("gmsh", &[])),
+        (
+            "ParaView",
+            find_executable(
+                "paraview",
+                &[r"C:\Program Files\ParaView 6.1.0\bin\paraview.exe"],
+            ),
+        ),
+        (
+            "ElmerGUI",
+            find_executable("ElmerGUI", &elmer_known_paths("ElmerGUI.exe")),
+        ),
+        (
+            "ElmerSolver",
+            find_executable("ElmerSolver", &elmer_known_paths("ElmerSolver.exe")),
+        ),
+        (
+            "FreeCAD",
+            find_executable(
+                "freecad",
+                &[r"C:\Users\varsh\AppData\Local\Programs\FreeCAD 1.1\bin\freecad.exe"],
+            ),
+        ),
+        (
+            "OpenSCAD",
+            find_executable(
+                "openscad",
+                &[r"C:\Users\varsh\tools\OpenSCAD-2021.01\openscad-2021.01\openscad.exe"],
+            ),
+        ),
+    ];
+
+    for (name, path) in tools {
+        match path {
+            Some(path) => ui.label(format!("{name}: {}", path.display())),
+            None => ui.colored_label(egui::Color32::YELLOW, format!("{name}: not found")),
+        };
+    }
+
+    ui.horizontal_wrapped(|ui| {
+        if let Some(geometry) = pdr_geometry_path(manifest, manifest_path) {
+            if ui.button("Open Geometry In Gmsh").clicked() {
+                launch_tool("gmsh", &[], Some(&geometry));
+            }
+        }
+        if let Some(vtk) = thermal_vtk_path(manifest) {
+            if ui.button("Open Thermal VTK In ParaView").clicked() {
+                launch_tool(
+                    "paraview",
+                    &[r"C:\Program Files\ParaView 6.1.0\bin\paraview.exe"],
+                    Some(&vtk),
+                );
+            }
+        }
+        if ui.button("Open ElmerGUI").clicked() {
+            launch_tool("ElmerGUI", &elmer_known_paths("ElmerGUI.exe"), None);
+        }
+        if let Some(stl) = pdr_stl_path(manifest_path) {
+            if ui.button("Open STL In FreeCAD").clicked() {
+                launch_tool(
+                    "freecad",
+                    &[r"C:\Users\varsh\AppData\Local\Programs\FreeCAD 1.1\bin\freecad.exe"],
+                    Some(&stl),
+                );
+            }
+        }
+    });
 }
 
 fn render_scene_inspector(ui: &mut egui::Ui, scene: Option<&Scene3d>) {
@@ -271,13 +352,104 @@ fn render_iterations(ui: &mut egui::Ui, manifest: &Value) {
     });
 }
 
-fn load_scene_from_manifest(manifest: &Value) -> Option<Scene3d> {
+fn load_scene_from_manifest(manifest: &Value, manifest_path: &str) -> Option<Scene3d> {
     let path = manifest
         .get("artifacts")
         .and_then(|artifacts| artifacts.get("scene3d_json"))
-        .and_then(Value::as_str)?;
+        .and_then(Value::as_str)
+        .map(PathBuf::from)
+        .or_else(|| {
+            Path::new(manifest_path)
+                .parent()
+                .map(|dir| dir.join("scene3d.json"))
+        })?;
     let content = fs::read_to_string(path).ok()?;
     serde_json::from_str::<Scene3d>(&content).ok()
+}
+
+fn pdr_geometry_path(manifest: &Value, manifest_path: &str) -> Option<PathBuf> {
+    if let Some(path) = manifest
+        .get("solver_handoffs")
+        .and_then(|handoffs| handoffs.get("elmer"))
+        .and_then(|elmer| elmer.get("geometry_geo_path"))
+        .and_then(Value::as_str)
+    {
+        return Some(PathBuf::from(path));
+    }
+    if let Some(path) = manifest
+        .get("artifacts")
+        .and_then(|artifacts| artifacts.get("geometry_geo"))
+        .and_then(Value::as_str)
+    {
+        return Some(PathBuf::from(path));
+    }
+    let manifest_dir = Path::new(manifest_path).parent()?;
+    Some(manifest_dir.join("geometry.geo"))
+}
+
+fn thermal_vtk_path(manifest: &Value) -> Option<PathBuf> {
+    manifest
+        .get("thermal_fea")
+        .and_then(|thermal| thermal.get("revised").or_else(|| thermal.get("baseline")))
+        .and_then(|result| result.get("vtk_path"))
+        .and_then(Value::as_str)
+        .map(PathBuf::from)
+}
+
+fn pdr_stl_path(manifest_path: &str) -> Option<PathBuf> {
+    let path = Path::new(manifest_path).parent()?.join("assembly.stl");
+    Some(path)
+}
+
+fn launch_tool(name: &str, known_paths: &[&str], artifact: Option<&Path>) {
+    let Some(executable) = find_executable(name, known_paths) else {
+        return;
+    };
+    let mut command = Command::new(executable);
+    if let Some(path) = artifact {
+        command.arg(path);
+    }
+    let _ = command.spawn();
+}
+
+fn find_executable(name: &str, known_paths: &[&str]) -> Option<PathBuf> {
+    for path in known_paths {
+        let path = PathBuf::from(path);
+        if path.exists() {
+            return Some(path);
+        }
+    }
+
+    let pathext: Vec<String> = env::var("PATHEXT")
+        .unwrap_or_else(|_| ".EXE;.BAT;.CMD".to_string())
+        .split(';')
+        .map(|ext| ext.to_ascii_lowercase())
+        .collect();
+    for dir in env::split_paths(&env::var_os("PATH")?) {
+        let direct = dir.join(name);
+        if direct.exists() {
+            return Some(direct);
+        }
+        for ext in &pathext {
+            let candidate = dir.join(format!("{name}{ext}"));
+            if candidate.exists() {
+                return Some(candidate);
+            }
+        }
+    }
+    None
+}
+
+fn elmer_known_paths(executable: &str) -> Vec<&'static str> {
+    match executable {
+        "ElmerGUI.exe" => {
+            vec![r"C:\Users\varsh\tools\ElmerFEM-gui-nompi-Windows-AMD64\bin\ElmerGUI.exe"]
+        }
+        "ElmerSolver.exe" => {
+            vec![r"C:\Users\varsh\tools\ElmerFEM-gui-nompi-Windows-AMD64\bin\ElmerSolver.exe"]
+        }
+        _ => vec![],
+    }
 }
 
 fn mesh_outer_radius(mesh: &SceneMesh) -> Option<f64> {
@@ -351,6 +523,15 @@ mod tests {
 
         assert_eq!(scene.meshes.len(), 2);
         assert_eq!(mesh_outer_radius(&scene.meshes[0]), Some(0.12));
-        assert_eq!(parse_hex_color("#58616a"), egui::Color32::from_rgb(88, 97, 106));
+        assert_eq!(
+            parse_hex_color("#58616a"),
+            egui::Color32::from_rgb(88, 97, 106)
+        );
+        assert_eq!(
+            thermal_vtk_path(&serde_json::json!({
+                "thermal_fea": {"revised": {"vtk_path": "thermal.vtk"}}
+            })),
+            Some(PathBuf::from("thermal.vtk"))
+        );
     }
 }

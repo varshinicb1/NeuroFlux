@@ -1,0 +1,240 @@
+{
+  "features": [
+    "modular_stator_segments",
+    "magnet_segmentation",
+    "segmented_windings",
+    "coreless_topology",
+    "halbach_array",
+    "dual_rotor_geometry",
+    "thermal_management_integration",
+    "fault_tolerant_control",
+    "advanced_cooling_channels",
+    "integrated_sensors"
+  ],
+  "metrics": [
+    "novelty",
+    "prior_art_density",
+    "differentiation",
+    "claim_strength",
+    "patentability_likelihood",
+    "whitespace_opportunity"
+  ],
+  "opportunity_matrix": [
+    [
+      0.7,
+      0.4,
+      0.8,
+      0.7,
+      0.75,
+      0.6
+    ],
+    [
+      0.6,
+      0.5,
+      0.7,
+      0.6,
+      0.65,
+      0.5
+    ],
+    [
+      0.5,
+      0.6,
+      0.6,
+      0.5,
+      0.55,
+      0.4
+    ],
+    [
+      0.3,
+      0.8,
+      0.4,
+      0.4,
+      0.35,
+      0.2
+    ],
+    [
+      0.4,
+      0.7,
+      0.5,
+      0.5,
+      0.45,
+      0.3
+    ],
+    [
+      0.5,
+      0.6,
+      0.6,
+      0.6,
+      0.55,
+      0.4
+    ],
+    [
+      0.6,
+      0.5,
+      0.7,
+      0.6,
+      0.65,
+      0.5
+    ],
+    [
+      0.7,
+      0.4,
+      0.8,
+      0.7,
+      0.75,
+      0.6
+    ],
+    [
+      0.5,
+      0.6,
+      0.6,
+      0.5,
+      0.55,
+      0.4
+    ],
+    [
+      0.4,
+      0.7,
+      0.5,
+      0.5,
+      0.45,
+      0.3
+    ]
+  ],
+  "top_opportunities": [
+    [
+      "modular_stator_segments",
+      0.6583333333333333
+    ],
+    [
+      "fault_tolerant_control",
+      0.6583333333333333
+    ],
+    [
+      "magnet_segmentation",
+      0.5916666666666667
+    ]
+  ],
+  "feature_details": [
+    {
+      "feature": "modular_stator_segments",
+      "metrics": {
+        "novelty": 0.7,
+        "prior_art_density": 0.4,
+        "differentiation": 0.8,
+        "claim_strength": 0.7,
+        "patentability_likelihood": 0.75,
+        "whitespace_opportunity": 0.6
+      },
+      "overall_potential": 0.6583333333333333
+    },
+    {
+      "feature": "magnet_segmentation",
+      "metrics": {
+        "novelty": 0.6,
+        "prior_art_density": 0.5,
+        "differentiation": 0.7,
+        "claim_strength": 0.6,
+        "patentability_likelihood": 0.65,
+        "whitespace_opportunity": 0.5
+      },
+      "overall_potential": 0.5916666666666667
+    },
+    {
+      "feature": "segmented_windings",
+      "metrics": {
+        "novelty": 0.5,
+        "prior_art_density": 0.6,
+        "differentiation": 0.6,
+        "claim_strength": 0.5,
+        "patentability_likelihood": 0.55,
+        "whitespace_opportunity": 0.4
+      },
+      "overall_potential": 0.525
+    },
+    {
+      "feature": "coreless_topology",
+      "metrics": {
+        "novelty": 0.3,
+        "prior_art_density": 0.8,
+        "differentiation": 0.4,
+        "claim_strength": 0.4,
+        "patentability_likelihood": 0.35,
+        "whitespace_opportunity": 0.2
+      },
+      "overall_potential": 0.4083333333333334
+    },
+    {
+      "feature": "halbach_array",
+      "metrics": {
+        "novelty": 0.4,
+        "prior_art_density": 0.7,
+        "differentiation": 0.5,
+        "claim_strength": 0.5,
+        "patentability_likelihood": 0.45,
+        "whitespace_opportunity": 0.3
+      },
+      "overall_potential": 0.47500000000000003
+    },
+    {
+      "feature": "dual_rotor_geometry",
+      "metrics": {
+        "novelty": 0.5,
+        "prior_art_density": 0.6,
+        "differentiation": 0.6,
+        "claim_strength": 0.6,
+        "patentability_likelihood": 0.55,
+        "whitespace_opportunity": 0.4
+      },
+      "overall_potential": 0.5416666666666667
+    },
+    {
+      "feature": "thermal_management_integration",
+      "metrics": {
+        "novelty": 0.6,
+        "prior_art_density": 0.5,
+        "differentiation": 0.7,
+        "claim_strength": 0.6,
+        "patentability_likelihood": 0.65,
+        "whitespace_opportunity": 0.5
+      },
+      "overall_potential": 0.5916666666666667
+    },
+    {
+      "feature": "fault_tolerant_control",
+      "metrics": {
+        "novelty": 0.7,
+        "prior_art_density": 0.4,
+        "differentiation": 0.8,
+        "claim_strength": 0.7,
+        "patentability_likelihood": 0.75,
+        "whitespace_opportunity": 0.6
+      },
+      "overall_potential": 0.6583333333333333
+    },
+    {
+      "feature": "advanced_cooling_channels",
+      "metrics": {
+        "novelty": 0.5,
+        "prior_art_density": 0.6,
+        "differentiation": 0.6,
+        "claim_strength": 0.5,
+        "patentability_likelihood": 0.55,
+        "whitespace_opportunity": 0.4
+      },
+      "overall_potential": 0.525
+    },
+    {
+      "feature": "integrated_sensors",
+      "metrics": {
+        "novelty": 0.4,
+        "prior_art_density": 0.7,
+        "differentiation": 0.5,
+        "claim_strength": 0.5,
+        "patentability_likelihood": 0.45,
+        "whitespace_opportunity": 0.3
+      },
+      "overall_potential": 0.47500000000000003
+    }
+  ]
+}

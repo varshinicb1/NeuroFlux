@@ -1,0 +1,537 @@
+{% extends "base.html" %}
+
+{% block title %}New Design{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-section {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+    
+    .form-section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .form-section-title i {
+        margin-right: 8px;
+        color: #667eea;
+    }
+    
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .form-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 6px;
+    }
+    
+    .form-hint {
+        font-size: 12px;
+        color: #6b7280;
+        margin-top: 4px;
+    }
+    
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background: #f9fafb;
+        border-radius: 8px;
+        border: 2px solid #e5e7eb;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .checkbox-group:hover {
+        border-color: #667eea;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 12px;
+        accent-color: #667eea;
+    }
+    
+    .checkbox-label {
+        font-weight: 500;
+        color: #374151;
+    }
+    
+    .checkbox-description {
+        font-size: 12px;
+        color: #6b7280;
+        margin-left: 30px;
+    }
+    
+    .progress-panel {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        margin-top: 24px;
+        display: none;
+    }
+    
+    .progress-panel.active {
+        display: block;
+    }
+    
+    .stage-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        background: #f9fafb;
+        border-radius: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .stage-name {
+        font-weight: 500;
+        color: #374151;
+    }
+    
+    .stage-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .result-panel {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        margin-top: 24px;
+        display: none;
+    }
+    
+    .result-panel.active {
+        display: block;
+    }
+    
+    .result-success {
+        border-left: 4px solid #10b981;
+    }
+    
+    .result-failed {
+        border-left: 4px solid #ef4444;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto">
+    
+    <!-- Header -->
+    <div class="glass-panel p-6 mb-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">New Design</h2>
+                <p class="text-gray-600">Configure your AFPM generator specifications</p>
+            </div>
+            <a href="/" class="btn-secondary">
+                <i class="fas fa-arrow-left mr-2"></i>Back
+            </a>
+        </div>
+    </div>
+    
+    <!-- Design Form -->
+    <form id="design-form" class="space-y-6">
+        
+        <!-- Basic Info -->
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <i class="fas fa-info-circle"></i>Design Information
+            </h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Design Name</label>
+                    <input type="text" name="name" class="input-field" 
+                           value="my-generator" placeholder="e.g., Wind-Turbine-Generator">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Target Specifications -->
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <i class="fas fa-bullseye"></i>Target Specifications
+            </h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Target Power (W)</label>
+                    <input type="number" name="target_power_w" class="input-field" 
+                           value="500" min="10" max="10000" step="10">
+                    <span class="form-hint">Generator output power in watts</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Target Speed (RPM)</label>
+                    <input type="number" name="target_speed_rpm" class="input-field" 
+                           value="800" min="100" max="5000" step="10">
+                    <span class="form-hint">Rotational speed in RPM</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Target Voltage (V)</label>
+                    <input type="number" name="target_voltage_v" class="input-field" 
+                           value="48" min="12" max="400" step="1">
+                    <span class="form-hint">Output voltage in volts</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Max Outer Diameter (m)</label>
+                    <input type="number" name="max_diameter_m" class="input-field" 
+                           value="0.25" min="0.05" max="2.0" step="0.01">
+                    <span class="form-hint">Maximum machine diameter in meters</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Min Efficiency</label>
+                    <input type="number" name="min_efficiency" class="input-field" 
+                           value="0.60" min="0.30" max="0.98" step="0.01">
+                    <span class="form-hint">Minimum efficiency (0.0-1.0)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Advanced Options -->
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <i class="fas fa-cog"></i>Advanced Options
+            </h3>
+            
+            <div class="space-y-4">
+                <label class="checkbox-group">
+                    <input type="checkbox" name="run_external_solvers" id="run_external_solvers">
+                    <div>
+                        <div class="checkbox-label">Run External Solvers (Elmer FEM)</div>
+                        <div class="checkbox-description">Perform 3D electromagnetic FEA using ElmerSolver (requires installation)</div>
+                    </div>
+                </label>
+                
+                <label class="checkbox-group">
+                    <input type="checkbox" name="export_cad" id="export_cad">
+                    <div>
+                        <div class="checkbox-label">Export CAD Files (STEP)</div>
+                        <div class="checkbox-description">Generate STEP files for manufacturing using FreeCAD</div>
+                    </div>
+                </label>
+                
+                <label class="checkbox-group">
+                    <input type="checkbox" name="visualize" id="visualize">
+                    <div>
+                        <div class="checkbox-label">Auto-launch Visualization (ParaView)</div>
+                        <div class="checkbox-description">Open results in ParaView for 3D visualization</div>
+                    </div>
+                </label>
+            </div>
+            
+            <div class="mt-4">
+                <label class="form-label">Mesh Refinement</label>
+                <select name="refinement" class="input-field">
+                    <option value="coarse">Coarse (Fast)</option>
+                    <option value="medium" selected>Medium (Balanced)</option>
+                    <option value="fine">Fine (Accurate)</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="flex space-x-4">
+            <button type="submit" class="btn-primary text-lg flex-1" id="submit-btn">
+                <i class="fas fa-play mr-2"></i>Start Design Automation
+            </button>
+            <button type="reset" class="btn-secondary">
+                <i class="fas fa-undo mr-2"></i>Reset
+            </button>
+        </div>
+    </form>
+    
+    <!-- Progress Panel -->
+    <div class="progress-panel" id="progress-panel">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">
+            <i class="fas fa-spinner fa-spin mr-2 text-indigo-600"></i>Design in Progress
+        </h3>
+        
+        <div class="mb-4">
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                <span id="progress-status">Initializing...</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+        
+        <div class="stage-list" id="stage-list">
+            <!-- Stages will be populated here -->
+        </div>
+        
+        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+            <p class="text-sm text-blue-800">
+                <i class="fas fa-info-circle mr-2"></i>
+                This may take 10-60 seconds depending on options selected.
+                The page will update automatically when complete.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Results Panel -->
+    <div class="result-panel" id="result-panel">
+        <div id="result-content">
+            <!-- Results will be populated here -->
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    const STAGES = [
+        { name: 'discovery', label: 'Design Discovery' },
+        { name: 'thermal_analysis', label: 'Thermal Analysis' },
+        { name: '3d_validation', label: '3D Validation' },
+        { name: 'visualization', label: 'Visualization' },
+        { name: 'cad_export', label: 'CAD Export' },
+        { name: 'reporting', label: 'Report Generation' },
+    ];
+    
+    // Initialize stage list
+    const stageList = document.getElementById('stage-list');
+    stageList.innerHTML = STAGES.map(stage => `
+        <div class="stage-item" id="stage-${stage.name}">
+            <span class="stage-name">${stage.label}</span>
+            <span class="stage-status" id="status-${stage.name}">
+                <i class="fas fa-clock text-gray-400"></i>
+            </span>
+        </div>
+    `).join('');
+    
+    // Form submission
+    document.getElementById('design-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const data = {
+            name: formData.get('name'),
+            target_power_w: parseFloat(formData.get('target_power_w')),
+            target_speed_rpm: parseFloat(formData.get('target_speed_rpm')),
+            target_voltage_v: parseFloat(formData.get('target_voltage_v')),
+            max_diameter_m: parseFloat(formData.get('max_diameter_m')),
+            min_efficiency: parseFloat(formData.get('min_efficiency')),
+            run_external_solvers: document.getElementById('run_external_solvers').checked,
+            export_cad: document.getElementById('export_cad').checked,
+            visualize: document.getElementById('visualize').checked,
+            refinement: formData.get('refinement'),
+        };
+        
+        // Disable submit button
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Starting...';
+        
+        // Show progress panel
+        document.getElementById('progress-panel').classList.add('active');
+        
+        try {
+            const response = await fetch('/api/start-design', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                const sessionId = result.session_id;
+                
+                // Subscribe to session updates via Socket.IO
+                socket.emit('subscribe', { session_id: sessionId });
+                
+                // Poll for status updates
+                pollSessionStatus(sessionId);
+            } else {
+                showError(result.message || 'Failed to start design');
+            }
+        } catch (error) {
+            showError('Error starting design: ' + error.message);
+        }
+    });
+    
+    function pollSessionStatus(sessionId) {
+        const pollInterval = setInterval(async () => {
+            try {
+                const response = await fetch(`/api/session/${sessionId}/status`);
+                const status = await response.json();
+                
+                // Update progress
+                updateProgress(status.progress, status.current_stage, status.message);
+                
+                // Check if complete
+                if (status.status === 'completed' || status.status === 'failed') {
+                    clearInterval(pollInterval);
+                    loadResults(sessionId, status.status === 'completed');
+                }
+            } catch (error) {
+                console.error('Error polling status:', error);
+            }
+        }, 1000);
+    }
+    
+    function updateProgress(percent, currentStage, message) {
+        document.getElementById('progress-bar').style.width = percent + '%';
+        document.getElementById('progress-percent').textContent = Math.round(percent) + '%';
+        document.getElementById('progress-status').textContent = message || 'Processing...';
+        
+        // Update stage indicators
+        STAGES.forEach(stage => {
+            const statusEl = document.getElementById(`status-${stage.name}`);
+            if (stage.name === currentStage) {
+                statusEl.innerHTML = '<i class="fas fa-spinner fa-spin text-blue-600"></i>';
+            } else if (percent >= 100) {
+                statusEl.innerHTML = '<i class="fas fa-check text-green-600"></i>';
+            }
+        });
+    }
+    
+    async function loadResults(sessionId, success) {
+        try {
+            const response = await fetch(`/api/session/${sessionId}/results`);
+            const results = await response.json();
+            
+            const resultPanel = document.getElementById('result-panel');
+            const resultContent = document.getElementById('result-content');
+            
+            resultPanel.classList.add('active');
+            resultPanel.classList.add(success ? 'result-success' : 'result-failed');
+            
+            if (success) {
+                resultContent.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-check-circle text-4xl text-green-600 mr-4"></i>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">Design Complete!</h3>
+                            <p class="text-gray-600">Completed in ${results.duration_seconds?.toFixed(1) || '?'} seconds</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="metric-card">
+                            <div class="metric-value">${results.design?.power_w?.toFixed(0) || '-'}</div>
+                            <div class="metric-label">Power (W)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">${results.design?.torque_nm?.toFixed(2) || '-'}</div>
+                            <div class="metric-label">Torque (Nm)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">${(results.design?.efficiency * 100)?.toFixed(1) || '-'}%</div>
+                            <div class="metric-label">Efficiency</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">${(results.design?.diameter_m * 1000)?.toFixed(0) || '-'}</div>
+                            <div class="metric-label">Diameter (mm)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-2">Thermal Analysis</h4>
+                        <p class="text-sm text-gray-600">
+                            Max Winding Temp: <span class="font-medium">${results.thermal?.max_winding_temp?.toFixed(1) || '-'}°C</span><br>
+                            Max Magnet Temp: <span class="font-medium">${results.thermal?.max_magnet_temp?.toFixed(1) || '-'}°C</span><br>
+                            Status: <span class="font-medium">${results.thermal?.status || '-'}</span>
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-2">3D Validation</h4>
+                        <p class="text-sm text-gray-600">
+                            Passed: <span class="font-medium ${results.validation?.passed ? 'text-green-600' : 'text-red-600'}">${results.validation?.passed ? 'Yes' : 'No'}</span><br>
+                            Confidence: <span class="font-medium">${results.validation?.confidence || '-'}</span>
+                        </p>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <a href="/results/${sessionId}" class="btn-primary">
+                            <i class="fas fa-chart-bar mr-2"></i>View Full Report
+                        </a>
+                        <a href="/" class="btn-secondary">
+                            <i class="fas fa-home mr-2"></i>Back to Dashboard
+                        </a>
+                    </div>
+                    
+                    ${results.output_directory ? `
+                    <div class="mt-4 p-3 bg-blue-50 rounded text-sm text-blue-800">
+                        <i class="fas fa-folder mr-2"></i>
+                        Output: ${results.output_directory}
+                    </div>
+                    ` : ''}
+                `;
+            } else {
+                resultContent.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-times-circle text-4xl text-red-600 mr-4"></i>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">Design Failed</h3>
+                            <p class="text-gray-600">Check the logs for details</p>
+                        </div>
+                    </div>
+                    <a href="/" class="btn-secondary">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
+                    </a>
+                `;
+            }
+        } catch (error) {
+            showError('Error loading results: ' + error.message);
+        }
+    }
+    
+    function showError(message) {
+        const resultPanel = document.getElementById('result-panel');
+        const resultContent = document.getElementById('result-content');
+        
+        resultPanel.classList.add('active');
+        resultPanel.classList.add('result-failed');
+        
+        resultContent.innerHTML = `
+            <div class="flex items-center mb-4">
+                <i class="fas fa-exclamation-triangle text-4xl text-red-600 mr-4"></i>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800">Error</h3>
+                    <p class="text-gray-600">${message}</p>
+                </div>
+            </div>
+            <button onclick="location.reload()" class="btn-secondary">
+                <i class="fas fa-redo mr-2"></i>Try Again
+            </button>
+        `;
+    }
+    
+    // Socket.IO events
+    socket.on('design_complete', function(data) {
+        console.log('Design complete:', data);
+    });
+    
+    socket.on('design_error', function(data) {
+        console.error('Design error:', data);
+        showError(data.error || 'Unknown error');
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,172 @@
+{
+  "requirements": [
+    "weight",
+    "power_density",
+    "reliability",
+    "fault_tolerance",
+    "thermal_robustness",
+    "manufacturability",
+    "certification_feasibility",
+    "maintainability",
+    "safety_margin",
+    "cost_effectiveness"
+  ],
+  "weights": [
+    0.15,
+    0.2,
+    0.15,
+    0.15,
+    0.1,
+    0.08,
+    0.07,
+    0.05,
+    0.03,
+    0.02
+  ],
+  "architectures": [
+    "modular_segmented_dssr",
+    "conventional_dssr",
+    "coreless_ssdr"
+  ],
+  "suitability_matrix": [
+    [
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      8.0,
+      7.0,
+      8.0,
+      9.0,
+      9.0,
+      7.0
+    ],
+    [
+      8.0,
+      8.0,
+      7.0,
+      5.0,
+      7.0,
+      8.0,
+      9.0,
+      6.0,
+      7.0,
+      8.0
+    ],
+    [
+      9.0,
+      9.0,
+      7.0,
+      6.0,
+      7.0,
+      6.0,
+      6.0,
+      6.0,
+      7.0,
+      6.0
+    ]
+  ],
+  "rankings": [
+    [
+      "modular_segmented_dssr",
+      8.280000000000001
+    ],
+    [
+      "coreless_ssdr",
+      7.33
+    ],
+    [
+      "conventional_dssr",
+      7.24
+    ]
+  ],
+  "details": [
+    {
+      "architecture": "modular_segmented_dssr",
+      "requirements": [
+        "weight",
+        "power_density",
+        "reliability",
+        "fault_tolerance",
+        "thermal_robustness",
+        "manufacturability",
+        "certification_feasibility",
+        "maintainability",
+        "safety_margin",
+        "cost_effectiveness"
+      ],
+      "scores": [
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        8.0,
+        7.0,
+        8.0,
+        9.0,
+        9.0,
+        7.0
+      ],
+      "weighted_overall": 8.280000000000001,
+      "rank": 0
+    },
+    {
+      "architecture": "conventional_dssr",
+      "requirements": [
+        "weight",
+        "power_density",
+        "reliability",
+        "fault_tolerance",
+        "thermal_robustness",
+        "manufacturability",
+        "certification_feasibility",
+        "maintainability",
+        "safety_margin",
+        "cost_effectiveness"
+      ],
+      "scores": [
+        8.0,
+        8.0,
+        7.0,
+        5.0,
+        7.0,
+        8.0,
+        9.0,
+        6.0,
+        7.0,
+        8.0
+      ],
+      "weighted_overall": 7.24,
+      "rank": 0
+    },
+    {
+      "architecture": "coreless_ssdr",
+      "requirements": [
+        "weight",
+        "power_density",
+        "reliability",
+        "fault_tolerance",
+        "thermal_robustness",
+        "manufacturability",
+        "certification_feasibility",
+        "maintainability",
+        "safety_margin",
+        "cost_effectiveness"
+      ],
+      "scores": [
+        9.0,
+        9.0,
+        7.0,
+        6.0,
+        7.0,
+        6.0,
+        6.0,
+        6.0,
+        7.0,
+        6.0
+      ],
+      "weighted_overall": 7.33,
+      "rank": 0
+    }
+  ]
+}

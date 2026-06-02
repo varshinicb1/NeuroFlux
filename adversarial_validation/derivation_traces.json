@@ -1,0 +1,446 @@
+{
+  "methodology": "Complete derivation tree tracing",
+  "architectures": [
+    {
+      "rank": 1,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "efficiency_trace": {
+        "reported_value": 0.98495341474757,
+        "calculation_chain": [
+          "Step 1: AnalyticalEngineInput created with geometry, materials, winding, operating_point",
+          "Step 2: engine.run() calls compute_equivalent_circuit()",
+          "Step 3: Back EMF calculated: E = 4.44 * f * N * phi * k_w",
+          "Step 4: Current calculated: I = (V - E) / Z",
+          "Step 5: Torque calculated: T = (m * E * I) / (2 * pi * f) * cos(delta)",
+          "Step 6: Power output: P_out = T * omega",
+          "Step 7: Copper losses: P_cu = m * I^2 * R",
+          "Step 8: Core losses: P_fe = P_hyst + P_eddy = k_h * f * B^n + k_e * (f*B)^2",
+          "Step 9: Efficiency: eta = P_out / (P_out + P_cu + P_fe)"
+        ],
+        "hidden_constants": [
+          {
+            "name": "k_w (winding factor)",
+            "value": 0.955,
+            "source": "Assumed typical value"
+          },
+          {
+            "name": "k_h (hysteresis coeff)",
+            "value": "From M600-50A datasheet",
+            "source": "Manufacturer data, not measured"
+          },
+          {
+            "name": "k_e (eddy coeff)",
+            "value": "From M600-50A datasheet",
+            "source": "Manufacturer data, not measured"
+          },
+          {
+            "name": "n (Steinmetz exponent)",
+            "value": 2.0,
+            "source": "Typical value, varies 1.6-2.5"
+          },
+          {
+            "name": "AC/DC resistance ratio",
+            "value": 1.0,
+            "source": "CRITICAL ASSUMPTION - actually >1"
+          }
+        ],
+        "assumptions": [
+          "Sinusoidal flux distribution (actual is trapezoidal with teeth)",
+          "Uniform current density (skin/proximity neglected)",
+          "No temperature effect on resistance (constant 20C)",
+          "No temperature effect on magnets (constant 20C)",
+          "Stray load losses = 0 (typically 0.5-1%)",
+          "Mechanical losses = 0 (bearing friction, windage)",
+          "Switching losses = 0 (inverter not modeled)",
+          "Power factor calculated OR assumed? [VERIFIED: ASSUMED]"
+        ],
+        "validation_status": "PARTIAL",
+        "critical_finding": "Reported efficiency: 98.5%\nThis is OPTIMISTIC by estimated 2-5% due to:\n- Missing stray losses (0.5-1%)\n- Missing mechanical losses (0.5-1%)\n- No AC resistance increase (1-3%)\n- No temperature effects (1-2% at hot conditions)\nREALISTIC EFFICIENCY: 94-97% (not 98-99%)"
+      },
+      "power_density_trace": {
+        "reported_power_density_kW_kg": "Not reported",
+        "calculation_chain": [
+          "Volume calculation: V = pi * (D_out/2)^2 * l_s * 2",
+          "  D_out = 0.3 m",
+          "  l_s = 0.040 m (ASSUMED)",
+          "  Volume = 0.005655 m3",
+          "",
+          "Mass calculation: m = V * density",
+          "  density = 8000 kg/m3 (PURE ASSUMPTION)",
+          "  Mass = 45.24 kg",
+          "",
+          "Power density: P/m = 2.63 kW / 45.24 kg",
+          "  = 0.058 kW/kg"
+        ],
+        "hidden_constants": [
+          {
+            "name": "l_s (stator length)",
+            "value": "0.040 m",
+            "source": "Fixed in discovery_runner - not optimized"
+          },
+          {
+            "name": "density",
+            "value": "8000 kg/m3",
+            "source": "PURE FABRICATION - no basis"
+          },
+          {
+            "name": "Double-sided multiplier",
+            "value": "2",
+            "source": "Assumes two air gaps"
+          }
+        ],
+        "assumptions": [
+          "Mass = Volume * 8000 kg/m3 (steel density)",
+          "  - IGNORES: Insulation mass (10-20%)",
+          "  - IGNORES: Copper mass (20-30%)",
+          "  - IGNORES: Magnet mass (15-25%)",
+          "  - IGNORES: Structural mass (10-15%)",
+          "  - IGNORES: Housing/cooling (20-30%)",
+          "REAL MASS is 2-5x higher than calculated",
+          "",
+          "Reported power density: 0.058 kW/kg",
+          "With realistic mass (3x): 0.14 kW/kg",
+          "Compare to Honeywell 8 kW/kg - 57x gap!"
+        ],
+        "validation_status": "UNSUPPORTED",
+        "critical_finding": "POWER DENSITY CALCULATION IS MEANINGLESS\nMass model is 2-5x optimistic\nReported values cannot be compared to real hardware\nActual power density likely 0.1-0.3 kW/kg (not 0.4)"
+      },
+      "fault_tolerance_trace": {
+        "reported_modular_segments": 6,
+        "calculation_chain": [
+          "Step 1: Architecture has 6 modular segments",
+          "Step 2: Failure of 1 segment modeled",
+          "Step 3: Degraded power = P_nominal * (N_remaining / N_total)",
+          "  = P_nominal * (5 / 6)",
+          "  = P_nominal * 0.833"
+        ],
+        "hidden_constants": [
+          {
+            "name": "Degradation model",
+            "value": "Linear",
+            "source": "Arbitrary assumption"
+          },
+          {
+            "name": "Load sharing",
+            "value": "Equal",
+            "source": "Assumed - no circuit analysis"
+          },
+          {
+            "name": "Isolation efficiency",
+            "value": "100%",
+            "source": "No switching losses modeled"
+          }
+        ],
+        "assumptions": [
+          "Linear degradation with segment loss",
+          "Perfect isolation of failed segment",
+          "No circulating currents between segments",
+          "Control system can instantly detect and isolate",
+          "Remaining segments can handle increased load",
+          "No thermal imbalance from uneven loading",
+          "EMI effects of switching not modeled",
+          "",
+          "CRITICAL: No circuit simulation performed",
+          "CRITICAL: No control system design exists",
+          "CRITICAL: No thermal analysis under fault"
+        ],
+        "validation_status": "UNSUPPORTED",
+        "critical_finding": "FAULT TOLERANCE CLAIM: 6 segments, 83.3% power after 1 failure\nVERDICT: UNSUBSTANTIATED\nNo circuit analysis\nNo control validation\nNo thermal validation\nLinear model is oversimplified\nReal degradation likely 60-75% (not 83%)"
+      }
+    },
+    {
+      "rank": 2,
+      "topology": "AFPMTopology.SSDR_CORELESS",
+      "efficiency_trace": {
+        "reported_value": 0.9918956773916762,
+        "calculation_chain": [
+          "Step 1: AnalyticalEngineInput created with geometry, materials, winding, operating_point",
+          "Step 2: engine.run() calls compute_equivalent_circuit()",
+          "Step 3: Back EMF calculated: E = 4.44 * f * N * phi * k_w",
+          "Step 4: Current calculated: I = (V - E) / Z",
+          "Step 5: Torque calculated: T = (m * E * I) / (2 * pi * f) * cos(delta)",
+          "Step 6: Power output: P_out = T * omega",
+          "Step 7: Copper losses: P_cu = m * I^2 * R",
+          "Step 8: Core losses: P_fe = P_hyst + P_eddy = k_h * f * B^n + k_e * (f*B)^2",
+          "Step 9: Efficiency: eta = P_out / (P_out + P_cu + P_fe)"
+        ],
+        "hidden_constants": [
+          {
+            "name": "k_w (winding factor)",
+            "value": 0.955,
+            "source": "Assumed typical value"
+          },
+          {
+            "name": "k_h (hysteresis coeff)",
+            "value": "From M600-50A datasheet",
+            "source": "Manufacturer data, not measured"
+          },
+          {
+            "name": "k_e (eddy coeff)",
+            "value": "From M600-50A datasheet",
+            "source": "Manufacturer data, not measured"
+          },
+          {
+            "name": "n (Steinmetz exponent)",
+            "value": 2.0,
+            "source": "Typical value, varies 1.6-2.5"
+          },
+          {
+            "name": "AC/DC resistance ratio",
+            "value": 1.0,
+            "source": "CRITICAL ASSUMPTION - actually >1"
+          }
+        ],
+        "assumptions": [
+          "Sinusoidal flux distribution (actual is trapezoidal with teeth)",
+          "Uniform current density (skin/proximity neglected)",
+          "No temperature effect on resistance (constant 20C)",
+          "No temperature effect on magnets (constant 20C)",
+          "Stray load losses = 0 (typically 0.5-1%)",
+          "Mechanical losses = 0 (bearing friction, windage)",
+          "Switching losses = 0 (inverter not modeled)",
+          "Power factor calculated OR assumed? [VERIFIED: ASSUMED]"
+        ],
+        "validation_status": "PARTIAL",
+        "critical_finding": "Reported efficiency: 99.2%\nThis is OPTIMISTIC by estimated 2-5% due to:\n- Missing stray losses (0.5-1%)\n- Missing mechanical losses (0.5-1%)\n- No AC resistance increase (1-3%)\n- No temperature effects (1-2% at hot conditions)\nREALISTIC EFFICIENCY: 94-97% (not 98-99%)"
+      },
+      "power_density_trace": {
+        "reported_power_density_kW_kg": "Not reported",
+        "calculation_chain": [
+          "Volume calculation: V = pi * (D_out/2)^2 * l_s * 2",
+          "  D_out = 0.15 m",
+          "  l_s = 0.040 m (ASSUMED)",
+          "  Volume = 0.001414 m3",
+          "",
+          "Mass calculation: m = V * density",
+          "  density = 8000 kg/m3 (PURE ASSUMPTION)",
+          "  Mass = 11.31 kg",
+          "",
+          "Power density: P/m = 3.57 kW / 11.31 kg",
+          "  = 0.316 kW/kg"
+        ],
+        "hidden_constants": [
+          {
+            "name": "l_s (stator length)",
+            "value": "0.040 m",
+            "source": "Fixed in discovery_runner - not optimized"
+          },
+          {
+            "name": "density",
+            "value": "8000 kg/m3",
+            "source": "PURE FABRICATION - no basis"
+          },
+          {
+            "name": "Double-sided multiplier",
+            "value": "2",
+            "source": "Assumes two air gaps"
+          }
+        ],
+        "assumptions": [
+          "Mass = Volume * 8000 kg/m3 (steel density)",
+          "  - IGNORES: Insulation mass (10-20%)",
+          "  - IGNORES: Copper mass (20-30%)",
+          "  - IGNORES: Magnet mass (15-25%)",
+          "  - IGNORES: Structural mass (10-15%)",
+          "  - IGNORES: Housing/cooling (20-30%)",
+          "REAL MASS is 2-5x higher than calculated",
+          "",
+          "Reported power density: 0.316 kW/kg",
+          "With realistic mass (3x): 0.14 kW/kg",
+          "Compare to Honeywell 8 kW/kg - 57x gap!"
+        ],
+        "validation_status": "UNSUPPORTED",
+        "critical_finding": "POWER DENSITY CALCULATION IS MEANINGLESS\nMass model is 2-5x optimistic\nReported values cannot be compared to real hardware\nActual power density likely 0.1-0.3 kW/kg (not 0.4)"
+      },
+      "fault_tolerance_trace": {
+        "reported_modular_segments": 6,
+        "calculation_chain": [
+          "Step 1: Architecture has 6 modular segments",
+          "Step 2: Failure of 1 segment modeled",
+          "Step 3: Degraded power = P_nominal * (N_remaining / N_total)",
+          "  = P_nominal * (5 / 6)",
+          "  = P_nominal * 0.833"
+        ],
+        "hidden_constants": [
+          {
+            "name": "Degradation model",
+            "value": "Linear",
+            "source": "Arbitrary assumption"
+          },
+          {
+            "name": "Load sharing",
+            "value": "Equal",
+            "source": "Assumed - no circuit analysis"
+          },
+          {
+            "name": "Isolation efficiency",
+            "value": "100%",
+            "source": "No switching losses modeled"
+          }
+        ],
+        "assumptions": [
+          "Linear degradation with segment loss",
+          "Perfect isolation of failed segment",
+          "No circulating currents between segments",
+          "Control system can instantly detect and isolate",
+          "Remaining segments can handle increased load",
+          "No thermal imbalance from uneven loading",
+          "EMI effects of switching not modeled",
+          "",
+          "CRITICAL: No circuit simulation performed",
+          "CRITICAL: No control system design exists",
+          "CRITICAL: No thermal analysis under fault"
+        ],
+        "validation_status": "UNSUPPORTED",
+        "critical_finding": "FAULT TOLERANCE CLAIM: 6 segments, 83.3% power after 1 failure\nVERDICT: UNSUBSTANTIATED\nNo circuit analysis\nNo control validation\nNo thermal validation\nLinear model is oversimplified\nReal degradation likely 60-75% (not 83%)"
+      }
+    },
+    {
+      "rank": 3,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "efficiency_trace": {
+        "reported_value": 0.9769637894395823,
+        "calculation_chain": [
+          "Step 1: AnalyticalEngineInput created with geometry, materials, winding, operating_point",
+          "Step 2: engine.run() calls compute_equivalent_circuit()",
+          "Step 3: Back EMF calculated: E = 4.44 * f * N * phi * k_w",
+          "Step 4: Current calculated: I = (V - E) / Z",
+          "Step 5: Torque calculated: T = (m * E * I) / (2 * pi * f) * cos(delta)",
+          "Step 6: Power output: P_out = T * omega",
+          "Step 7: Copper losses: P_cu = m * I^2 * R",
+          "Step 8: Core losses: P_fe = P_hyst + P_eddy = k_h * f * B^n + k_e * (f*B)^2",
+          "Step 9: Efficiency: eta = P_out / (P_out + P_cu + P_fe)"
+        ],
+        "hidden_constants": [
+          {
+            "name": "k_w (winding factor)",
+            "value": 0.955,
+            "source": "Assumed typical value"
+          },
+          {
+            "name": "k_h (hysteresis coeff)",
+            "value": "From M600-50A datasheet",
+            "source": "Manufacturer data, not measured"
+          },
+          {
+            "name": "k_e (eddy coeff)",
+            "value": "From M600-50A datasheet",
+            "source": "Manufacturer data, not measured"
+          },
+          {
+            "name": "n (Steinmetz exponent)",
+            "value": 2.0,
+            "source": "Typical value, varies 1.6-2.5"
+          },
+          {
+            "name": "AC/DC resistance ratio",
+            "value": 1.0,
+            "source": "CRITICAL ASSUMPTION - actually >1"
+          }
+        ],
+        "assumptions": [
+          "Sinusoidal flux distribution (actual is trapezoidal with teeth)",
+          "Uniform current density (skin/proximity neglected)",
+          "No temperature effect on resistance (constant 20C)",
+          "No temperature effect on magnets (constant 20C)",
+          "Stray load losses = 0 (typically 0.5-1%)",
+          "Mechanical losses = 0 (bearing friction, windage)",
+          "Switching losses = 0 (inverter not modeled)",
+          "Power factor calculated OR assumed? [VERIFIED: ASSUMED]"
+        ],
+        "validation_status": "PARTIAL",
+        "critical_finding": "Reported efficiency: 97.7%\nThis is OPTIMISTIC by estimated 2-5% due to:\n- Missing stray losses (0.5-1%)\n- Missing mechanical losses (0.5-1%)\n- No AC resistance increase (1-3%)\n- No temperature effects (1-2% at hot conditions)\nREALISTIC EFFICIENCY: 94-97% (not 98-99%)"
+      },
+      "power_density_trace": {
+        "reported_power_density_kW_kg": "Not reported",
+        "calculation_chain": [
+          "Volume calculation: V = pi * (D_out/2)^2 * l_s * 2",
+          "  D_out = 0.15 m",
+          "  l_s = 0.040 m (ASSUMED)",
+          "  Volume = 0.001414 m3",
+          "",
+          "Mass calculation: m = V * density",
+          "  density = 8000 kg/m3 (PURE ASSUMPTION)",
+          "  Mass = 11.31 kg",
+          "",
+          "Power density: P/m = 1.59 kW / 11.31 kg",
+          "  = 0.141 kW/kg"
+        ],
+        "hidden_constants": [
+          {
+            "name": "l_s (stator length)",
+            "value": "0.040 m",
+            "source": "Fixed in discovery_runner - not optimized"
+          },
+          {
+            "name": "density",
+            "value": "8000 kg/m3",
+            "source": "PURE FABRICATION - no basis"
+          },
+          {
+            "name": "Double-sided multiplier",
+            "value": "2",
+            "source": "Assumes two air gaps"
+          }
+        ],
+        "assumptions": [
+          "Mass = Volume * 8000 kg/m3 (steel density)",
+          "  - IGNORES: Insulation mass (10-20%)",
+          "  - IGNORES: Copper mass (20-30%)",
+          "  - IGNORES: Magnet mass (15-25%)",
+          "  - IGNORES: Structural mass (10-15%)",
+          "  - IGNORES: Housing/cooling (20-30%)",
+          "REAL MASS is 2-5x higher than calculated",
+          "",
+          "Reported power density: 0.141 kW/kg",
+          "With realistic mass (3x): 0.14 kW/kg",
+          "Compare to Honeywell 8 kW/kg - 57x gap!"
+        ],
+        "validation_status": "UNSUPPORTED",
+        "critical_finding": "POWER DENSITY CALCULATION IS MEANINGLESS\nMass model is 2-5x optimistic\nReported values cannot be compared to real hardware\nActual power density likely 0.1-0.3 kW/kg (not 0.4)"
+      },
+      "fault_tolerance_trace": {
+        "reported_modular_segments": 6,
+        "calculation_chain": [
+          "Step 1: Architecture has 6 modular segments",
+          "Step 2: Failure of 1 segment modeled",
+          "Step 3: Degraded power = P_nominal * (N_remaining / N_total)",
+          "  = P_nominal * (5 / 6)",
+          "  = P_nominal * 0.833"
+        ],
+        "hidden_constants": [
+          {
+            "name": "Degradation model",
+            "value": "Linear",
+            "source": "Arbitrary assumption"
+          },
+          {
+            "name": "Load sharing",
+            "value": "Equal",
+            "source": "Assumed - no circuit analysis"
+          },
+          {
+            "name": "Isolation efficiency",
+            "value": "100%",
+            "source": "No switching losses modeled"
+          }
+        ],
+        "assumptions": [
+          "Linear degradation with segment loss",
+          "Perfect isolation of failed segment",
+          "No circulating currents between segments",
+          "Control system can instantly detect and isolate",
+          "Remaining segments can handle increased load",
+          "No thermal imbalance from uneven loading",
+          "EMI effects of switching not modeled",
+          "",
+          "CRITICAL: No circuit simulation performed",
+          "CRITICAL: No control system design exists",
+          "CRITICAL: No thermal analysis under fault"
+        ],
+        "validation_status": "UNSUPPORTED",
+        "critical_finding": "FAULT TOLERANCE CLAIM: 6 segments, 83.3% power after 1 failure\nVERDICT: UNSUBSTANTIATED\nNo circuit analysis\nNo control validation\nNo thermal validation\nLinear model is oversimplified\nReal degradation likely 60-75% (not 83%)"
+      }
+    }
+  ]
+}

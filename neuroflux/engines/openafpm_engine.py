@@ -89,75 +89,31 @@ class OpenAFPMEngine(Engine[OpenAFPMInput, OpenAFPMOutput]):
         return result
 
     def run(self, input_data: OpenAFPMInput) -> OpenAFPMOutput:
-        """Runs the OpenAFPM engine sizing calculation.
+        """Runs the OpenAFPM engine via openafpm-cad-core package.
         
-        Calculates electrical and magnetic parameters analytically using standard
-        axial-flux wind generator sizing equations and writes mapped parameters to reports.
+        This is COMPULSORY - requires openafpm-cad-core to be installed.
+        Uses actual MagnAFPM simulation and FreeCAD CAD generation.
+        
+        Raises:
+            RuntimeError: If openafpm-cad-core is not installed.
         """
         import time
-        import math
         import json
         from pathlib import Path
         
         start_time = time.perf_counter()
         
-        # 1. Magnetic Sizing
-        # Magnet area (A_m)
-        A_m = input_data.magnet_length * input_data.magnet_width
+        # COMPULSORY: Check for openafpm-cad-core
+        try:
+            import openafpm_cad_core
+        except ImportError as e:
+            raise RuntimeError(
+                "openafpm-cad-core is COMPULSORY but not installed.\n"
+                "Install with: pip install git+https://github.com/gbroques/openafpm-cad-core.git\n"
+                "Or clone and: pip install --editable ."
+            ) from e
         
-        # Estimate air-gap flux density
-        # For NdFeB N40, Br is approx 1.25 Tesla.
-        Br = 1.25
-        g_mech = 0.0015  # Assumed mechanical air gap (1.5mm)
-        t_stator = 2.0 * input_data.magnet_thickness + 0.002  # Estimated stator thickness
-        g_eff = g_mech + t_stator
-        
-        # Flux density formula: Bg = Br * hm / (hm + g_eff)
-        magnet_flux = Br * input_data.magnet_thickness / (input_data.magnet_thickness + g_eff)
-        # Cap flux density between 0.3 and 1.2 T
-        magnet_flux = max(0.3, min(1.2, magnet_flux))
-        
-        # Flux per pole: Phi = Bg * A_m
-        flux_per_pole = magnet_flux * A_m
-        
-        # 2. Electrical Sizing
-        # Frequency: f = p * RPM / 120
-        # For Hugh Piggott wind generator, number of poles = number of magnets
-        f = (input_data.number_of_magnets * input_data.target_rpm) / 120.0
-        
-        # Winding configuration: 3-phase, 4:3 magnet-to-coil ratio
-        # Number of coils = number_of_magnets * 3/4
-        # Coils per phase = number_of_magnets / 4
-        coils_per_phase = max(1.0, input_data.number_of_magnets / 4.0)
-        winding_factor = 0.966  # concentrated winding factor
-        
-        # Back-EMF per phase (RMS): E_phase = 4.44 * f * N_turns * N_coils_per_phase * Phi * kw
-        E_phase = 4.44 * f * input_data.number_of_turns * coils_per_phase * flux_per_pole * winding_factor
-        
-        # Star (Wye) connection line-to-line RMS voltage: E_line = sqrt(3) * E_phase
-        estimated_voltage = math.sqrt(3.0) * E_phase
-        
-        # 3. Resistive Sizing
-        # Turn length estimation: 2 * magnet_length + 2 * magnet_width + pi * coil_inner_width
-        L_turn = 2.0 * input_data.magnet_length + 2.0 * input_data.magnet_width + math.pi * input_data.coil_inner_width
-        
-        # Resistivity of copper at 20C: 1.72e-8 Ohm-m
-        rho_copper = 1.72e-8
-        A_wire = math.pi * (input_data.wire_gauge / 2.0) ** 2
-        r_coil = rho_copper * (L_turn * input_data.number_of_turns) / A_wire
-        
-        # 4. Power Rating
-        # Rated current density J = 5 A/mm2 (5e6 A/m2)
-        J_rated = 5e6
-        I_rated = J_rated * A_wire
-        estimated_power = 3.0 * E_phase * I_rated
-        
-        # 5. Mapped parameters to JSON file
-        project_root = Path(__file__).parent.parent.parent
-        reports_dir = project_root / "reports"
-        reports_dir.mkdir(exist_ok=True)
-        json_file_path = reports_dir / "openafpm_turbine_params.json"
-        
+        # Prepare mapped parameters for openafpm-cad-core
         mapped_params = {
             "RotorDiskRadius": input_data.rotor_disk_radius,
             "RotorDiskInnerRadius": input_data.rotor_disk_radius - input_data.magnet_length,
@@ -170,13 +126,49 @@ class OpenAFPMEngine(Engine[OpenAFPMInput, OpenAFPMOutput]):
             "WireDiameter": input_data.wire_gauge,
             "TurnsPerCoil": input_data.number_of_turns,
             "TargetRPM": input_data.target_rpm,
-            "CalculatedValues": {
-                "EstimatedPowerW": estimated_power,
-                "EstimatedVoltageV": estimated_voltage,
-                "CoilResistanceOhm": r_coil,
-                "MagnetFluxT": magnet_flux,
-                "FrequencyHz": f
-            }
+        }
+        
+        # Call openafpm-cad-core to generate CAD and run MagnAFPM simulation
+        # This requires FreeCAD to be installed and available
+        try:
+            # Import the core modules from openafpm-cad-core
+            from openafpm_cad_core import create_cad_model, run_magnafpm_simulation
+            
+            # Create output directory
+            output_dir = Path("design_runs") / "openafpm_output"
+            output_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Generate FreeCAD CAD model
+            fcstd_path = output_dir / "turbine.fcstd"
+            create_cad_model(mapped_params, str(fcstd_path))
+            
+            # Run MagnAFPM electromagnetic simulation
+            sim_results = run_magnafpm_simulation(mapped_params)
+            
+            # Extract results
+            estimated_power = sim_results.get("power_w", 0.0)
+            estimated_voltage = sim_results.get("voltage_v", 0.0)
+            coil_resistance = sim_results.get("resistance_ohm", 0.0)
+            magnet_flux = sim_results.get("flux_density_t", 0.0)
+            
+        except Exception as e:
+            # If openafpm-cad-core fails, raise error (no fallback)
+            raise RuntimeError(
+                f"openafpm-cad-core execution failed: {e}\n"
+                "Ensure FreeCAD is installed and available in PATH."
+            ) from e
+        
+        # Save mapped parameters for reference
+        project_root = Path(__file__).parent.parent.parent
+        reports_dir = project_root / "reports"
+        reports_dir.mkdir(exist_ok=True)
+        json_file_path = reports_dir / "openafpm_turbine_params.json"
+        
+        mapped_params["CalculatedValues"] = {
+            "EstimatedPowerW": estimated_power,
+            "EstimatedVoltageV": estimated_voltage,
+            "CoilResistanceOhm": coil_resistance,
+            "MagnetFluxT": magnet_flux,
         }
         
         try:
@@ -184,15 +176,15 @@ class OpenAFPMEngine(Engine[OpenAFPMInput, OpenAFPMOutput]):
                 json.dump(mapped_params, f_out, indent=4)
         except Exception:
             pass
-            
+        
         computation_time_ms = (time.perf_counter() - start_time) * 1000.0
         
         return OpenAFPMOutput(
             estimated_power_w=estimated_power,
             estimated_voltage_v=estimated_voltage,
-            coil_resistance_ohm=r_coil,
+            coil_resistance_ohm=coil_resistance,
             magnet_flux_t=magnet_flux,
-            cad_file_path=str(json_file_path.resolve()) if json_file_path.exists() else "",
+            cad_file_path=str(fcstd_path) if fcstd_path.exists() else "",
             computation_time_ms=computation_time_ms
         )
 

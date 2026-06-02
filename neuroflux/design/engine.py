@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field
 from neuroflux.core.models import AFPMTopology
 from neuroflux.discovery import DesignCandidate, DesignRequirements
 from neuroflux.lab import AutonomousLab, LabRunConfig, LabRunResult
+from neuroflux.validation import ValidationPipeline, ValidationResult, ValidationSpec
 
 
 class AFPMGeneratorSpec(BaseModel):
@@ -38,6 +39,17 @@ class AFPMGeneratorSpec(BaseModel):
     iterations: int = Field(default=3, ge=1, le=200)
     num_candidates: int = Field(default=6, ge=1, le=20)
     num_planes: int = Field(default=7, ge=3, le=21)
+
+    # Phase 2: 3D Validation options
+    run_3d_validation: bool = Field(
+        default=True, description="Run Phase 2 3D thermal FEA validation"
+    )
+    run_external_solvers: bool = Field(
+        default=False, description="Run Elmer/Palace if available (requires installation)"
+    )
+    validation_refinement: str = Field(
+        default="medium", pattern=r"^(coarse|medium|fine)$"
+    )
 
     def to_requirements(self) -> DesignRequirements:
         """Convert public spec to the discovery workflow requirements model."""
@@ -107,7 +119,7 @@ class DesignArtifacts(BaseModel):
 
 
 class AFPMDesignResult(BaseModel):
-    """Unified output from the AFPM design engine."""
+    """Unified output from the AFPM design engine (Phase 1 + Phase 2)."""
 
     spec: AFPMGeneratorSpec
     lab_result: LabRunResult
@@ -116,6 +128,9 @@ class AFPMDesignResult(BaseModel):
     rendering_scene: RenderingScene
     artifacts: DesignArtifacts
     design_package_dir: str
+    # Phase 2: 3D Validation
+    validation_result: ValidationResult | None = None
+    validation_passed: bool = True
 
 
 class AFPMDesignEngine:
@@ -129,7 +144,7 @@ class AFPMDesignEngine:
         return self.design(AFPMGeneratorSpec())
 
     def design(self, spec: AFPMGeneratorSpec) -> AFPMDesignResult:
-        """Run lab, thermal analysis, 3D scene generation, and artifact export."""
+        """Run lab, thermal analysis, 3D validation (Phase 2), and artifact export."""
         package_dir = self.output_root / self._slug(spec.name)
         package_dir.mkdir(parents=True, exist_ok=True)
 
@@ -147,6 +162,31 @@ class AFPMDesignEngine:
         best_candidate = lab_result.best_candidate
         thermal = self._analyze_thermal(spec, best_candidate)
         scene = self._build_scene(spec, best_candidate)
+
+        # ─────────────────────────────────────────────────────────────────
+        # Phase 2: 3D Validation Pipeline
+        # ─────────────────────────────────────────────────────────────────
+        validation_result = None
+        validation_passed = True
+        if spec.run_3d_validation:
+            pipeline = ValidationPipeline(output_root=package_dir / "validation")
+            validation_result = pipeline.run(
+                ValidationSpec(
+                    name=spec.name,
+                    geometry=best_candidate.analytical_input.geometry,
+                    materials=best_candidate.analytical_input.materials,
+                    winding=best_candidate.analytical_input.winding,
+                    operating_point=best_candidate.analytical_input.operating_point,
+                    run_analytical=True,
+                    run_thermal_fea3d=True,
+                    run_elmer_fea=spec.run_external_solvers,
+                    run_palace=False,
+                    generate_handoffs=True,
+                    mesh_refinement=spec.validation_refinement,
+                )
+            )
+            validation_passed = validation_result.passed
+
         artifacts = self._write_artifacts(
             package_dir,
             spec,
@@ -154,6 +194,7 @@ class AFPMDesignEngine:
             best_candidate,
             thermal,
             scene,
+            validation_result,
         )
 
         result = AFPMDesignResult(
@@ -164,6 +205,8 @@ class AFPMDesignEngine:
             rendering_scene=scene,
             artifacts=artifacts,
             design_package_dir=str(package_dir.resolve()),
+            validation_result=validation_result,
+            validation_passed=validation_passed,
         )
         self._write_json(Path(artifacts.manifest_json), result.model_dump(mode="json"))
         return result
@@ -276,6 +319,7 @@ class AFPMDesignEngine:
         candidate: DesignCandidate,
         thermal: ThermalAnalysis,
         scene: RenderingScene,
+        validation_result: ValidationResult | None = None,
     ) -> DesignArtifacts:
         paths = DesignArtifacts(
             manifest_json=str((package_dir / "design_manifest.json").resolve()),
@@ -294,7 +338,7 @@ class AFPMDesignEngine:
         self._write_json(Path(paths.thermal_json), thermal.model_dump(mode="json"))
         self._write_json(Path(paths.scene3d_json), scene.model_dump(mode="json"))
         Path(paths.report_md).write_text(
-            self._render_report(spec, candidate, thermal, paths),
+            self._render_report(spec, candidate, thermal, paths, validation_result),
             encoding="utf-8",
         )
         Path(paths.geometry_geo).write_text(self._render_geo(candidate), encoding="utf-8")
@@ -314,9 +358,35 @@ class AFPMDesignEngine:
         candidate: DesignCandidate,
         thermal: ThermalAnalysis,
         artifacts: DesignArtifacts,
+        validation_result: ValidationResult | None = None,
     ) -> str:
         result = candidate.analytical_result
         geometry = candidate.analytical_input.geometry
+        
+        # Build validation section if available
+        validation_section = ""
+        if validation_result and validation_result.thermal.native_fea3d:
+            fea = validation_result.thermal.native_fea3d
+            validation_section = f"""
+            ## Phase 2: 3D Validation (Native FEA)
+
+            - **Validation Status**: {"PASS" if validation_result.passed else "FAIL"}
+            - **Confidence**: {validation_result.thermal.confidence}
+            - **3D Max Temperature**: {fea.max_temp_c:.1f} C
+            - **3D Avg Temperature**: {fea.average_temp_c:.1f} C
+            - **Hotspot Location**: r={fea.hotspot_radius_m:.4f} m, θ={fea.hotspot_angle_deg:.1f}°, z={fea.hotspot_z_m:.4f} m
+            - **Thermal Margin to 180°C**: {fea.thermal_margin_to_180c:.1f} C
+            - **Solve Time**: {fea.solve_time_ms:.0f} ms
+            - **Node Count**: {fea.node_count}
+            - **VTK Output**: `{fea.vtk_path}`
+
+            ## Solver Handoffs Generated
+
+            """ + "\n".join([
+                f"- **{h.solver_name}**: `{h.case_dir}`" 
+                for h in validation_result.solver_handoffs
+            ])
+        
         return dedent(
             f"""
             # NeuroFlux AFPM Generator Design: {spec.name}
@@ -346,12 +416,13 @@ class AFPMDesignEngine:
             - Efficiency: {result.efficiency:.3f}
             - Total losses: {result.total_losses_w:.3f} W
 
-            ## Thermal Screen
+            ## Phase 1: Thermal Screen
 
             - Status: {thermal.status}
             - Winding temperature: {thermal.max_winding_temp_c:.1f} C
             - Magnet temperature: {thermal.max_magnet_temp_c:.1f} C
             - Convective area: {thermal.convective_area_m2:.4f} m2
+            {validation_section}
 
             ## Artifact Index
 

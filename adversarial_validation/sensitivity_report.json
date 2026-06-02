@@ -1,0 +1,56 @@
+{
+  "methodology": "Perturbation analysis \u00b11%, \u00b15%, \u00b110%, \u00b120%",
+  "base_rankings": [
+    "AFPMTopology.DSSR_SLOTTED",
+    "AFPMTopology.SSDR_CORELESS",
+    "AFPMTopology.DSSR_SLOTTED",
+    "AFPMTopology.SSDR_CORELESS",
+    "AFPMTopology.DSSR_SLOTTED"
+  ],
+  "perturbed_rankings": {
+    "0.01": [
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED"
+    ],
+    "0.05": [
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED"
+    ],
+    "0.1": [
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED"
+    ],
+    "0.2": [
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED",
+      "AFPMTopology.SSDR_CORELESS",
+      "AFPMTopology.DSSR_SLOTTED"
+    ]
+  },
+  "stability_scores": {
+    "AFPMTopology.DSSR_SLOTTED": {
+      "base_rank": 0,
+      "max_rank_change": 0,
+      "stability_score": 1.0,
+      "fragile": false
+    },
+    "AFPMTopology.SSDR_CORELESS": {
+      "base_rank": 1,
+      "max_rank_change": 0,
+      "stability_score": 1.0,
+      "fragile": false
+    }
+  },
+  "fragile_architectures": [],
+  "verdict": "STABLE"
+}

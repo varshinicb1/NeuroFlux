@@ -1,0 +1,307 @@
+{
+  "certification_requirements": [
+    {
+      "standard": "DO-160G",
+      "section": "4",
+      "test_category": "Temperature",
+      "parameter": "Operating Temperature Low",
+      "value_range": "-40\u00b0C",
+      "unit": "\u00b0C",
+      "severity_level": "E",
+      "source": "DO-160G Section 4"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "4",
+      "test_category": "Temperature",
+      "parameter": "Operating Temperature High",
+      "value_range": "+70\u00b0C",
+      "unit": "\u00b0C",
+      "severity_level": "E",
+      "source": "DO-160G Section 4"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "5",
+      "test_category": "Altitude",
+      "parameter": "Operating Altitude",
+      "value_range": "55,000",
+      "unit": "ft",
+      "severity_level": "E",
+      "source": "DO-160G Section 5"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "8",
+      "test_category": "Vibration",
+      "parameter": "Vibration Level",
+      "value_range": "10g (5-2000 Hz)",
+      "unit": "g",
+      "severity_level": "E",
+      "source": "DO-160G Section 8"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "7",
+      "test_category": "Shock",
+      "parameter": "Shock Level",
+      "value_range": "20g (11ms half-sine)",
+      "unit": "g",
+      "severity_level": "E",
+      "source": "DO-160G Section 7"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "6",
+      "test_category": "Humidity",
+      "parameter": "Humidity Resistance",
+      "value_range": "95% RH at 50\u00b0C",
+      "unit": "% RH",
+      "severity_level": "E",
+      "source": "DO-160G Section 6"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "21",
+      "test_category": "RF Emission",
+      "parameter": "EMI Emissions",
+      "value_range": "Category M",
+      "unit": "-",
+      "severity_level": "M",
+      "source": "DO-160G Section 21"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "22",
+      "test_category": "Lightning Induced",
+      "parameter": "Lightning Protection",
+      "value_range": "Level 3 (300V/150A)",
+      "unit": "V/A",
+      "severity_level": "A3J3L3",
+      "source": "DO-160G Section 22"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "16",
+      "test_category": "Power Input",
+      "parameter": "DC Power Bus Transients",
+      "value_range": "28V nominal, 80V spike",
+      "unit": "V",
+      "severity_level": "B",
+      "source": "DO-160G Section 16"
+    },
+    {
+      "standard": "DO-160G",
+      "section": "26",
+      "test_category": "Fire Resistance",
+      "parameter": "Flammability Rating",
+      "value_range": "Self-extinguishing within 15s",
+      "unit": "s",
+      "severity_level": "-",
+      "source": "DO-160G Section 26"
+    },
+    {
+      "standard": "ARP4754A",
+      "section": "3.0",
+      "test_category": "Development Process",
+      "parameter": "Development Assurance Level",
+      "value_range": "A, B, C, D, E",
+      "unit": "-",
+      "severity_level": "DAL-A",
+      "source": "ARP4754A Guidelines"
+    },
+    {
+      "standard": "ARP4754A",
+      "section": "4.0",
+      "test_category": "Validation Process",
+      "parameter": "Validation Coverage",
+      "value_range": "100% of requirements",
+      "unit": "%",
+      "severity_level": "Required",
+      "source": "ARP4754A Guidelines"
+    },
+    {
+      "standard": "ARP4761",
+      "section": "3.2",
+      "test_category": "Safety Assessment",
+      "parameter": "FHA Coverage",
+      "value_range": "All functions",
+      "unit": "-",
+      "severity_level": "Required",
+      "source": "ARP4761 Guidelines"
+    },
+    {
+      "standard": "ARP4761",
+      "section": "4.0",
+      "test_category": "Safety Assessment",
+      "parameter": "Single Fault Tolerance",
+      "value_range": "No single failure",
+      "unit": "-",
+      "severity_level": "Required",
+      "source": "ARP4761 Guidelines"
+    },
+    {
+      "standard": "ARP4761",
+      "section": "5.0",
+      "test_category": "Safety Assessment",
+      "parameter": "FMEA Coverage",
+      "value_range": "All components",
+      "unit": "-",
+      "severity_level": "Required",
+      "source": "ARP4761 Guidelines"
+    },
+    {
+      "standard": "DO-254",
+      "section": "2.0",
+      "test_category": "Hardware Design",
+      "parameter": "Design Assurance Level",
+      "value_range": "A, B, C, D, E",
+      "unit": "-",
+      "severity_level": "Level A",
+      "source": "DO-254 Guidelines"
+    },
+    {
+      "standard": "DO-254",
+      "section": "4.0",
+      "test_category": "Hardware Design",
+      "parameter": "Verification Coverage",
+      "value_range": "100% of design",
+      "unit": "%",
+      "severity_level": "Required",
+      "source": "DO-254 Guidelines"
+    }
+  ],
+  "product_benchmarks": [
+    {
+      "manufacturer": "Honeywell",
+      "product": "1-Megawatt Generator",
+      "power_kw": 1000.0,
+      "weight_kg": 127.0,
+      "efficiency_pct": 97.0,
+      "source": "Honeywell Press Release, May 31, 2022"
+    },
+    {
+      "manufacturer": "Market Standard",
+      "product": "Typical Aerospace Generator",
+      "power_kw": 100.0,
+      "weight_kg": null,
+      "efficiency_pct": 89.0,
+      "source": "Honeywell Benchmark Comparison"
+    },
+    {
+      "manufacturer": "Safran",
+      "product": "23064 Series DC Starter Generator",
+      "power_kw": 9.0,
+      "weight_kg": null,
+      "efficiency_pct": null,
+      "source": "Naasco Product Catalog"
+    }
+  ],
+  "requirements_matrix": {
+    "Power Density": {
+      "minimum": null,
+      "target": null,
+      "stretch": null,
+      "unit": "kW/kg",
+      "sources": [
+        {
+          "value": "8.0",
+          "source": "Honeywell 1-MW Generator Press Release",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high",
+      "type": "confirmed"
+    },
+    "Efficiency": {
+      "minimum": null,
+      "target": null,
+      "stretch": null,
+      "unit": "%",
+      "sources": [
+        {
+          "value": "97.0",
+          "source": "Honeywell 1-MW Generator Press Release",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high",
+      "type": "confirmed"
+    },
+    "Power": {
+      "minimum": null,
+      "target": null,
+      "stretch": null,
+      "unit": "kW",
+      "sources": [
+        {
+          "value": "50-1000",
+          "source": "Honeywell Product Range",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high",
+      "type": "confirmed"
+    },
+    "Weight": {
+      "minimum": null,
+      "target": null,
+      "stretch": null,
+      "unit": "kg",
+      "sources": [
+        {
+          "value": "<12",
+          "source": "Honeywell Challenge Statement",
+          "confidence": "low"
+        }
+      ],
+      "confidence": "low",
+      "type": "assumed"
+    },
+    "RPM": {
+      "minimum": null,
+      "target": null,
+      "stretch": null,
+      "unit": "rpm",
+      "sources": [
+        {
+          "value": "1800-12000",
+          "source": "Aerospace Generator Range",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "type": "inferred"
+    },
+    "Reliability": {
+      "minimum": null,
+      "target": null,
+      "stretch": null,
+      "unit": "%",
+      "sources": [
+        {
+          "value": ">99.0",
+          "source": "Aerospace Industry Standard",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "type": "inferred"
+    },
+    "Fault Tolerance": {
+      "minimum": null,
+      "target": null,
+      "stretch": null,
+      "unit": "-",
+      "sources": [
+        {
+          "value": "Single fault tolerant",
+          "source": "ARP4761 Safety Assessment",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high",
+      "type": "confirmed"
+    }
+  }
+}

@@ -1,0 +1,492 @@
+[
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.3,
+      "k_D": 0.55,
+      "p": 4,
+      "Q": 12,
+      "l_PM": 0.005,
+      "g": 0.003,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "power_w": 2634.703899558683,
+    "torque_nm": 14.19106538169708,
+    "efficiency": 0.98495341474757,
+    "losses_w": 40.24890542643505,
+    "fitness": {
+      "power_density": 0.058239792137250286,
+      "thermal_margin": 0.9236177821857385,
+      "fault_tolerance": 1.0,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.9,
+      "certification": 0.8,
+      "composite": 0.6282179439653828
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.8333333333333334
+      },
+      {
+        "failed": 2,
+        "ratio": 0.6666666666666666
+      },
+      {
+        "failed": 3,
+        "ratio": 0.5
+      }
+    ],
+    "eddy_reduction": 0.85,
+    "thermal_c": 70.8049781085287,
+    "novelty_score": 0.7,
+    "combined_score": 0.6497525607757679
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.15,
+      "k_D": 0.65,
+      "p": 4,
+      "Q": 18,
+      "l_PM": 0.008,
+      "g": 0.004,
+      "topology": "AFPMTopology.SSDR_CORELESS",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "power_w": 3570.824438610034,
+    "torque_nm": 19.098593171027442,
+    "efficiency": 0.9918956773916762,
+    "losses_w": 29.175561389965765,
+    "fitness": {
+      "power_density": 0.3157304668628549,
+      "thermal_margin": 0.9591473035267417,
+      "fault_tolerance": 1.0,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.84,
+      "certification": 0.6,
+      "composite": 0.6247732887171196
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.8333333333333334
+      },
+      {
+        "failed": 2,
+        "ratio": 0.6666666666666666
+      },
+      {
+        "failed": 3,
+        "ratio": 0.5
+      }
+    ],
+    "eddy_reduction": 0.85,
+    "thermal_c": 70.58351122779932,
+    "novelty_score": 0.7,
+    "combined_score": 0.6473413021019837
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.15,
+      "k_D": 0.6,
+      "p": 4,
+      "Q": 12,
+      "l_PM": 0.008,
+      "g": 0.002,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "power_w": 1590.6866108914346,
+    "torque_nm": 8.63783761384135,
+    "efficiency": 0.9769637894395823,
+    "losses_w": 37.50742054129989,
+    "fitness": {
+      "power_density": 0.14064769492972903,
+      "thermal_margin": 0.8821030481916221,
+      "fault_tolerance": 1.0,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.84,
+      "certification": 0.8,
+      "composite": 0.6188594713341082
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.8333333333333334
+      },
+      {
+        "failed": 2,
+        "ratio": 0.6666666666666666
+      },
+      {
+        "failed": 3,
+        "ratio": 0.5
+      }
+    ],
+    "eddy_reduction": 0.85,
+    "thermal_c": 70.750148410826,
+    "novelty_score": 0.7,
+    "combined_score": 0.6432016299338758
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.25,
+      "k_D": 0.7,
+      "p": 4,
+      "Q": 6,
+      "l_PM": 0.005,
+      "g": 0.003,
+      "topology": "AFPMTopology.SSDR_CORELESS",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "power_w": 3570.6562497281457,
+    "torque_nm": 19.098593171027442,
+    "efficiency": 0.9918489582578183,
+    "losses_w": 29.343750271854127,
+    "fitness": {
+      "power_density": 0.11365761444772061,
+      "thermal_margin": 0.9589098638743393,
+      "fault_tolerance": 1.0,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.9,
+      "certification": 0.6,
+      "composite": 0.618601429641731
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.8333333333333334
+      },
+      {
+        "failed": 2,
+        "ratio": 0.6666666666666666
+      },
+      {
+        "failed": 3,
+        "ratio": 0.5
+      }
+    ],
+    "eddy_reduction": 0.85,
+    "thermal_c": 70.58687500543708,
+    "novelty_score": 0.7,
+    "combined_score": 0.6430210007492116
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.35,
+      "k_D": 0.7,
+      "p": 4,
+      "Q": 18,
+      "l_PM": 0.008,
+      "g": 0.004,
+      "topology": "AFPMTopology.SSDR_CORELESS",
+      "modular_segments": 6,
+      "magnet_segments": 3
+    },
+    "power_w": 3569.6088137300403,
+    "torque_nm": 19.098593171027442,
+    "efficiency": 0.9915580038139001,
+    "losses_w": 30.391186269959654,
+    "fitness": {
+      "power_density": 0.05797156811031865,
+      "thermal_margin": 0.9574306487687616,
+      "fault_tolerance": 1.0,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.84,
+      "certification": 0.6,
+      "composite": 0.6089644238403715
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.8333333333333334
+      },
+      {
+        "failed": 2,
+        "ratio": 0.6666666666666666
+      },
+      {
+        "failed": 3,
+        "ratio": 0.5
+      }
+    ],
+    "eddy_reduction": 0.9,
+    "thermal_c": 70.6078237253992,
+    "novelty_score": 0.7,
+    "combined_score": 0.63627509668826
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.2,
+      "k_D": 0.7,
+      "p": 4,
+      "Q": 18,
+      "l_PM": 0.01,
+      "g": 0.003,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "power_w": 1529.956707086534,
+    "torque_nm": 8.319023012967326,
+    "efficiency": 0.975676159207091,
+    "losses_w": 38.14218786842069,
+    "fitness": {
+      "power_density": 0.07609386822668485,
+      "thermal_margin": 0.8753488000943043,
+      "fault_tolerance": 1.0,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.8,
+      "certification": 0.8,
+      "composite": 0.609635392112462
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.8333333333333334
+      },
+      {
+        "failed": 2,
+        "ratio": 0.6666666666666666
+      },
+      {
+        "failed": 3,
+        "ratio": 0.5
+      }
+    ],
+    "eddy_reduction": 0.85,
+    "thermal_c": 70.76284375736842,
+    "novelty_score": 0.5,
+    "combined_score": 0.5767447744787234
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.2,
+      "k_D": 0.65,
+      "p": 6,
+      "Q": 6,
+      "l_PM": 0.01,
+      "g": 0.005,
+      "topology": "AFPMTopology.SSDR_CORELESS",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "power_w": 3570.322333207671,
+    "torque_nm": 19.098593171027442,
+    "efficiency": 0.9917562036687975,
+    "losses_w": 29.677666792329084,
+    "fitness": {
+      "power_density": 0.17757341491528125,
+      "thermal_margin": 0.9584383929200225,
+      "fault_tolerance": 1.0,
+      "manufacturability": 0.7,
+      "magnet_reduction": 0.7,
+      "certification": 0.6,
+      "composite": 0.5873420834789214
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.8333333333333334
+      },
+      {
+        "failed": 2,
+        "ratio": 0.6666666666666666
+      },
+      {
+        "failed": 3,
+        "ratio": 0.5
+      }
+    ],
+    "eddy_reduction": 0.85,
+    "thermal_c": 70.59355333584658,
+    "novelty_score": 0.5,
+    "combined_score": 0.5611394584352449
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.3,
+      "k_D": 0.55,
+      "p": 4,
+      "Q": 9,
+      "l_PM": 0.01,
+      "g": 0.004,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 4,
+      "magnet_segments": 3
+    },
+    "power_w": 3138.010741211223,
+    "torque_nm": 16.87139072588605,
+    "efficiency": 0.9867392855625609,
+    "losses_w": 42.17148840597186,
+    "fitness": {
+      "power_density": 0.06936532538749891,
+      "thermal_margin": 0.9328053791337656,
+      "fault_tolerance": 0.6666666666666666,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.8,
+      "certification": 0.8,
+      "composite": 0.570722995350003
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.75
+      },
+      {
+        "failed": 2,
+        "ratio": 0.5
+      },
+      {
+        "failed": 3,
+        "ratio": 0.25
+      }
+    ],
+    "eddy_reduction": 0.9,
+    "thermal_c": 70.84342976811944,
+    "novelty_score": 0.5,
+    "combined_score": 0.5495060967450021
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.25,
+      "k_D": 0.6,
+      "p": 4,
+      "Q": 18,
+      "l_PM": 0.01,
+      "g": 0.002,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 4,
+      "magnet_segments": 3
+    },
+    "power_w": 2789.654660967209,
+    "torque_nm": 15.018404620341759,
+    "efficiency": 0.9854294115255442,
+    "losses_w": 41.24791646707104,
+    "fitness": {
+      "power_density": 0.08879754076652935,
+      "thermal_margin": 0.9260698518633668,
+      "fault_tolerance": 0.6666666666666666,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.8,
+      "certification": 0.8,
+      "composite": 0.5705418228186652
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.75
+      },
+      {
+        "failed": 2,
+        "ratio": 0.5
+      },
+      {
+        "failed": 3,
+        "ratio": 0.25
+      }
+    ],
+    "eddy_reduction": 0.9,
+    "thermal_c": 70.82495832934143,
+    "novelty_score": 0.5,
+    "combined_score": 0.5493792759730656
+  },
+  {
+    "valid": true,
+    "params": {
+      "D_out": 0.15,
+      "k_D": 0.65,
+      "p": 4,
+      "Q": 18,
+      "l_PM": 0.008,
+      "g": 0.005,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 4,
+      "magnet_segments": 2
+    },
+    "power_w": 1054.4593494012584,
+    "torque_nm": 5.7888961798434035,
+    "efficiency": 0.9663466778060503,
+    "losses_w": 36.721873258144846,
+    "fitness": {
+      "power_density": 0.09323475527795891,
+      "thermal_margin": 0.8258734522151271,
+      "fault_tolerance": 0.6666666666666666,
+      "manufacturability": 0.8,
+      "magnet_reduction": 0.84,
+      "certification": 0.8,
+      "composite": 0.5547687757597031
+    },
+    "modular_degradation": [
+      {
+        "failed": 0,
+        "ratio": 1.0
+      },
+      {
+        "failed": 1,
+        "ratio": 0.75
+      },
+      {
+        "failed": 2,
+        "ratio": 0.5
+      },
+      {
+        "failed": 3,
+        "ratio": 0.25
+      }
+    ],
+    "eddy_reduction": 0.95,
+    "thermal_c": 70.7344374651629,
+    "novelty_score": 0.5,
+    "combined_score": 0.5383381430317922
+  }
+]

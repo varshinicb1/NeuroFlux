@@ -1,0 +1,77 @@
+Header
+  CHECK KEYWORDS Warn
+  Mesh DB "." "mesh"
+  Include Path ""
+  Results Directory "results"
+End
+
+Simulation
+  Max Output Level = 5
+  Coordinate System = Cartesian 3D
+  Simulation Type = Steady State
+  Steady State Max Iterations = 1
+  Output Intervals = 1
+  Solver Input File = case.sif
+End
+
+Constants
+  Permittivity of Vacuum = 8.854187817e-12
+  Permeability of Vacuum = 1.2566370614e-6
+End
+
+Body 1
+  Name = "AFPM active domain"
+  Equation = 1
+  Material = 1
+  Body Force = 1
+End
+
+Equation 1
+  Active Solvers(2) = 1 2
+End
+
+Solver 1
+  Equation = MagnetoDynamics
+  Procedure = "MagnetoDynamics" "WhitneyAVSolver"
+  Variable = A
+  Variable DOFs = 3
+  Fix Input Current Density = True
+  Use Tree Gauge = True
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 1000
+  Linear System Convergence Tolerance = 1.0e-8
+End
+
+Solver 2
+  Equation = HeatSolve
+  Procedure = "HeatSolve" "HeatSolver"
+  Variable = Temperature
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-8
+End
+
+Material 1
+  Name = "Homogenized AFPM material"
+  Relative Permeability = 5000.000
+  Relative Permittivity = 1.0
+  Heat Conductivity = 28.0
+  Density = 7600.0
+  Heat Capacity = 460.0
+End
+
+Body Force 1
+  Current Density 1 = 5.000000e+06
+  Current Density 2 = 0.0
+  Current Density 3 = 0.0
+  Heat Source = 2633.333333
+End
+
+Boundary Condition 1
+  Name = "outer magnetic and thermal reference"
+  Target Boundaries(4) = 4 5 6 7
+  AV {e} = 0.0
+  Temperature = 338.15
+End

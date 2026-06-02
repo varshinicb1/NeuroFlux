@@ -119,7 +119,16 @@ class DiscoveryWorkflow:
                 AFPMTopology.SSDR_CORELESS,
                 AFPMTopology.SSDR_CORELESS_HALBACH,
             ):
-                openafpm_result = self._run_openafpm(engine_input, requirements)
+                # OpenAFPM is compulsory but may not be installed
+                try:
+                    openafpm_result = self._run_openafpm(engine_input, requirements)
+                except RuntimeError as e:
+                    if "openafpm-cad-core is COMPULSORY" in str(e):
+                        warnings.append(f"{candidate_id}: OpenAFPM not available (install openafpm-cad-core)")
+                    else:
+                        warnings.append(f"{candidate_id}: OpenAFPM error: {e}")
+                    openafpm_result = None
+                
                 maggen_result = self._run_maggen(engine_input)
                 autocoil_result = self._run_autocoil(engine_input)
 

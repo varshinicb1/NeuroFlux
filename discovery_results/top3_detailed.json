@@ -1,0 +1,122 @@
+[
+  {
+    "rank": 1,
+    "params": {
+      "D_out": 0.3,
+      "k_D": 0.55,
+      "p": 4,
+      "Q": 12,
+      "l_PM": 0.005,
+      "g": 0.003,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "operating_points": [
+      {
+        "condition": "Cruise",
+        "power_kw": 2.634703899558683,
+        "torque_nm": 14.19106538169708,
+        "efficiency": 0.98495341474757,
+        "losses_w": 40.24890542643505
+      },
+      {
+        "condition": "Max Power",
+        "power_kw": 3.895342818068308,
+        "torque_nm": 18.92142050892944,
+        "efficiency": 0.9829543150428539,
+        "losses_w": 67.55022635408956
+      },
+      {
+        "condition": "Low Speed",
+        "power_kw": 1.4012406941751527,
+        "torque_nm": 11.352852305357665,
+        "efficiency": 0.9821953855342983,
+        "losses_w": 25.400801816910665
+      }
+    ],
+    "power_density_kW_kg": 0.08610605391582297,
+    "mass_kg": 45.238896,
+    "volume_m3": 0.005654861999999999
+  },
+  {
+    "rank": 2,
+    "params": {
+      "D_out": 0.15,
+      "k_D": 0.65,
+      "p": 4,
+      "Q": 18,
+      "l_PM": 0.008,
+      "g": 0.004,
+      "topology": "AFPMTopology.SSDR_CORELESS",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "operating_points": [
+      {
+        "condition": "Cruise",
+        "power_kw": 3.570824438610034,
+        "torque_nm": 19.098593171027442,
+        "efficiency": 0.9918956773916762,
+        "losses_w": 29.175561389965765
+      },
+      {
+        "condition": "Max Power",
+        "power_kw": 4.749566894530809,
+        "torque_nm": 22.918311805232932,
+        "efficiency": 0.9894931030272519,
+        "losses_w": 50.433105469191375
+      },
+      {
+        "condition": "Low Speed",
+        "power_kw": 2.861293585978126,
+        "torque_nm": 22.91831180523293,
+        "efficiency": 0.993504717353516,
+        "losses_w": 18.706414021873975
+      }
+    ],
+    "power_density_kW_kg": 0.4199542707258647,
+    "mass_kg": 11.309724,
+    "volume_m3": 0.0014137154999999998
+  },
+  {
+    "rank": 3,
+    "params": {
+      "D_out": 0.15,
+      "k_D": 0.6,
+      "p": 4,
+      "Q": 12,
+      "l_PM": 0.008,
+      "g": 0.002,
+      "topology": "AFPMTopology.DSSR_SLOTTED",
+      "modular_segments": 6,
+      "magnet_segments": 4
+    },
+    "operating_points": [
+      {
+        "condition": "Cruise",
+        "power_kw": 1.5906866108914346,
+        "torque_nm": 8.63783761384135,
+        "efficiency": 0.9769637894395823,
+        "losses_w": 37.50742054129989
+      },
+      {
+        "condition": "Max Power",
+        "power_kw": 2.347874783011171,
+        "torque_nm": 11.517116818455136,
+        "efficiency": 0.9733578725491192,
+        "losses_w": 64.26452281510252
+      },
+      {
+        "condition": "Low Speed",
+        "power_kw": 0.8444212137054018,
+        "torque_nm": 6.91027009107308,
+        "efficiency": 0.9724208203271741,
+        "losses_w": 23.94893639205654
+      }
+    ],
+    "power_density_kW_kg": 0.20759788505989812,
+    "mass_kg": 11.309724,
+    "volume_m3": 0.0014137154999999998
+  }
+]

@@ -1,0 +1,147 @@
+# NeuroFlux Automation Report
+
+**Generated**: 2026-05-31 22:10:45  
+**Status**: ❌ FAILED  
+**Total Duration**: 0.00 seconds  
+**Output Directory**: `design_automation\design_20260531_221030`
+
+
+            ## Executive Summary
+
+            ### Design: my-generator
+
+            | Metric | Target | Achieved | Status |
+            |--------|--------|----------|--------|
+            | Power | 500 W | 713.00 W | ✅ |
+            | Speed | 800 rpm | - | - |
+            | Voltage | 48 V | 100.00 V (BEMF) | ✅ |
+            | Efficiency | 60.0% | 97.26% | ✅ |
+            | Outer Diameter | 250 mm | 250.0 mm | ✅ |
+
+            ### Assessment
+
+            - ✅ Power target met
+- ✅ Efficiency 97.3% exceeds minimum 60.0%
+
+            ### Topology
+            - **Type**: DSSR_slotted
+            - **Pole Pairs**: 8
+            - **Slots**: 48
+            - **Pole Pitch (mean)**: 77.56 mm
+
+
+            ## Pipeline Stage Breakdown
+
+            | Stage | Status | Duration | Notes |
+            |-------|--------|----------|-------|
+            | ✅ discovery | COMPLETED | 12959ms |
+| ✅ visualization | COMPLETED | 1ms |
+| ✅ cad_export | COMPLETED | 1926ms |
+| ⏭️ reporting | RUNNING | 1ms |
+
+
+## Detailed Design Metrics
+
+### Electromagnetic Performance
+| Parameter | Value | Unit |
+|-----------|-------|------|
+| Torque | 8.7503 | Nm |
+| Power | 713.00 | W |
+| Back EMF (RMS) | 100.00 | V |
+| Efficiency | 97.263% | - |
+| Frequency | 0.00 | Hz |
+
+### Losses
+| Component | Value | Unit |
+|-----------|-------|------|
+| Copper Loss | 0.000 | W |
+| Iron Loss | 0.000 | W |
+| PM Eddy Loss | 0.000 | W |
+| Total Losses | 20.062 | W |
+
+### Flux Densities
+| Location | B_max | Unit |
+|----------|-------|------|
+| airgap | 0.798 | T |
+
+
+## Thermal Analysis
+
+### Operating Conditions
+| Parameter | Value | Unit |
+|-----------|-------|------|
+| Ambient Temperature | 40.0 | °C |
+| Max Winding Temperature | 52.6 | °C |
+| Max Magnet Temperature | 43.3 | °C |
+| Thermal Resistance | 0.626 | K/W |
+| Convective Area | 0.088711 | m² |
+
+### Status: pass
+
+- ✅ All thermal checks passed
+
+
+## 3D Validation Results
+
+**Status**: ✅ PASS
+**Confidence**: HIGH CONFIDENCE
+
+### Native 3D Thermal FEA
+| Metric | Value | Unit |
+|--------|-------|------|
+| Max Temperature | 51.8 | °C |
+| Min Temperature | 50.7 | °C |
+| Average Temperature | 51.4 | °C |
+| Thermal Margin to 180°C | 128.2 | °C |
+| Hotspot Location | r=0.0976m, θ=315.0° | - |
+| Node Count | 13824 | - |
+| Solve Time | 1208 | ms |
+
+### Solver Handoffs Generated
+
+- **Elmer FEM**: `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\validation\my-generator\solver_handoffs\elmer_case`
+- **Palace**: `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\validation\my-generator\solver_handoffs\palace_case`
+
+            ## External Tool Status
+
+            | Tool | Status | Path |
+            |------|--------|------|
+            | ✅ ElmerSolver | Available | `C:\Users\varsh\tools\ElmerFEM-gui-nompi-Windows-AMD64\bin\ElmerSolver.exe` |
+| ✅ ElmerGUI | Available | `C:\Users\varsh\tools\ElmerFEM-gui-nompi-Windows-AMD64\bin\ElmerGUI.exe` |
+| ✅ Gmsh | Available | `C:\Users\varsh\Downloads\gmsh-4.15.2-Windows64\gmsh-4.15.2-Windows64\gmsh.exe` |
+| ✅ FreeCAD | Available | `C:\Users\varsh\AppData\Local\Programs\FreeCAD 1.1\bin\freecad.exe` |
+| ✅ ParaView | Available | `C:\Program Files\ParaView 6.1.0\bin\paraview.exe` |
+
+
+## Artifact Inventory
+
+### Core Design Files
+| Artifact | Path |
+|----------|------|
+| Design Manifest | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\design_manifest.json` |
+| Report | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\design_report.md` |
+| 3D Scene | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\scene3d.json` |
+| HTML Viewer | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\viewer.html` |
+
+### CAD Files
+| Artifact | Path |
+|----------|------|
+| Gmsh Geometry | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\geometry.geo` |
+| OpenSCAD Assembly | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\assembly.scad` |
+| STL Mesh | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\assembly.stl` |
+| CAD Index | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\cad_index.json` |
+
+### Analysis Files
+| Artifact | Path |
+|----------|------|
+| Thermal Analysis | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\thermal_analysis.json` |
+| Parameters CSV | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\parameters.csv` |
+| Lab Manifest | `C:\Users\varsh\.codex\worktrees\a9d3\NeuroFlux\design_automation\my-generator\lab\autonomous-lab\manifest.json` |
+
+
+## Recommended Next Steps
+
+- Consider running external solvers for higher confidence validation
+
+---
+*Generated by NeuroFlux Automation v2.0*

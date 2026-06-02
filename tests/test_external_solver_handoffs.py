@@ -42,7 +42,13 @@ def test_elmer_handoff_builder_writes_sif_geo_and_gui_metadata(tmp_path):
     assert handoff.case_sif_path.endswith("case.sif")
     assert handoff.geometry_geo_path.endswith("geometry.geo")
     assert handoff.run_command == "ElmerSolver case.sif"
-    assert "HeatSolve" in (tmp_path / "elmer_case" / "case.sif").read_text(encoding="utf-8")
+    geo = (tmp_path / "elmer_case" / "geometry.geo").read_text(encoding="utf-8")
+    sif = (tmp_path / "elmer_case" / "case.sif").read_text(encoding="utf-8")
+    assert "Physical Surface(2)" in geo
+    assert "Mesh.SaveAll = 1" in geo
+    assert '"MagnetoDynamics" "WhitneyAVSolver"' in sif
+    assert "Boundary Condition 1" in sif
+    assert "HeatSolve" in sif
 
 
 def test_palace_handoff_builder_writes_json_config_and_manifest(tmp_path):

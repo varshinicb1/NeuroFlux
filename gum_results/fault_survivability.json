@@ -1,0 +1,139 @@
+{
+  "n_modules": 6,
+  "fault_scenarios": [
+    "single_segment_failure",
+    "double_segment_failure",
+    "triple_segment_failure",
+    "phase_a_loss",
+    "winding_short_10pct",
+    "winding_short_50pct",
+    "thermal_runaway",
+    "cooling_failure",
+    "bearing_degradation",
+    "sensor_loss"
+  ],
+  "metrics": [
+    "power_retained_pct",
+    "efficiency_retained_pct",
+    "torque_retained_pct",
+    "temperature_rise_K",
+    "vibration_increase_pct",
+    "fault_severity_score",
+    "recovery_time_s",
+    "graceful_degradation_score"
+  ],
+  "survivability_matrix": [
+    [
+      83.33333333333334,
+      95.0,
+      83.33333333333334,
+      15.0,
+      10.0,
+      3.0,
+      0.1,
+      9.0
+    ],
+    [
+      66.66666666666666,
+      90.0,
+      66.66666666666666,
+      25.0,
+      20.0,
+      5.0,
+      0.2,
+      7.0
+    ],
+    [
+      50.0,
+      85.0,
+      50.0,
+      35.0,
+      30.0,
+      7.0,
+      0.5,
+      5.0
+    ],
+    [
+      67.0,
+      95.0,
+      67.0,
+      10.0,
+      50.0,
+      8.0,
+      0.05,
+      4.0
+    ],
+    [
+      90.0,
+      85.0,
+      90.0,
+      40.0,
+      5.0,
+      6.0,
+      1.0,
+      6.0
+    ],
+    [
+      50.0,
+      70.0,
+      50.0,
+      80.0,
+      15.0,
+      9.0,
+      5.0,
+      2.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      150.0,
+      100.0,
+      10.0,
+      10.0,
+      0.0
+    ],
+    [
+      70.0,
+      80.0,
+      70.0,
+      60.0,
+      5.0,
+      7.0,
+      60.0,
+      5.0
+    ],
+    [
+      95.0,
+      98.0,
+      95.0,
+      5.0,
+      200.0,
+      6.0,
+      1000.0,
+      7.0
+    ],
+    [
+      100.0,
+      100.0,
+      100.0,
+      0.0,
+      0.0,
+      4.0,
+      0.01,
+      8.0
+    ]
+  ],
+  "overall_scores": {
+    "single_segment_failure": 63.49966666666667,
+    "double_segment_failure": 56.22933333333333,
+    "triple_segment_failure": 48.965,
+    "phase_a_loss": 58.9815,
+    "winding_short_10pct": 66.95,
+    "winding_short_50pct": 49.14,
+    "thermal_runaway": 25.8,
+    "cooling_failure": 59.75,
+    "bearing_degradation": 118.03999999999999,
+    "sensor_loss": 70.3603
+  }
+}

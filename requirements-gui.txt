@@ -1,0 +1,5 @@
+# GUI Dependencies for NeuroFlux
+# Install with: pip install -r requirements-gui.txt
+
+flask>=2.3
+flask-socketio>=5.3

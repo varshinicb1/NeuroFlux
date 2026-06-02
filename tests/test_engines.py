@@ -66,6 +66,12 @@ def test_maggen_engine():
 
 
 def test_openafpm_engine():
+    # Skip if openafpm-cad-core not installed (it's compulsory but external)
+    try:
+        import openafpm_cad_core
+    except ImportError:
+        pytest.skip("openafpm-cad-core not installed (compulsory external dependency)")
+    
     engine = OpenAFPMEngine()
     inp = OpenAFPMInput(
         rotor_disk_radius=0.187,

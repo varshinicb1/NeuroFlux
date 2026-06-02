@@ -1,0 +1,78 @@
+{
+  "report_version": "2.0",
+  "generated_at": "2026-05-31T18:00:39.533386",
+  "automation": {
+    "success": false,
+    "duration_seconds": 0.0,
+    "total_duration_ms": 0.0,
+    "stages": {
+      "discovery": {
+        "status": "COMPLETED",
+        "duration_ms": 11613.39460000454,
+        "retries": 0,
+        "error": null
+      },
+      "visualization": {
+        "status": "COMPLETED",
+        "duration_ms": 1.2844999946537428,
+        "retries": 0,
+        "error": null
+      },
+      "cad_export": {
+        "status": "COMPLETED",
+        "duration_ms": 1942.1020000008866,
+        "retries": 0,
+        "error": null
+      },
+      "reporting": {
+        "status": "RUNNING",
+        "duration_ms": 0.3651999941212125,
+        "retries": 0,
+        "error": null
+      }
+    },
+    "errors": [],
+    "warnings": []
+  },
+  "tool_configuration": {
+    "elmer_available": true,
+    "freecad_available": true,
+    "paraview_available": true
+  },
+  "design": {
+    "name": "my-generator1",
+    "target_power_w": 500.0,
+    "target_speed_rpm": 790.0,
+    "target_voltage_v": 48.0,
+    "max_outer_diameter_m": 0.25,
+    "achieved_efficiency": 0.9723948551768238,
+    "achieved_power_w": 703.9177493803534,
+    "achieved_torque_nm": 8.750312323287192
+  },
+  "thermal_analysis": {
+    "max_winding_temp_c": 52.51470658971157,
+    "max_magnet_temp_c": 43.303443743873935,
+    "status": "pass"
+  },
+  "validation": {
+    "passed": true,
+    "confidence": "HIGH CONFIDENCE",
+    "max_temp_c": 51.767387
+  },
+  "artifacts": {
+    "design_package_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1",
+    "all_paths": {
+      "manifest_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\design_manifest.json",
+      "report_md": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\design_report.md",
+      "geometry_geo": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\geometry.geo",
+      "assembly_scad": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\assembly.scad",
+      "assembly_stl": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\assembly.stl",
+      "cad_index_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\cad_index.json",
+      "scene3d_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\scene3d.json",
+      "viewer_html": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\viewer.html",
+      "thermal_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\thermal_analysis.json",
+      "parameters_csv": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\parameters.csv",
+      "lab_manifest_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\design_automation\\my-generator1\\lab\\autonomous-lab\\manifest.json"
+    }
+  }
+}

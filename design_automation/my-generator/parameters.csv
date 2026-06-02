@@ -1,0 +1,15 @@
+parameter,value
+name,my-generator
+target_power_w,500.0
+target_speed_rpm,800.0
+outer_diameter_m,0.25
+inner_diameter_m,0.145
+pole_count,16
+slot_count,48
+air_gap_m,0.0025
+magnet_thickness_m,0.0045
+torque_nm,8.750312323287192
+power_w,713.002382415113
+efficiency,0.9726325993158953
+thermal_status,pass
+winding_temp_c,52.56397571983459

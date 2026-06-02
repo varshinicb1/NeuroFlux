@@ -1,0 +1,112 @@
+{
+  "criteria": [
+    "inspectability",
+    "maintainability",
+    "fault_isolation",
+    "redundancy",
+    "verification_complexity",
+    "qualification_risk",
+    "documentation_burden",
+    "test_coverage_ease",
+    "traceability",
+    "configuration_management"
+  ],
+  "baseline_scores": [
+    7,
+    6,
+    8,
+    7,
+    6,
+    7,
+    5,
+    7,
+    8,
+    7
+  ],
+  "architectures": {
+    "modular_segmented": {
+      "criteria": [
+        "inspectability",
+        "maintainability",
+        "fault_isolation",
+        "redundancy",
+        "verification_complexity",
+        "qualification_risk",
+        "documentation_burden",
+        "test_coverage_ease",
+        "traceability",
+        "configuration_management"
+      ],
+      "scores": [
+        8,
+        7,
+        10,
+        9,
+        5,
+        8,
+        4,
+        8,
+        9,
+        8
+      ],
+      "overall": 7.6,
+      "architecture": "modular_segmented"
+    },
+    "conventional": {
+      "criteria": [
+        "inspectability",
+        "maintainability",
+        "fault_isolation",
+        "redundancy",
+        "verification_complexity",
+        "qualification_risk",
+        "documentation_burden",
+        "test_coverage_ease",
+        "traceability",
+        "configuration_management"
+      ],
+      "scores": [
+        7,
+        6,
+        8,
+        7,
+        6,
+        7,
+        5,
+        7,
+        8,
+        7
+      ],
+      "overall": 6.8,
+      "architecture": "conventional"
+    },
+    "coreless": {
+      "criteria": [
+        "inspectability",
+        "maintainability",
+        "fault_isolation",
+        "redundancy",
+        "verification_complexity",
+        "qualification_risk",
+        "documentation_burden",
+        "test_coverage_ease",
+        "traceability",
+        "configuration_management"
+      ],
+      "scores": [
+        8,
+        7,
+        8,
+        7,
+        7,
+        7,
+        6,
+        8,
+        8,
+        7
+      ],
+      "overall": 7.3,
+      "architecture": "coreless"
+    }
+  }
+}

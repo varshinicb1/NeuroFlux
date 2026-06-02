@@ -1,0 +1,11 @@
+{
+  "topology": "DSSR_SLOTTED",
+  "power_w": 6993.05831408574,
+  "torque_nm": 37.37296467160344,
+  "efficiency": 0.9926781813149198,
+  "total_losses_w": 51.579561225074,
+  "copper_loss_w": 0,
+  "iron_loss_w": 0,
+  "back_emf_rms": 100.0,
+  "max_flux_air_gap": 0
+}

@@ -88,7 +88,10 @@ class ElmerHandoffBuilder:
             Cylinder(1) = {{0, 0, -axial/2, 0, 0, axial, r_out}};
             Cylinder(2) = {{0, 0, -axial/2, 0, 0, axial, r_in}};
             BooleanDifference{{ Volume{{1}}; Delete; }}{{ Volume{{2}}; Delete; }}
-            Physical Volume("active_machine_domain") = {{1}};
+            machine_boundary[] = Boundary{{ Volume{{1}}; }};
+            Physical Volume(1) = {{1}};
+            Physical Surface(2) = {{machine_boundary[]}};
+            Mesh.SaveAll = 1;
             Mesh.CharacteristicLengthMax = {max(geometry.g, geometry.active_length / 8.0):.8f};
             """
         ).lstrip()
@@ -138,9 +141,11 @@ class ElmerHandoffBuilder:
 
             Solver 1
               Equation = MagnetoDynamics
-              Procedure = "MagnetoDynamics" "MagnetoDynamics"
+              Procedure = "MagnetoDynamics" "WhitneyAVSolver"
               Variable = A
               Variable DOFs = 3
+              Fix Input Current Density = True
+              Use Tree Gauge = True
               Linear System Solver = Iterative
               Linear System Iterative Method = BiCGStab
               Linear System Max Iterations = 1000
@@ -160,6 +165,7 @@ class ElmerHandoffBuilder:
             Material 1
               Name = "Homogenized AFPM material"
               Relative Permeability = {materials.mu_r_steel_linear:.3f}
+              Relative Permittivity = 1.0
               Heat Conductivity = 28.0
               Density = 7600.0
               Heat Capacity = 460.0
@@ -170,6 +176,13 @@ class ElmerHandoffBuilder:
               Current Density 2 = 0.0
               Current Density 3 = 0.0
               Heat Source = {max(1.0, frequency * 25.0):.6f}
+            End
+
+            Boundary Condition 1
+              Name = "outer magnetic and thermal reference"
+              Target Boundaries(4) = 4 5 6 7
+              AV {{e}} = 0.0
+              Temperature = 338.15
             End
             """
         ).strip() + "\n"

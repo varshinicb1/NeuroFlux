@@ -107,7 +107,7 @@ class AegisPDRGenerator:
         ]
         cooling = ["air", "cold_plate", "cold_plate_vapor_spreader", "spray_oil"]
         phases = ["3-phase", "dual-3-phase", "6-phase", "9-phase"]
-        rotor = ["passive_salient", "passive_flux_modulated", "PM_rotor"]
+        rotor = ["passive_salient", "passive_reluctance", "PM_rotor"]
         idx = 1
         for family in families:
             for cool in cooling:
@@ -116,6 +116,7 @@ class AegisPDRGenerator:
                         if family == "AEGIS-AFSG" and rotor_type == "PM_rotor":
                             continue
                         score_vector = self._score_variant(family, cool, phase, rotor_type)
+                        classification_penalty = self._classification_penalty(family, rotor_type)
                         score = (
                             0.22 * score_vector["reliability"]
                             + 0.18 * score_vector["certification"]
@@ -125,7 +126,7 @@ class AegisPDRGenerator:
                             + 0.08 * score_vector["patentability"]
                             + 0.06 * score_vector["maintainability"]
                             + 0.04 * score_vector["cost"]
-                        )
+                        ) * classification_penalty
                         variants.append(
                             {
                                 "id": f"AEGIS-CAND-{idx:03d}",
@@ -133,6 +134,7 @@ class AegisPDRGenerator:
                                 "cooling": cool,
                                 "phases": phase,
                                 "rotor": rotor_type,
+                                "classification_penalty": round(classification_penalty, 3),
                                 "score": round(score, 4),
                                 **{key: round(value, 3) for key, value in score_vector.items()},
                             }
@@ -181,6 +183,15 @@ class AegisPDRGenerator:
             score["specific_power"] -= 0.15
             score["patentability"] -= 0.18
         return {key: max(0.05, min(0.97, value)) for key, value in score.items()}
+
+    def _classification_penalty(self, family: str, rotor: str) -> float:
+        """Keep AEGIS in AFPM territory rather than rewarding adjacent machine classes."""
+        penalty = 1.0
+        if "radial" in family or "wound-field" in family:
+            penalty *= 0.72
+        if "flux_modulated" in rotor or "vernier" in rotor:
+            penalty *= 0.35
+        return penalty
 
     def _run_thermal_fea(self, spec: AegisPDRSpec, output_dir: Path):
         radius = spec.max_outer_diameter_m / 2.0
@@ -334,7 +345,10 @@ class AegisPDRGenerator:
     ) -> None:
         manifest = {
             "concept": "AEGIS-AFSG",
-            "description": "stationary-magnet cassette-isolated axial-flux switching generator",
+            "description": (
+                "modular aerospace axial-flux permanent-magnet generator with "
+                "stationary cassette cooling and health monitoring"
+            ),
             "top_candidate": top,
             "validation_status": {
                 "analytical_em": "completed_preliminary",
@@ -466,14 +480,15 @@ class AegisPDRGenerator:
             """
             # Novelty Report
 
-            AEGIS-AFSG combines axial flux packaging, flux-switching/flux-modulated
-            physics, stationary permanent magnets, cassette-level phase isolation,
-            and direct liquid cooling. Each element has prior art. The candidate
-            novelty is the aerospace-specific integration that removes rotor magnets
-            while preserving low-speed axial machine packaging.
+            AEGIS-AFSG combines axial-flux permanent-magnet packaging, serviceable
+            cassette modules, cassette-level phase isolation, and direct liquid
+            cooling. Each element has prior art. The candidate novelty is the
+            aerospace-specific AFPM integration that preserves low-speed axial
+            machine packaging without reclassifying the machine as flux-switching,
+            vernier, or flux-modulated.
 
             Potential white space:
-            - removable stationary PM/winding/cooling cassettes for axial flux switching
+            - removable PM/winding/cooling cassettes for an AFPM generator
             - passive salient rotor with no PM retention hazard
             - cassette-level health index and degraded operation control
             - vapor-spreader cold plate integrated into PM cassette retention
@@ -489,12 +504,13 @@ class AegisPDRGenerator:
             # Patentability Assessment
 
             Patentability is plausible but not claimed. Strongest claim direction:
-            stationary-magnet axial-flux switching generator with removable liquid-cooled
-            phase cassettes and passive salient rotor for aerospace degraded operation.
+            modular AFPM generator with removable liquid-cooled phase cassettes,
+            passive-safe rotor construction, and aerospace degraded operation.
 
             High-risk overlap areas:
             - fault-tolerant axial-gap permanent magnet machines
-            - flux-switching PM machines
+            - adjacent flux-switching PM machines, treated as prior-art risk
+              rather than target category
             - modular stator motor/generator patents
             - aircraft starter-generator health monitoring
 
@@ -516,8 +532,8 @@ class AegisPDRGenerator:
             - Required torque: {torque:.2f} N m
             - DC bus current at rated power: {current:.2f} A
             - Target back EMF: compatible with {spec.dc_bus_voltage_v:.0f} V DC link
-            - Candidate physics: axial flux-switching / flux-modulated PM generator
-            - Expected losses: copper dominant, followed by stator core switching loss
+            - Candidate physics: AFPM-dominant PM generator with modular stator cassettes
+            - Expected losses: copper dominant, followed by stator core and magnet eddy-current loss
 
             Required validation:
             - 3D electromagnetic FEA for flux maps, saturation, cogging, ripple, harmonics
@@ -673,7 +689,7 @@ class AegisPDRGenerator:
             f"""
             # AEGIS-AFSG Design Report
 
-            Concept: stationary-magnet cassette-isolated axial-flux switching generator.
+            Concept: modular aerospace AFPM generator with cassette-isolated stator modules.
             Target: {spec.target_power_kw:.1f} kW at {spec.target_speed_rpm:.0f} rpm.
             Selected candidate: {top["id"]}.
 
@@ -744,7 +760,7 @@ class AegisPDRGenerator:
     def _scene(self, spec: AegisPDRSpec) -> dict:
         radius = spec.max_outer_diameter_m / 2.0
         return {
-            "title": "AEGIS-AFSG cassette axial-flux switching generator",
+            "title": "AEGIS-AFSG modular aerospace AFPM generator",
             "units": "m",
             "camera": {"x": 0.0, "y": -0.75, "z": 0.45},
             "meshes": [
@@ -868,7 +884,7 @@ class AegisPDRGenerator:
             <html><head><meta charset="utf-8"><title>AEGIS-AFSG Viewer</title></head>
             <body style="font-family:Arial;background:#101418;color:#e8edf2">
             <h1>AEGIS-AFSG PDR Viewer</h1>
-            <p>Stationary-magnet cassette-isolated axial-flux switching generator.</p>
+            <p>Modular aerospace AFPM generator with cassette-isolated stator modules.</p>
             <p>Target: {spec.target_power_kw:.1f} kW at {spec.target_speed_rpm:.0f} rpm.</p>
             <p>Open <code>scene3d.json</code>, <code>assembly.scad</code>, or
             <code>thermal_fea3d_revised/thermal_fea3d.vtk</code> for inspection.</p>
