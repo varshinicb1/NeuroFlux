@@ -1,0 +1,16 @@
+{
+  "average_temp_c": 52.877473,
+  "confidence": "MEDIUM CONFIDENCE",
+  "converged": true,
+  "coolant_temp_c": 55.0,
+  "hotspot_angle_deg": 90.0,
+  "hotspot_radius_m": 0.10185,
+  "hotspot_z_m": 0.01575,
+  "max_temp_c": 53.267582,
+  "min_temp_c": 52.120896,
+  "node_count": 4608,
+  "solve_time_ms": 173.5757,
+  "summary_json_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\ev-traction-5kw\\validation\\ev-traction-5kw\\thermal_fea3d\\thermal_fea3d_summary.json",
+  "thermal_margin_to_180c": 126.732418,
+  "vtk_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\ev-traction-5kw\\validation\\ev-traction-5kw\\thermal_fea3d\\thermal_fea3d.vtk"
+}

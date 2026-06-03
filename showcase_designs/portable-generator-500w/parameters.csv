@@ -1,0 +1,15 @@
+parameter,value
+name,portable-generator-500w
+target_power_w,500.0
+target_speed_rpm,1500.0
+outer_diameter_m,0.16537500000000002
+inner_diameter_m,0.0959175
+pole_count,20
+slot_count,60
+air_gap_m,0.0025
+magnet_thickness_m,0.004
+torque_nm,3.154944147483988
+power_w,306.42714316790904
+efficiency,0.6183233965849234
+thermal_status,fail
+winding_temp_c,310.70655510169513

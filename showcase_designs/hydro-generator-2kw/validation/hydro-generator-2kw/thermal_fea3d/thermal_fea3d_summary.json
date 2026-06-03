@@ -1,0 +1,16 @@
+{
+  "average_temp_c": 50.986482,
+  "confidence": "MEDIUM CONFIDENCE",
+  "converged": true,
+  "coolant_temp_c": 55.0,
+  "hotspot_angle_deg": 326.25,
+  "hotspot_radius_m": 0.221904,
+  "hotspot_z_m": 0.03312,
+  "max_temp_c": 51.727113,
+  "min_temp_c": 49.63675,
+  "node_count": 4608,
+  "solve_time_ms": 160.3811,
+  "summary_json_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\validation\\hydro-generator-2kw\\thermal_fea3d\\thermal_fea3d_summary.json",
+  "thermal_margin_to_180c": 128.272887,
+  "vtk_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\validation\\hydro-generator-2kw\\thermal_fea3d\\thermal_fea3d.vtk"
+}

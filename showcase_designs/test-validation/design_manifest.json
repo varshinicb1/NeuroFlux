@@ -1,0 +1,1580 @@
+{
+  "artifacts": {
+    "assembly_scad": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\assembly.scad",
+    "assembly_stl": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\assembly.stl",
+    "cad_index_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\cad_index.json",
+    "geometry_geo": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\geometry.geo",
+    "lab_manifest_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\lab\\autonomous-lab\\manifest.json",
+    "manifest_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\design_manifest.json",
+    "parameters_csv": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\parameters.csv",
+    "report_md": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\design_report.md",
+    "scene3d_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\scene3d.json",
+    "thermal_json": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\thermal_analysis.json",
+    "viewer_html": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\viewer.html"
+  },
+  "best_candidate": {
+    "analytical_input": {
+      "geometry": {
+        "D_out": 0.2432,
+        "Q": 48,
+        "g": 0.0025,
+        "k_D": 0.62,
+        "l_PM": 0.0043776,
+        "l_s": 0.029183999999999998,
+        "p": 8,
+        "rotor_yoke_thickness": 0.008512,
+        "slot_depth": 0.025,
+        "slot_opening": 0.009669822187749384,
+        "tooth_width": 0.016245301275418962,
+        "topology": "DSSR_slotted",
+        "w_PM": 0.027849087900718224,
+        "winding_thickness": null,
+        "yoke_thickness": 0.008512
+      },
+      "magnet_config": {
+        "halbach_ratio": 1.0,
+        "mag_type": "conventional",
+        "segments_per_pole": 1
+      },
+      "materials": {
+        "B_sat": 1.8,
+        "Br": 1.28,
+        "Hcj": 955000.0,
+        "copper_resistivity_20c": 1.678e-08,
+        "k_eddy": 0.53,
+        "k_exc": 0.0,
+        "k_hys": 143.0,
+        "mu_r_PM": 1.05,
+        "mu_r_steel_linear": 5000.0,
+        "pm_temp_coeff": -0.12,
+        "steel_grade": "M600-50A",
+        "steinmetz_alpha": 2.0
+      },
+      "num_planes": 7,
+      "operating_point": {
+        "I_rms": 6.014065304058602,
+        "ambient_temp": 40.0,
+        "gamma_advance": 0.0,
+        "speed_rpm": 600.0,
+        "winding_temp": 80.0
+      },
+      "winding": {
+        "coil_pitch": null,
+        "conductor_diameter": null,
+        "current_density": 5000000.0,
+        "fill_factor": 0.58,
+        "parallel_paths": 1,
+        "phases": 3,
+        "turns_per_phase": 65
+      }
+    },
+    "analytical_result": {
+      "back_emf_rms": 100.0,
+      "computation_time_ms": 0.10880001354962587,
+      "efficiency": 0.9777352063642869,
+      "engine_name": "Quasi3D_Analytical_Engine",
+      "fidelity": "analytical",
+      "losses": {
+        "copper": 5.4255090395030035,
+        "core": 2.248532415459045,
+        "mechanical": 0.7006168897697466,
+        "rotor": 0.08618301135381233
+      },
+      "max_flux_densities": {
+        "airgap": 0.7891800421416363
+      },
+      "plane_results": [
+        {
+          "B_g": 0.7891800421416363,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.568209630341978,
+            "yoke": 1.0314320022611514
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 0,
+          "r_mean": 0.07869257142857143,
+          "tau_p": 0.03090250053651126,
+          "torque_contribution": 0.6922997985257776
+        },
+        {
+          "B_g": 0.7888505907003895,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.5679724253042805,
+            "yoke": 1.1174871905609118
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 1,
+          "r_mean": 0.08529371428571428,
+          "tau_p": 0.03349476327467334,
+          "torque_contribution": 0.750060261058855
+        },
+        {
+          "B_g": 0.7884949246617836,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.5677163457564841,
+            "yoke": 1.2034301302411963
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 2,
+          "r_mean": 0.09189485714285714,
+          "tau_p": 0.03608702601283544,
+          "torque_contribution": 0.8077453820313854
+        },
+        {
+          "B_g": 0.7879635012947689,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.5673337209322336,
+            "yoke": 1.2890075663836769
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 3,
+          "r_mean": 0.098496,
+          "tau_p": 0.038679288750997534,
+          "torque_contribution": 0.8651851760943117
+        },
+        {
+          "B_g": 0.7869238414749645,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.5665851658619745,
+            "yoke": 1.3735813466791897
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 4,
+          "r_mean": 0.10509714285714286,
+          "tau_p": 0.041271551489159626,
+          "torque_contribution": 0.9219513137852016
+        },
+        {
+          "B_g": 0.7854278745231507,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.5655080696566686,
+            "yoke": 1.4570806456456424
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 5,
+          "r_mean": 0.11169828571428572,
+          "tau_p": 0.04386381422732172,
+          "torque_contribution": 0.9779962568592897
+        },
+        {
+          "B_g": 0.7831627924468706,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.5638772105617468,
+            "yoke": 1.5387407831848467
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 6,
+          "r_mean": 0.11829942857142857,
+          "tau_p": 0.04645607696548381,
+          "torque_contribution": 1.032806750078468
+        }
+      ],
+      "power_w": 371.54902958717344,
+      "torque_nm": 6.048044938433288,
+      "total_losses_w": 8.460841356085608,
+      "warnings": []
+    },
+    "autocoil_result": null,
+    "candidate_id": "NF-DSSR_slotted-68",
+    "maggen_result": null,
+    "meets_requirements": true,
+    "openafpm_result": null,
+    "reasons": [],
+    "score": 1.2865584079839483
+  },
+  "design_package_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation",
+  "lab_result": {
+    "best_candidate": {
+      "analytical_input": {
+        "geometry": {
+          "D_out": 0.2432,
+          "Q": 48,
+          "g": 0.0025,
+          "k_D": 0.62,
+          "l_PM": 0.0043776,
+          "l_s": 0.029183999999999998,
+          "p": 8,
+          "rotor_yoke_thickness": 0.008512,
+          "slot_depth": 0.025,
+          "slot_opening": 0.009669822187749384,
+          "tooth_width": 0.016245301275418962,
+          "topology": "DSSR_slotted",
+          "w_PM": 0.027849087900718224,
+          "winding_thickness": null,
+          "yoke_thickness": 0.008512
+        },
+        "magnet_config": {
+          "halbach_ratio": 1.0,
+          "mag_type": "conventional",
+          "segments_per_pole": 1
+        },
+        "materials": {
+          "B_sat": 1.8,
+          "Br": 1.28,
+          "Hcj": 955000.0,
+          "copper_resistivity_20c": 1.678e-08,
+          "k_eddy": 0.53,
+          "k_exc": 0.0,
+          "k_hys": 143.0,
+          "mu_r_PM": 1.05,
+          "mu_r_steel_linear": 5000.0,
+          "pm_temp_coeff": -0.12,
+          "steel_grade": "M600-50A",
+          "steinmetz_alpha": 2.0
+        },
+        "num_planes": 7,
+        "operating_point": {
+          "I_rms": 6.014065304058602,
+          "ambient_temp": 40.0,
+          "gamma_advance": 0.0,
+          "speed_rpm": 600.0,
+          "winding_temp": 80.0
+        },
+        "winding": {
+          "coil_pitch": null,
+          "conductor_diameter": null,
+          "current_density": 5000000.0,
+          "fill_factor": 0.58,
+          "parallel_paths": 1,
+          "phases": 3,
+          "turns_per_phase": 65
+        }
+      },
+      "analytical_result": {
+        "back_emf_rms": 100.0,
+        "computation_time_ms": 0.10880001354962587,
+        "efficiency": 0.9777352063642869,
+        "engine_name": "Quasi3D_Analytical_Engine",
+        "fidelity": "analytical",
+        "losses": {
+          "copper": 5.4255090395030035,
+          "core": 2.248532415459045,
+          "mechanical": 0.7006168897697466,
+          "rotor": 0.08618301135381233
+        },
+        "max_flux_densities": {
+          "airgap": 0.7891800421416363
+        },
+        "plane_results": [
+          {
+            "B_g": 0.7891800421416363,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.568209630341978,
+              "yoke": 1.0314320022611514
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 0,
+            "r_mean": 0.07869257142857143,
+            "tau_p": 0.03090250053651126,
+            "torque_contribution": 0.6922997985257776
+          },
+          {
+            "B_g": 0.7888505907003895,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5679724253042805,
+              "yoke": 1.1174871905609118
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 1,
+            "r_mean": 0.08529371428571428,
+            "tau_p": 0.03349476327467334,
+            "torque_contribution": 0.750060261058855
+          },
+          {
+            "B_g": 0.7884949246617836,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5677163457564841,
+              "yoke": 1.2034301302411963
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 2,
+            "r_mean": 0.09189485714285714,
+            "tau_p": 0.03608702601283544,
+            "torque_contribution": 0.8077453820313854
+          },
+          {
+            "B_g": 0.7879635012947689,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5673337209322336,
+              "yoke": 1.2890075663836769
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 3,
+            "r_mean": 0.098496,
+            "tau_p": 0.038679288750997534,
+            "torque_contribution": 0.8651851760943117
+          },
+          {
+            "B_g": 0.7869238414749645,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5665851658619745,
+              "yoke": 1.3735813466791897
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 4,
+            "r_mean": 0.10509714285714286,
+            "tau_p": 0.041271551489159626,
+            "torque_contribution": 0.9219513137852016
+          },
+          {
+            "B_g": 0.7854278745231507,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5655080696566686,
+              "yoke": 1.4570806456456424
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 5,
+            "r_mean": 0.11169828571428572,
+            "tau_p": 0.04386381422732172,
+            "torque_contribution": 0.9779962568592897
+          },
+          {
+            "B_g": 0.7831627924468706,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5638772105617468,
+              "yoke": 1.5387407831848467
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 6,
+            "r_mean": 0.11829942857142857,
+            "tau_p": 0.04645607696548381,
+            "torque_contribution": 1.032806750078468
+          }
+        ],
+        "power_w": 371.54902958717344,
+        "torque_nm": 6.048044938433288,
+        "total_losses_w": 8.460841356085608,
+        "warnings": []
+      },
+      "autocoil_result": null,
+      "candidate_id": "NF-DSSR_slotted-68",
+      "maggen_result": null,
+      "meets_requirements": true,
+      "openafpm_result": null,
+      "reasons": [],
+      "score": 1.2865584079839483
+    },
+    "computation_time_ms": 42.33080000267364,
+    "iterations": [
+      {
+        "artifact_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\lab\\autonomous-lab\\iteration_001.json",
+        "best_candidate": {
+          "analytical_input": {
+            "geometry": {
+              "D_out": 0.2432,
+              "Q": 48,
+              "g": 0.0025,
+              "k_D": 0.62,
+              "l_PM": 0.0043776,
+              "l_s": 0.029183999999999998,
+              "p": 8,
+              "rotor_yoke_thickness": 0.008512,
+              "slot_depth": 0.025,
+              "slot_opening": 0.009669822187749384,
+              "tooth_width": 0.016245301275418962,
+              "topology": "DSSR_slotted",
+              "w_PM": 0.027849087900718224,
+              "winding_thickness": null,
+              "yoke_thickness": 0.008512
+            },
+            "magnet_config": {
+              "halbach_ratio": 1.0,
+              "mag_type": "conventional",
+              "segments_per_pole": 1
+            },
+            "materials": {
+              "B_sat": 1.8,
+              "Br": 1.28,
+              "Hcj": 955000.0,
+              "copper_resistivity_20c": 1.678e-08,
+              "k_eddy": 0.53,
+              "k_exc": 0.0,
+              "k_hys": 143.0,
+              "mu_r_PM": 1.05,
+              "mu_r_steel_linear": 5000.0,
+              "pm_temp_coeff": -0.12,
+              "steel_grade": "M600-50A",
+              "steinmetz_alpha": 2.0
+            },
+            "num_planes": 7,
+            "operating_point": {
+              "I_rms": 6.014065304058602,
+              "ambient_temp": 40.0,
+              "gamma_advance": 0.0,
+              "speed_rpm": 600.0,
+              "winding_temp": 80.0
+            },
+            "winding": {
+              "coil_pitch": null,
+              "conductor_diameter": null,
+              "current_density": 5000000.0,
+              "fill_factor": 0.58,
+              "parallel_paths": 1,
+              "phases": 3,
+              "turns_per_phase": 65
+            }
+          },
+          "analytical_result": {
+            "back_emf_rms": 100.0,
+            "computation_time_ms": 0.10880001354962587,
+            "efficiency": 0.9777352063642869,
+            "engine_name": "Quasi3D_Analytical_Engine",
+            "fidelity": "analytical",
+            "losses": {
+              "copper": 5.4255090395030035,
+              "core": 2.248532415459045,
+              "mechanical": 0.7006168897697466,
+              "rotor": 0.08618301135381233
+            },
+            "max_flux_densities": {
+              "airgap": 0.7891800421416363
+            },
+            "plane_results": [
+              {
+                "B_g": 0.7891800421416363,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.568209630341978,
+                  "yoke": 1.0314320022611514
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 0,
+                "r_mean": 0.07869257142857143,
+                "tau_p": 0.03090250053651126,
+                "torque_contribution": 0.6922997985257776
+              },
+              {
+                "B_g": 0.7888505907003895,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5679724253042805,
+                  "yoke": 1.1174871905609118
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 1,
+                "r_mean": 0.08529371428571428,
+                "tau_p": 0.03349476327467334,
+                "torque_contribution": 0.750060261058855
+              },
+              {
+                "B_g": 0.7884949246617836,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5677163457564841,
+                  "yoke": 1.2034301302411963
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 2,
+                "r_mean": 0.09189485714285714,
+                "tau_p": 0.03608702601283544,
+                "torque_contribution": 0.8077453820313854
+              },
+              {
+                "B_g": 0.7879635012947689,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5673337209322336,
+                  "yoke": 1.2890075663836769
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 3,
+                "r_mean": 0.098496,
+                "tau_p": 0.038679288750997534,
+                "torque_contribution": 0.8651851760943117
+              },
+              {
+                "B_g": 0.7869238414749645,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5665851658619745,
+                  "yoke": 1.3735813466791897
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 4,
+                "r_mean": 0.10509714285714286,
+                "tau_p": 0.041271551489159626,
+                "torque_contribution": 0.9219513137852016
+              },
+              {
+                "B_g": 0.7854278745231507,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5655080696566686,
+                  "yoke": 1.4570806456456424
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 5,
+                "r_mean": 0.11169828571428572,
+                "tau_p": 0.04386381422732172,
+                "torque_contribution": 0.9779962568592897
+              },
+              {
+                "B_g": 0.7831627924468706,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5638772105617468,
+                  "yoke": 1.5387407831848467
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 6,
+                "r_mean": 0.11829942857142857,
+                "tau_p": 0.04645607696548381,
+                "torque_contribution": 1.032806750078468
+              }
+            ],
+            "power_w": 371.54902958717344,
+            "torque_nm": 6.048044938433288,
+            "total_losses_w": 8.460841356085608,
+            "warnings": []
+          },
+          "autocoil_result": null,
+          "candidate_id": "NF-DSSR_slotted-68",
+          "maggen_result": null,
+          "meets_requirements": true,
+          "openafpm_result": null,
+          "reasons": [],
+          "score": 1.2865584079839483
+        },
+        "critique": {
+          "failure_modes": [],
+          "next_requirements": {
+            "max_outer_diameter_m": 0.32,
+            "min_efficiency": 0.5,
+            "num_candidates": 4,
+            "num_planes": 7,
+            "pm_grade": "N42",
+            "prefer_halbach": false,
+            "steel_grade": "M600-50A",
+            "target_power_w": 250.0,
+            "target_speed_rpm": 600.0,
+            "target_voltage_v": 48.0,
+            "topology": "DSSR_slotted"
+          },
+          "validation_actions": [
+            "Correlate Layer 1 torque and flux against FEMM at mean radius.",
+            "Run 3D Elmer validation before hardware release.",
+            "Check magnet retention, rotor deflection, winding temperature, and assembly clearance."
+          ],
+          "verdict": "promote_to_validation"
+        },
+        "index": 1,
+        "novelty": {
+          "closest_nodes": [
+            {
+              "assignee": "",
+              "features": [
+                "halbach permanent magnet array",
+                "reduced back iron",
+                "coreless stator",
+                "air gap flux concentration"
+              ],
+              "node_id": "afpm-halbach-coreless",
+              "source": "local_seed",
+              "title": "Halbach rotor coreless axial flux generator"
+            },
+            {
+              "assignee": "",
+              "features": [
+                "printed circuit board stator",
+                "coreless winding",
+                "single stator double rotor",
+                "low cogging torque"
+              ],
+              "node_id": "afpm-coreless-pcb",
+              "source": "local_seed",
+              "title": "Coreless PCB stator axial flux permanent magnet machine"
+            },
+            {
+              "assignee": "YASA family",
+              "features": [
+                "yokeless segmented armature",
+                "concentrated tooth coils",
+                "dual rotor axial flux",
+                "high torque density"
+              ],
+              "node_id": "afpm-yasa-baseline",
+              "source": "local_seed",
+              "title": "Yokeless segmented armature axial flux machine"
+            }
+          ],
+          "differentiators": [
+            "0",
+            "0025",
+            "16",
+            "243",
+            "48",
+            "62",
+            "airgap",
+            "diameter",
+            "dssr",
+            "kd",
+            "m",
+            "outer"
+          ],
+          "max_overlap": 0.03225806451612903,
+          "novelty_score": 0.967741935483871
+        },
+        "requirements": {
+          "max_outer_diameter_m": 0.32,
+          "min_efficiency": 0.5,
+          "num_candidates": 4,
+          "num_planes": 7,
+          "pm_grade": "N42",
+          "prefer_halbach": false,
+          "steel_grade": "M600-50A",
+          "target_power_w": 250.0,
+          "target_speed_rpm": 600.0,
+          "target_voltage_v": 48.0,
+          "topology": "DSSR_slotted"
+        }
+      },
+      {
+        "artifact_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\lab\\autonomous-lab\\iteration_002.json",
+        "best_candidate": {
+          "analytical_input": {
+            "geometry": {
+              "D_out": 0.2432,
+              "Q": 48,
+              "g": 0.0025,
+              "k_D": 0.62,
+              "l_PM": 0.0043776,
+              "l_s": 0.029183999999999998,
+              "p": 8,
+              "rotor_yoke_thickness": 0.008512,
+              "slot_depth": 0.025,
+              "slot_opening": 0.009669822187749384,
+              "tooth_width": 0.016245301275418962,
+              "topology": "DSSR_slotted",
+              "w_PM": 0.027849087900718224,
+              "winding_thickness": null,
+              "yoke_thickness": 0.008512
+            },
+            "magnet_config": {
+              "halbach_ratio": 1.0,
+              "mag_type": "conventional",
+              "segments_per_pole": 1
+            },
+            "materials": {
+              "B_sat": 1.8,
+              "Br": 1.28,
+              "Hcj": 955000.0,
+              "copper_resistivity_20c": 1.678e-08,
+              "k_eddy": 0.53,
+              "k_exc": 0.0,
+              "k_hys": 143.0,
+              "mu_r_PM": 1.05,
+              "mu_r_steel_linear": 5000.0,
+              "pm_temp_coeff": -0.12,
+              "steel_grade": "M600-50A",
+              "steinmetz_alpha": 2.0
+            },
+            "num_planes": 7,
+            "operating_point": {
+              "I_rms": 6.014065304058602,
+              "ambient_temp": 40.0,
+              "gamma_advance": 0.0,
+              "speed_rpm": 600.0,
+              "winding_temp": 80.0
+            },
+            "winding": {
+              "coil_pitch": null,
+              "conductor_diameter": null,
+              "current_density": 5000000.0,
+              "fill_factor": 0.58,
+              "parallel_paths": 1,
+              "phases": 3,
+              "turns_per_phase": 65
+            }
+          },
+          "analytical_result": {
+            "back_emf_rms": 100.0,
+            "computation_time_ms": 0.09329998283647001,
+            "efficiency": 0.9777352063642869,
+            "engine_name": "Quasi3D_Analytical_Engine",
+            "fidelity": "analytical",
+            "losses": {
+              "copper": 5.4255090395030035,
+              "core": 2.248532415459045,
+              "mechanical": 0.7006168897697466,
+              "rotor": 0.08618301135381233
+            },
+            "max_flux_densities": {
+              "airgap": 0.7891800421416363
+            },
+            "plane_results": [
+              {
+                "B_g": 0.7891800421416363,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.568209630341978,
+                  "yoke": 1.0314320022611514
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 0,
+                "r_mean": 0.07869257142857143,
+                "tau_p": 0.03090250053651126,
+                "torque_contribution": 0.6922997985257776
+              },
+              {
+                "B_g": 0.7888505907003895,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5679724253042805,
+                  "yoke": 1.1174871905609118
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 1,
+                "r_mean": 0.08529371428571428,
+                "tau_p": 0.03349476327467334,
+                "torque_contribution": 0.750060261058855
+              },
+              {
+                "B_g": 0.7884949246617836,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5677163457564841,
+                  "yoke": 1.2034301302411963
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 2,
+                "r_mean": 0.09189485714285714,
+                "tau_p": 0.03608702601283544,
+                "torque_contribution": 0.8077453820313854
+              },
+              {
+                "B_g": 0.7879635012947689,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5673337209322336,
+                  "yoke": 1.2890075663836769
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 3,
+                "r_mean": 0.098496,
+                "tau_p": 0.038679288750997534,
+                "torque_contribution": 0.8651851760943117
+              },
+              {
+                "B_g": 0.7869238414749645,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5665851658619745,
+                  "yoke": 1.3735813466791897
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 4,
+                "r_mean": 0.10509714285714286,
+                "tau_p": 0.041271551489159626,
+                "torque_contribution": 0.9219513137852016
+              },
+              {
+                "B_g": 0.7854278745231507,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5655080696566686,
+                  "yoke": 1.4570806456456424
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 5,
+                "r_mean": 0.11169828571428572,
+                "tau_p": 0.04386381422732172,
+                "torque_contribution": 0.9779962568592897
+              },
+              {
+                "B_g": 0.7831627924468706,
+                "emf_contribution": 0.0,
+                "flux_densities": {
+                  "teeth": 0.5638772105617468,
+                  "yoke": 1.5387407831848467
+                },
+                "losses": {
+                  "copper": 10.0
+                },
+                "plane_index": 6,
+                "r_mean": 0.11829942857142857,
+                "tau_p": 0.04645607696548381,
+                "torque_contribution": 1.032806750078468
+              }
+            ],
+            "power_w": 371.54902958717344,
+            "torque_nm": 6.048044938433288,
+            "total_losses_w": 8.460841356085608,
+            "warnings": []
+          },
+          "autocoil_result": null,
+          "candidate_id": "NF-DSSR_slotted-68",
+          "maggen_result": null,
+          "meets_requirements": true,
+          "openafpm_result": null,
+          "reasons": [],
+          "score": 1.2865584079839483
+        },
+        "critique": {
+          "failure_modes": [],
+          "next_requirements": {
+            "max_outer_diameter_m": 0.32,
+            "min_efficiency": 0.5,
+            "num_candidates": 4,
+            "num_planes": 7,
+            "pm_grade": "N42",
+            "prefer_halbach": false,
+            "steel_grade": "M600-50A",
+            "target_power_w": 250.0,
+            "target_speed_rpm": 600.0,
+            "target_voltage_v": 48.0,
+            "topology": "DSSR_slotted"
+          },
+          "validation_actions": [
+            "Correlate Layer 1 torque and flux against FEMM at mean radius.",
+            "Run 3D Elmer validation before hardware release.",
+            "Check magnet retention, rotor deflection, winding temperature, and assembly clearance."
+          ],
+          "verdict": "promote_to_validation"
+        },
+        "index": 2,
+        "novelty": {
+          "closest_nodes": [
+            {
+              "assignee": "",
+              "features": [
+                "halbach permanent magnet array",
+                "reduced back iron",
+                "coreless stator",
+                "air gap flux concentration"
+              ],
+              "node_id": "afpm-halbach-coreless",
+              "source": "local_seed",
+              "title": "Halbach rotor coreless axial flux generator"
+            },
+            {
+              "assignee": "",
+              "features": [
+                "printed circuit board stator",
+                "coreless winding",
+                "single stator double rotor",
+                "low cogging torque"
+              ],
+              "node_id": "afpm-coreless-pcb",
+              "source": "local_seed",
+              "title": "Coreless PCB stator axial flux permanent magnet machine"
+            },
+            {
+              "assignee": "YASA family",
+              "features": [
+                "yokeless segmented armature",
+                "concentrated tooth coils",
+                "dual rotor axial flux",
+                "high torque density"
+              ],
+              "node_id": "afpm-yasa-baseline",
+              "source": "local_seed",
+              "title": "Yokeless segmented armature axial flux machine"
+            }
+          ],
+          "differentiators": [
+            "0",
+            "0025",
+            "16",
+            "243",
+            "48",
+            "62",
+            "airgap",
+            "diameter",
+            "dssr",
+            "kd",
+            "m",
+            "outer"
+          ],
+          "max_overlap": 0.03225806451612903,
+          "novelty_score": 0.967741935483871
+        },
+        "requirements": {
+          "max_outer_diameter_m": 0.32,
+          "min_efficiency": 0.5,
+          "num_candidates": 4,
+          "num_planes": 7,
+          "pm_grade": "N42",
+          "prefer_halbach": false,
+          "steel_grade": "M600-50A",
+          "target_power_w": 250.0,
+          "target_speed_rpm": 600.0,
+          "target_voltage_v": 48.0,
+          "topology": "DSSR_slotted"
+        }
+      }
+    ],
+    "manifest_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\lab\\autonomous-lab\\manifest.json",
+    "run_id": "autonomous-lab",
+    "summary_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\lab\\autonomous-lab\\summary.md"
+  },
+  "rendering_scene": {
+    "camera": {
+      "x": 0.0,
+      "y": -0.41344,
+      "z": 0.26752000000000004
+    },
+    "meshes": [
+      {
+        "color": "#58616a",
+        "dimensions": {
+          "inner_radius": 0.075392,
+          "outer_radius": 0.1216,
+          "thickness": 0.008512
+        },
+        "kind": "rotor_disk",
+        "material": "electrical_steel",
+        "name": "rotor_back_iron",
+        "transform": {
+          "z": -0.006877599999999999
+        }
+      },
+      {
+        "color": "#b66a2c",
+        "dimensions": {
+          "inner_radius": 0.07689984,
+          "outer_radius": 0.119168,
+          "slots": 48.0,
+          "thickness": 0.029183999999999998
+        },
+        "kind": "stator",
+        "material": "copper_and_steel",
+        "name": "stator_core_or_winding",
+        "transform": {
+          "z": 0.0
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 0.0,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_01",
+        "transform": {
+          "rotation_z": 0.0,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 0.39269908169872414,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_02",
+        "transform": {
+          "rotation_z": 0.39269908169872414,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 0.7853981633974483,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_03",
+        "transform": {
+          "rotation_z": 0.7853981633974483,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 1.1780972450961724,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_04",
+        "transform": {
+          "rotation_z": 1.1780972450961724,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 1.5707963267948966,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_05",
+        "transform": {
+          "rotation_z": 1.5707963267948966,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 1.9634954084936207,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_06",
+        "transform": {
+          "rotation_z": 1.9634954084936207,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 2.356194490192345,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_07",
+        "transform": {
+          "rotation_z": 2.356194490192345,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 2.748893571891069,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_08",
+        "transform": {
+          "rotation_z": 2.748893571891069,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 3.141592653589793,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_09",
+        "transform": {
+          "rotation_z": 3.141592653589793,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 3.5342917352885173,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_10",
+        "transform": {
+          "rotation_z": 3.5342917352885173,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 3.9269908169872414,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_11",
+        "transform": {
+          "rotation_z": 3.9269908169872414,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 4.319689898685965,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_12",
+        "transform": {
+          "rotation_z": 4.319689898685965,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 4.71238898038469,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_13",
+        "transform": {
+          "rotation_z": 4.71238898038469,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 5.105088062083414,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_14",
+        "transform": {
+          "rotation_z": 5.105088062083414,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#1f77b4",
+        "dimensions": {
+          "angle_rad": 5.497787143782138,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_15",
+        "transform": {
+          "rotation_z": 5.497787143782138,
+          "z": -0.00125
+        }
+      },
+      {
+        "color": "#d62728",
+        "dimensions": {
+          "angle_rad": 5.890486225480862,
+          "arc_width": 0.027849087900718224,
+          "radial_width": 0.03973888,
+          "radius": 0.098496,
+          "thickness": 0.0043776
+        },
+        "kind": "magnet",
+        "material": "ndfeb",
+        "name": "pm_16",
+        "transform": {
+          "rotation_z": 5.890486225480862,
+          "z": -0.00125
+        }
+      }
+    ],
+    "title": "test-validation 3D AFPM design scene",
+    "units": "m"
+  },
+  "spec": {
+    "ambient_temp_c": 40.0,
+    "convection_w_per_m2k": 18.0,
+    "iterations": 2,
+    "max_outer_diameter_m": 0.32,
+    "max_winding_temp_c": 120.0,
+    "min_efficiency": 0.5,
+    "name": "test-validation",
+    "num_candidates": 4,
+    "num_planes": 7,
+    "prefer_halbach": false,
+    "run_3d_validation": true,
+    "run_external_solvers": false,
+    "target_power_w": 250.0,
+    "target_speed_rpm": 600.0,
+    "target_voltage_v": 48.0,
+    "topology": "DSSR_slotted",
+    "validation_refinement": "medium"
+  },
+  "thermal_analysis": {
+    "ambient_temp_c": 40.0,
+    "convective_area_m2": 0.07949096955597007,
+    "copper_losses_w": 5.4255090395030035,
+    "iron_losses_w": 0.0,
+    "max_magnet_temp_c": 41.3271445761794,
+    "max_winding_temp_c": 45.913209319629615,
+    "pm_losses_w": 0.0,
+    "status": "pass",
+    "thermal_resistance_k_per_w": 0.6988914069847715,
+    "total_losses_w": 8.460841356085608,
+    "warnings": []
+  },
+  "validation_passed": true,
+  "validation_result": {
+    "electromagnetic": {
+      "analytical": {
+        "back_emf_rms": 100.0,
+        "computation_time_ms": 0.2556999970693141,
+        "efficiency": 0.9777352063642869,
+        "engine_name": "Quasi3D_Analytical_Engine",
+        "fidelity": "analytical",
+        "losses": {
+          "copper": 5.4255090395030035,
+          "core": 2.248532415459045,
+          "mechanical": 0.7006168897697466,
+          "rotor": 0.08618301135381233
+        },
+        "max_flux_densities": {
+          "airgap": 0.7891800421416363
+        },
+        "plane_results": [
+          {
+            "B_g": 0.7891800421416363,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.568209630341978,
+              "yoke": 1.0314320022611514
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 0,
+            "r_mean": 0.07869257142857143,
+            "tau_p": 0.03090250053651126,
+            "torque_contribution": 0.6922997985257776
+          },
+          {
+            "B_g": 0.7888505907003895,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5679724253042805,
+              "yoke": 1.1174871905609118
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 1,
+            "r_mean": 0.08529371428571428,
+            "tau_p": 0.03349476327467334,
+            "torque_contribution": 0.750060261058855
+          },
+          {
+            "B_g": 0.7884949246617836,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5677163457564841,
+              "yoke": 1.2034301302411963
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 2,
+            "r_mean": 0.09189485714285714,
+            "tau_p": 0.03608702601283544,
+            "torque_contribution": 0.8077453820313854
+          },
+          {
+            "B_g": 0.7879635012947689,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5673337209322336,
+              "yoke": 1.2890075663836769
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 3,
+            "r_mean": 0.098496,
+            "tau_p": 0.038679288750997534,
+            "torque_contribution": 0.8651851760943117
+          },
+          {
+            "B_g": 0.7869238414749645,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5665851658619745,
+              "yoke": 1.3735813466791897
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 4,
+            "r_mean": 0.10509714285714286,
+            "tau_p": 0.041271551489159626,
+            "torque_contribution": 0.9219513137852016
+          },
+          {
+            "B_g": 0.7854278745231507,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5655080696566686,
+              "yoke": 1.4570806456456424
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 5,
+            "r_mean": 0.11169828571428572,
+            "tau_p": 0.04386381422732172,
+            "torque_contribution": 0.9779962568592897
+          },
+          {
+            "B_g": 0.7831627924468706,
+            "emf_contribution": 0.0,
+            "flux_densities": {
+              "teeth": 0.5638772105617468,
+              "yoke": 1.5387407831848467
+            },
+            "losses": {
+              "copper": 10.0
+            },
+            "plane_index": 6,
+            "r_mean": 0.11829942857142857,
+            "tau_p": 0.04645607696548381,
+            "torque_contribution": 1.032806750078468
+          }
+        ],
+        "power_w": 371.54902958717344,
+        "torque_nm": 6.048044938433288,
+        "total_losses_w": 8.460841356085608,
+        "warnings": []
+      },
+      "elmer": null,
+      "palace_handoff": {
+        "case_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case",
+        "config_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\palace.json",
+        "geometry_geo_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\geometry.geo",
+        "gui_tool": null,
+        "mesh_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\geometry.msh",
+        "notes": [
+          "Palace is a command-line 3D finite-element electromagnetics solver.",
+          "Generate geometry.msh before execution, then run palace palace.json.",
+          "Expected outputs include JSON metadata, CSV postprocessing, and VTK/PVD fields."
+        ],
+        "run_command": "palace palace.json",
+        "solver_name": "Palace"
+      }
+    },
+    "output_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation",
+    "passed": true,
+    "solver_handoffs": [
+      {
+        "case_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\elmer_case",
+        "config_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\elmer_case\\case.sif",
+        "geometry_geo_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\elmer_case\\geometry.geo",
+        "gui_tool": "ElmerGUI",
+        "mesh_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\elmer_case\\mesh",
+        "notes": [
+          "Open geometry/mesh in ElmerGUI for GUI-based material, boundary, and solver review.",
+          "Generate mesh with Gmsh/ElmerGrid before running ElmerSolver.",
+          "This handoff is a solver deck; it does not claim Elmer was executed."
+        ],
+        "run_command": "ElmerSolver case.sif",
+        "solver_name": "Elmer FEM"
+      },
+      {
+        "case_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case",
+        "config_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\palace.json",
+        "geometry_geo_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\geometry.geo",
+        "gui_tool": null,
+        "mesh_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\geometry.msh",
+        "notes": [
+          "Palace is a command-line 3D finite-element electromagnetics solver.",
+          "Generate geometry.msh before execution, then run palace palace.json.",
+          "Expected outputs include JSON metadata, CSV postprocessing, and VTK/PVD fields."
+        ],
+        "run_command": "palace palace.json",
+        "solver_name": "Palace"
+      }
+    ],
+    "spec": {
+      "generate_handoffs": true,
+      "geometry": {
+        "D_out": 0.2432,
+        "Q": 48,
+        "g": 0.0025,
+        "k_D": 0.62,
+        "l_PM": 0.0043776,
+        "l_s": 0.029183999999999998,
+        "p": 8,
+        "rotor_yoke_thickness": 0.008512,
+        "slot_depth": 0.025,
+        "slot_opening": 0.009669822187749384,
+        "tooth_width": 0.016245301275418962,
+        "topology": "DSSR_slotted",
+        "w_PM": 0.027849087900718224,
+        "winding_thickness": null,
+        "yoke_thickness": 0.008512
+      },
+      "materials": {
+        "B_sat": 1.8,
+        "Br": 1.28,
+        "Hcj": 955000.0,
+        "copper_resistivity_20c": 1.678e-08,
+        "k_eddy": 0.53,
+        "k_exc": 0.0,
+        "k_hys": 143.0,
+        "mu_r_PM": 1.05,
+        "mu_r_steel_linear": 5000.0,
+        "pm_temp_coeff": -0.12,
+        "steel_grade": "M600-50A",
+        "steinmetz_alpha": 2.0
+      },
+      "mesh_refinement": "medium",
+      "name": "test-validation",
+      "operating_point": {
+        "I_rms": 6.014065304058602,
+        "ambient_temp": 40.0,
+        "gamma_advance": 0.0,
+        "speed_rpm": 600.0,
+        "winding_temp": 80.0
+      },
+      "run_analytical": true,
+      "run_elmer_fea": false,
+      "run_palace": false,
+      "run_thermal_fea3d": true,
+      "winding": {
+        "coil_pitch": null,
+        "conductor_diameter": null,
+        "current_density": 5000000.0,
+        "fill_factor": 0.58,
+        "parallel_paths": 1,
+        "phases": 3,
+        "turns_per_phase": 65
+      }
+    },
+    "thermal": {
+      "analytical_estimate_c": 41.26912620341284,
+      "confidence": "HIGH CONFIDENCE",
+      "elmer_thermal_max_c": null,
+      "native_fea3d": {
+        "average_temp_c": 50.829191,
+        "confidence": "MEDIUM CONFIDENCE",
+        "converged": true,
+        "coolant_temp_c": 55.0,
+        "hotspot_angle_deg": 11.25,
+        "hotspot_radius_m": 0.100036,
+        "hotspot_z_m": -0.014592,
+        "max_temp_c": 51.170583,
+        "min_temp_c": 50.228591,
+        "node_count": 4608,
+        "solve_time_ms": 169.3474,
+        "summary_json_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\thermal_fea3d\\thermal_fea3d_summary.json",
+        "thermal_margin_to_180c": 128.829417,
+        "vtk_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\thermal_fea3d\\thermal_fea3d.vtk"
+      }
+    },
+    "validation_time_ms": 272.3666000238154,
+    "warnings": []
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "average_temp_c": 72.383766,
+  "confidence": "MEDIUM CONFIDENCE",
+  "converged": true,
+  "coolant_temp_c": 55.0,
+  "hotspot_angle_deg": 225.0,
+  "hotspot_radius_m": 0.064166,
+  "hotspot_z_m": 0.0,
+  "max_temp_c": 73.285004,
+  "min_temp_c": 71.12695,
+  "node_count": 4608,
+  "solve_time_ms": 179.382,
+  "summary_json_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\portable-generator-500w\\validation\\portable-generator-500w\\thermal_fea3d\\thermal_fea3d_summary.json",
+  "thermal_margin_to_180c": 106.714996,
+  "vtk_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\portable-generator-500w\\validation\\portable-generator-500w\\thermal_fea3d\\thermal_fea3d.vtk"
+}

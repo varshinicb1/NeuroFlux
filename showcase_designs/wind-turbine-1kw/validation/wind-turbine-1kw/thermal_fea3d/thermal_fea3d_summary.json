@@ -1,0 +1,16 @@
+{
+  "average_temp_c": 51.134454,
+  "confidence": "MEDIUM CONFIDENCE",
+  "converged": true,
+  "coolant_temp_c": 55.0,
+  "hotspot_angle_deg": 0.0,
+  "hotspot_radius_m": 0.139173,
+  "hotspot_z_m": -0.0204,
+  "max_temp_c": 51.574619,
+  "min_temp_c": 50.346917,
+  "node_count": 4608,
+  "solve_time_ms": 200.4951,
+  "summary_json_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\wind-turbine-1kw\\validation\\wind-turbine-1kw\\thermal_fea3d\\thermal_fea3d_summary.json",
+  "thermal_margin_to_180c": 128.425381,
+  "vtk_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\wind-turbine-1kw\\validation\\wind-turbine-1kw\\thermal_fea3d\\thermal_fea3d.vtk"
+}

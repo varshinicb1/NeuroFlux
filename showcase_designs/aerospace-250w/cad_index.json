@@ -1,0 +1,31 @@
+{
+  "formats": {
+    "browser_viewer": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\aerospace-250w\\viewer.html",
+    "gmsh_geo": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\aerospace-250w\\geometry.geo",
+    "openscad": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\aerospace-250w\\assembly.scad",
+    "scene3d": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\aerospace-250w\\scene3d.json",
+    "stl": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\aerospace-250w\\assembly.stl"
+  },
+  "parts": [
+    {
+      "inner_radius_m": 0.0319725,
+      "material": "electrical_steel",
+      "name": "rotor_back_iron",
+      "outer_radius_m": 0.05512500000000001
+    },
+    {
+      "inner_radius_m": 0.03261195,
+      "material": "copper_and_steel",
+      "name": "stator_active_region",
+      "outer_radius_m": 0.05402250000000001,
+      "slot_count": 24
+    },
+    {
+      "magnet_thickness_m": 0.004,
+      "material": "ndfeb",
+      "name": "permanent_magnet_array",
+      "pole_count": 8
+    }
+  ],
+  "units": "m"
+}

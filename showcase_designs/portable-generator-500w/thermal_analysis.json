@@ -1,0 +1,16 @@
+{
+  "ambient_temp_c": 40.0,
+  "convective_area_m2": 0.038818237575067256,
+  "copper_losses_w": 182.37940910105291,
+  "iron_losses_w": 0.0,
+  "max_magnet_temp_c": 131.35567479636882,
+  "max_winding_temp_c": 310.70655510169513,
+  "pm_losses_w": 0.0,
+  "status": "fail",
+  "thermal_resistance_k_per_w": 1.4311715066435315,
+  "total_losses_w": 189.15032464318148,
+  "warnings": [
+    "Winding temperature 310.7 C exceeds limit 120.0 C",
+    "Magnet temperature 131.4 C may demagnetize N-grade NdFeB"
+  ]
+}

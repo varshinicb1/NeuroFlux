@@ -1,0 +1,286 @@
+{
+  "artifact_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\lab\\autonomous-lab\\iteration_003.json",
+  "best_candidate": {
+    "analytical_input": {
+      "geometry": {
+        "D_out": 0.552,
+        "Q": 72,
+        "g": 0.0025,
+        "k_D": 0.58,
+        "l_PM": 0.009936,
+        "l_s": 0.06624000000000001,
+        "p": 12,
+        "rotor_yoke_thickness": 0.019320000000000004,
+        "slot_depth": 0.025,
+        "slot_opening": 0.014270684628931636,
+        "tooth_width": 0.023974750176605147,
+        "topology": "DSSR_slotted",
+        "w_PM": 0.041099571731323115,
+        "winding_thickness": null,
+        "yoke_thickness": 0.019320000000000004
+      },
+      "magnet_config": {
+        "halbach_ratio": 1.0,
+        "mag_type": "conventional",
+        "segments_per_pole": 1
+      },
+      "materials": {
+        "B_sat": 1.8,
+        "Br": 1.28,
+        "Hcj": 955000.0,
+        "copper_resistivity_20c": 1.678e-08,
+        "k_eddy": 0.53,
+        "k_exc": 0.0,
+        "k_hys": 143.0,
+        "mu_r_PM": 1.05,
+        "mu_r_steel_linear": 5000.0,
+        "pm_temp_coeff": -0.12,
+        "steel_grade": "M600-50A",
+        "steinmetz_alpha": 2.0
+      },
+      "num_planes": 7,
+      "operating_point": {
+        "I_rms": 10.934664189197457,
+        "ambient_temp": 40.0,
+        "gamma_advance": 0.0,
+        "speed_rpm": 100.0,
+        "winding_temp": 80.0
+      },
+      "winding": {
+        "coil_pitch": null,
+        "conductor_diameter": null,
+        "current_density": 5000000.0,
+        "fill_factor": 0.58,
+        "parallel_paths": 1,
+        "phases": 3,
+        "turns_per_phase": 240
+      }
+    },
+    "analytical_result": {
+      "back_emf_rms": 100.0,
+      "computation_time_ms": 0.1399999891873449,
+      "efficiency": 0.9908174308108866,
+      "engine_name": "Quasi3D_Analytical_Engine",
+      "fidelity": "analytical",
+      "losses": {
+        "copper": 17.935032139577594,
+        "core": 9.562226207006718,
+        "mechanical": 0.11763353012946365,
+        "rotor": 0.11059615998853768
+      },
+      "max_flux_densities": {
+        "airgap": 1.0072287945354488
+      },
+      "plane_results": [
+        {
+          "B_g": 1.0072287945354488,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.7252047320655233,
+            "yoke": 0.827239103422272
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 0,
+          "r_mean": 0.16836,
+          "tau_p": 0.0440765449298648,
+          "torque_contribution": 31.836683574702445
+        },
+        {
+          "B_g": 1.006978536459857,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.725024546251097,
+            "yoke": 0.9083811298077749
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 1,
+          "r_mean": 0.18492,
+          "tau_p": 0.048411942791818714,
+          "torque_contribution": 34.959472388672154
+        },
+        {
+          "B_g": 1.0067049590447525,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.7248275705122218,
+            "yoke": 0.9894598027188032
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 2,
+          "r_mean": 0.20148,
+          "tau_p": 0.05274734065377262,
+          "torque_contribution": 38.07982301456317
+        },
+        {
+          "B_g": 1.0064081003975718,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.7246138322862516,
+            "yoke": 1.0704695112131115
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 3,
+          "r_mean": 0.21804,
+          "tau_p": 0.057082738515726546,
+          "torque_contribution": 41.19751951264042
+        },
+        {
+          "B_g": 1.0060880018334937,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.7243833613201156,
+            "yoke": 1.1514046603333703
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 4,
+          "r_mean": 0.2346,
+          "tau_p": 0.061418136377680455,
+          "torque_contribution": 44.3123465583558
+        },
+        {
+          "B_g": 1.005744707861104,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.7241361896599948,
+            "yoke": 1.23225967238527
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 5,
+          "r_mean": 0.25116,
+          "tau_p": 0.06575353423963437,
+          "torque_contribution": 47.424089491536606
+        },
+        {
+          "B_g": 1.0050844897038826,
+          "emf_contribution": 0.0,
+          "flux_densities": {
+            "teeth": 0.7236608325867956,
+            "yoke": 1.312645314693446
+          },
+          "losses": {
+            "copper": 10.0
+          },
+          "plane_index": 6,
+          "r_mean": 0.26772,
+          "tau_p": 0.07008893210158829,
+          "torque_contribution": 50.517768510730946
+        }
+      ],
+      "power_w": 2991.635157736878,
+      "torque_nm": 288.3277030512015,
+      "total_losses_w": 27.725488036702313,
+      "warnings": []
+    },
+    "autocoil_result": null,
+    "candidate_id": "NF-DSSR_slotted-25",
+    "maggen_result": null,
+    "meets_requirements": true,
+    "openafpm_result": null,
+    "reasons": [],
+    "score": 1.2551040083343885
+  },
+  "critique": {
+    "failure_modes": [],
+    "next_requirements": {
+      "max_outer_diameter_m": 0.6,
+      "min_efficiency": 0.88,
+      "num_candidates": 5,
+      "num_planes": 7,
+      "pm_grade": "N42",
+      "prefer_halbach": false,
+      "steel_grade": "M600-50A",
+      "target_power_w": 2000.0,
+      "target_speed_rpm": 100.0,
+      "target_voltage_v": 120.0,
+      "topology": "DSSR_slotted"
+    },
+    "validation_actions": [
+      "Correlate Layer 1 torque and flux against FEMM at mean radius.",
+      "Run 3D Elmer validation before hardware release.",
+      "Check magnet retention, rotor deflection, winding temperature, and assembly clearance."
+    ],
+    "verdict": "promote_to_validation"
+  },
+  "index": 3,
+  "novelty": {
+    "closest_nodes": [
+      {
+        "assignee": "",
+        "features": [
+          "halbach permanent magnet array",
+          "reduced back iron",
+          "coreless stator",
+          "air gap flux concentration"
+        ],
+        "node_id": "afpm-halbach-coreless",
+        "source": "local_seed",
+        "title": "Halbach rotor coreless axial flux generator"
+      },
+      {
+        "assignee": "",
+        "features": [
+          "printed circuit board stator",
+          "coreless winding",
+          "single stator double rotor",
+          "low cogging torque"
+        ],
+        "node_id": "afpm-coreless-pcb",
+        "source": "local_seed",
+        "title": "Coreless PCB stator axial flux permanent magnet machine"
+      },
+      {
+        "assignee": "YASA family",
+        "features": [
+          "yokeless segmented armature",
+          "concentrated tooth coils",
+          "dual rotor axial flux",
+          "high torque density"
+        ],
+        "node_id": "afpm-yasa-baseline",
+        "source": "local_seed",
+        "title": "Yokeless segmented armature axial flux machine"
+      }
+    ],
+    "differentiators": [
+      "0",
+      "0025",
+      "24",
+      "552",
+      "58",
+      "72",
+      "airgap",
+      "diameter",
+      "dssr",
+      "kd",
+      "m",
+      "outer"
+    ],
+    "max_overlap": 0.03225806451612903,
+    "novelty_score": 0.967741935483871
+  },
+  "requirements": {
+    "max_outer_diameter_m": 0.6,
+    "min_efficiency": 0.88,
+    "num_candidates": 5,
+    "num_planes": 7,
+    "pm_grade": "N42",
+    "prefer_halbach": false,
+    "steel_grade": "M600-50A",
+    "target_power_w": 2000.0,
+    "target_speed_rpm": 100.0,
+    "target_voltage_v": 120.0,
+    "topology": "DSSR_slotted"
+  }
+}

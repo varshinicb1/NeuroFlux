@@ -1,0 +1,16 @@
+{
+  "average_temp_c": 50.829191,
+  "confidence": "MEDIUM CONFIDENCE",
+  "converged": true,
+  "coolant_temp_c": 55.0,
+  "hotspot_angle_deg": 11.25,
+  "hotspot_radius_m": 0.100036,
+  "hotspot_z_m": -0.014592,
+  "max_temp_c": 51.170583,
+  "min_temp_c": 50.228591,
+  "node_count": 4608,
+  "solve_time_ms": 169.3474,
+  "summary_json_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\thermal_fea3d\\thermal_fea3d_summary.json",
+  "thermal_margin_to_180c": 128.829417,
+  "vtk_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\thermal_fea3d\\thermal_fea3d.vtk"
+}

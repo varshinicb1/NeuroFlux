@@ -1,0 +1,471 @@
+<!doctype html>
+            <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <title>portable-generator-500w 3D AFPM design scene</title>
+              <style>
+                body {
+                  margin: 0;
+                  background: #101418;
+                  color: #e8edf2;
+                  font-family: Arial, sans-serif;
+                }
+                #app { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }
+                aside { padding: 20px; background: #171d23; border-right: 1px solid #2a343d; }
+                canvas { width: 100%; height: 100vh; display: block; }
+                pre { white-space: pre-wrap; font-size: 12px; }
+              </style>
+            </head>
+            <body>
+              <div id="app">
+                <aside>
+                  <h1>portable-generator-500w 3D AFPM design scene</h1>
+                  <p>
+                    Deterministic NeuroFlux scene. Open with network access for Three.js rendering.
+                  </p>
+                  <pre id="meta"></pre>
+                </aside>
+                <canvas id="view"></canvas>
+              </div>
+              <script type="module">
+                import * as THREE
+                  from 'https://cdn.jsdelivr.net/npm/three@0.164/build/three.module.js';
+                const sceneData = {
+  "title": "portable-generator-500w 3D AFPM design scene",
+  "units": "m",
+  "camera": {
+    "x": 0.0,
+    "y": -0.28113750000000004,
+    "z": 0.18191250000000003
+  },
+  "meshes": [
+    {
+      "kind": "rotor_disk",
+      "name": "rotor_back_iron",
+      "material": "electrical_steel",
+      "color": "#58616a",
+      "dimensions": {
+        "outer_radius": 0.08268750000000001,
+        "inner_radius": 0.04795875,
+        "thickness": 0.008
+      },
+      "transform": {
+        "z": -0.006500000000000001
+      }
+    },
+    {
+      "kind": "stator",
+      "name": "stator_core_or_winding",
+      "material": "copper_and_steel",
+      "color": "#b66a2c",
+      "dimensions": {
+        "outer_radius": 0.08103375000000002,
+        "inner_radius": 0.048917925,
+        "thickness": 0.019845,
+        "slots": 60.0
+      },
+      "transform": {
+        "z": 0.0
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_01",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 0.0
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 0.0
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_02",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 0.3141592653589793
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 0.3141592653589793
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_03",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 0.6283185307179586
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 0.6283185307179586
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_04",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 0.9424777960769379
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 0.9424777960769379
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_05",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 1.2566370614359172
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 1.2566370614359172
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_06",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 1.5707963267948966
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 1.5707963267948966
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_07",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 1.8849555921538759
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 1.8849555921538759
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_08",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 2.199114857512855
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 2.199114857512855
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_09",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 2.5132741228718345
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 2.5132741228718345
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_10",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 2.827433388230814
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 2.827433388230814
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_11",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 3.141592653589793
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 3.141592653589793
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_12",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 3.455751918948772
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 3.455751918948772
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_13",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 3.7699111843077517
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 3.7699111843077517
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_14",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 4.084070449666731
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 4.084070449666731
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_15",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 4.39822971502571
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 4.39822971502571
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_16",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 4.71238898038469
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 4.71238898038469
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_17",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 5.026548245743669
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 5.026548245743669
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_18",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 5.340707511102648
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 5.340707511102648
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_19",
+      "material": "ndfeb",
+      "color": "#1f77b4",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 5.654866776461628
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 5.654866776461628
+      }
+    },
+    {
+      "kind": "magnet",
+      "name": "pm_20",
+      "material": "ndfeb",
+      "color": "#d62728",
+      "dimensions": {
+        "radius": 0.06532312500000001,
+        "radial_width": 0.029866725000000007,
+        "arc_width": 0.014775742771886001,
+        "thickness": 0.004,
+        "angle_rad": 5.969026041820607
+      },
+      "transform": {
+        "z": -0.00125,
+        "rotation_z": 5.969026041820607
+      }
+    }
+  ]
+};
+                document.getElementById('meta').textContent =
+                  JSON.stringify(sceneData.meshes.slice(0, 8), null, 2);
+                const canvas = document.getElementById('view');
+                const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+                renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0x101418);
+                const camera = new THREE.PerspectiveCamera(
+                  45,
+                  canvas.clientWidth / canvas.clientHeight,
+                  0.001,
+                  10
+                );
+                camera.position.set(sceneData.camera.x, sceneData.camera.y, sceneData.camera.z);
+                camera.lookAt(0, 0, 0);
+                scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+                const light = new THREE.DirectionalLight(0xffffff, 1.8);
+                light.position.set(1, -1, 2);
+                scene.add(light);
+                for (const mesh of sceneData.meshes) {
+                  const color = new THREE.Color(mesh.color);
+                  let object;
+                  if (mesh.kind === 'magnet') {
+                    object = new THREE.Mesh(
+                      new THREE.BoxGeometry(
+                        mesh.dimensions.radial_width,
+                        mesh.dimensions.arc_width,
+                        mesh.dimensions.thickness
+                      ),
+                      new THREE.MeshStandardMaterial({ color, metalness: 0.15, roughness: 0.45 })
+                    );
+                    const r = mesh.dimensions.radius;
+                    const a = mesh.dimensions.angle_rad;
+                    object.position.set(Math.cos(a) * r, Math.sin(a) * r, mesh.transform.z || 0);
+                    object.rotation.z = a;
+                  } else {
+                    object = new THREE.Mesh(
+                      new THREE.CylinderGeometry(
+                        mesh.dimensions.outer_radius,
+                        mesh.dimensions.outer_radius,
+                        mesh.dimensions.thickness,
+                        96
+                      ),
+                      new THREE.MeshStandardMaterial({ color, metalness: 0.35, roughness: 0.38 })
+                    );
+                    object.rotation.x = Math.PI / 2;
+                    object.position.z = mesh.transform.z || 0;
+                  }
+                  scene.add(object);
+                }
+                function animate() {
+                  scene.rotation.z += 0.002;
+                  renderer.render(scene, camera);
+                  requestAnimationFrame(animate);
+                }
+                animate();
+              </script>
+            </body>
+            </html>

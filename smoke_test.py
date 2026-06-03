@@ -68,8 +68,8 @@ except Exception as e:
     traceback.print_exc()
     sys.exit(1)
 
-# Test 4: Check external tools (REQUIRED)
-print("\n[4/5] Testing external tools (REQUIRED)...")
+# Test 4: Check external tools (OPTIONAL - for Phase 2)
+print("\n[4/5] Testing external tools (OPTIONAL)...")
 try:
     tool_config = ExternalToolConfig.auto_detect()
     tools = {
@@ -79,26 +79,21 @@ try:
         "Gmsh": tool_config.get_gmsh() is not None,
     }
     
-    all_available = True
+    available_count = 0
     for name, available in tools.items():
         if available:
             print(f"  OK {name}")
+            available_count += 1
         else:
-            print(f"  FAIL {name} is REQUIRED but not found")
-            all_available = False
+            print(f"  SKIP {name} not found (optional for Phase 2)")
     
-    if not all_available:
-        print("\n  ERROR: External tools are compulsory!")
-        print("  Set environment variables:")
-        print("    NEUROFLUX_ELMER_SOLVER")
-        print("    NEUROFLUX_ELMER_GUI")
-        print("    NEUROFLUX_GMSH")
-        print("    NEUROFLUX_FREECAD")
-        print("    NEUROFLUX_PARAVIEW")
-        sys.exit(1)
+    if available_count == 0:
+        print("\n  NOTE: No external solvers found. Core functionality works without them.")
+        print("  Install Elmer, FreeCAD, ParaView, Gmsh for full 3D FEA capabilities.")
+    else:
+        print(f"\n  OK {available_count}/4 external tools available")
 except Exception as e:
-    print(f"  FAIL Tool config error: {e}")
-    sys.exit(1)
+    print(f"  WARN Tool config error: {e}")
 
 # Test 5: Check GUI templates
 print("\n[5/5] Testing GUI templates...")

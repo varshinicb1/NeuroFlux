@@ -173,7 +173,7 @@ class MasterOrchestrator:
         logger.info(f"Starting NeuroFlux Master Automation: {run_id}")
         logger.info(f"═" * 70)
         
-        # Validate external tools (COMPULSORY)
+        # Validate external tools (only if they will be used)
         self._validate_external_tools()
         
         result = AutomationResult(
@@ -256,44 +256,69 @@ class MasterOrchestrator:
             result.stages[stage_name] = PipelineStage(name=stage_name)
     
     def _validate_external_tools(self) -> None:
-        """Validate that all compulsory external tools are available.
+        """Validate that required external tools are available.
+        
+        Only checks tools that will actually be used based on configuration.
+        Core functionality (discovery, thermal analysis) works without external tools.
         
         Raises:
-            RuntimeError: If any required tool is not available.
+            RuntimeError: If any required tool for enabled features is not available.
         """
         missing_tools = []
+        warnings = []
         
-        # Elmer is always required
-        if not self.tool_config.elmer_available():
-            missing_tools.append("ElmerSolver/ElmerGUI")
+        # Check Elmer only if external solvers are enabled
+        if self.config.run_external_solvers:
+            if not self.tool_config.elmer_available():
+                missing_tools.append("ElmerSolver/ElmerGUI")
+        else:
+            if not self.tool_config.elmer_available():
+                warnings.append("Elmer not found (skipping external solver stage)")
         
-        # Gmsh is always required
-        if self.tool_config.get_gmsh() is None:
-            missing_tools.append("Gmsh")
+        # Check Gmsh only if external solvers are enabled
+        if self.config.run_external_solvers:
+            if self.tool_config.get_gmsh() is None:
+                missing_tools.append("Gmsh")
+        else:
+            if self.tool_config.get_gmsh() is None:
+                warnings.append("Gmsh not found (using internal meshing)")
         
-        # FreeCAD is always required
-        if not self.tool_config.freecad_available():
-            missing_tools.append("FreeCAD")
+        # Check FreeCAD only if CAD export is enabled
+        if self.config.run_cad_export:
+            if not self.tool_config.freecad_available():
+                missing_tools.append("FreeCAD")
+        else:
+            if not self.tool_config.freecad_available():
+                warnings.append("FreeCAD not found (skipping CAD export)")
         
-        # ParaView is always required
-        if not self.tool_config.paraview_available():
-            missing_tools.append("ParaView")
+        # Check ParaView only if visualization is enabled
+        if self.config.run_visualization:
+            if not self.tool_config.paraview_available():
+                missing_tools.append("ParaView")
+        else:
+            if not self.tool_config.paraview_available():
+                warnings.append("ParaView not found (skipping visualization)")
         
+        # Log warnings for optional tools
+        for warning in warnings:
+            logger.warning(f"⚠ {warning}")
+        
+        # Only fail if required tools for enabled features are missing
         if missing_tools:
             error_msg = (
-                f"External tools are COMPULSORY but missing: {', '.join(missing_tools)}\n"
-                f"Set environment variables:\n"
+                f"Required external tools for enabled features are missing: {', '.join(missing_tools)}\n"
+                f"Set environment variables or disable these features:\n"
                 f"  NEUROFLUX_ELMER_SOLVER=<path to ElmerSolver.exe>\n"
                 f"  NEUROFLUX_ELMER_GUI=<path to ElmerGUI.exe>\n"
                 f"  NEUROFLUX_GMSH=<path to gmsh.exe>\n"
                 f"  NEUROFLUX_FREECAD=<path to FreeCAD.exe>\n"
                 f"  NEUROFLUX_PARAVIEW=<path to ParaView.exe>\n"
-                f"Or install tools and ensure they are in PATH."
+                f"Or run with: --no-external-solvers --no-cad-export --no-visualization"
             )
             logger.error(error_msg)
             raise RuntimeError(error_msg)
         
-        logger.info("✓ All compulsory external tools verified")
+        logger.info("✓ External tools validated (core functionality ready)")
     
     def _execute_stage(
         self,

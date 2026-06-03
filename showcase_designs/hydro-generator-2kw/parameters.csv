@@ -1,0 +1,15 @@
+parameter,value
+name,hydro-generator-2kw
+target_power_w,2000.0
+target_speed_rpm,100.0
+outer_diameter_m,0.552
+inner_diameter_m,0.32016
+pole_count,24
+slot_count,72
+air_gap_m,0.0025
+magnet_thickness_m,0.009936
+torque_nm,288.3277030512015
+power_w,2991.635157736878
+efficiency,0.9908174308108866
+thermal_status,pass
+winding_temp_c,43.56149582601179

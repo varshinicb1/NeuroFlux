@@ -1,0 +1,16 @@
+{
+  "average_temp_c": 56.409004,
+  "confidence": "MEDIUM CONFIDENCE",
+  "converged": true,
+  "coolant_temp_c": 55.0,
+  "hotspot_angle_deg": 22.5,
+  "hotspot_radius_m": 0.044321,
+  "hotspot_z_m": 0.0,
+  "max_temp_c": 56.621901,
+  "min_temp_c": 56.021196,
+  "node_count": 4608,
+  "solve_time_ms": 187.2458,
+  "summary_json_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\aerospace-250w\\validation\\aerospace-250w\\thermal_fea3d\\thermal_fea3d_summary.json",
+  "thermal_margin_to_180c": 123.378099,
+  "vtk_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\aerospace-250w\\validation\\aerospace-250w\\thermal_fea3d\\thermal_fea3d.vtk"
+}

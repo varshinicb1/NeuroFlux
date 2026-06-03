@@ -1,0 +1,31 @@
+{
+  "formats": {
+    "browser_viewer": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\wind-turbine-1kw\\viewer.html",
+    "gmsh_geo": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\wind-turbine-1kw\\geometry.geo",
+    "openscad": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\wind-turbine-1kw\\assembly.scad",
+    "scene3d": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\wind-turbine-1kw\\scene3d.json",
+    "stl": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\wind-turbine-1kw\\assembly.stl"
+  },
+  "parts": [
+    {
+      "inner_radius_m": 0.11220000000000001,
+      "material": "electrical_steel",
+      "name": "rotor_back_iron",
+      "outer_radius_m": 0.17
+    },
+    {
+      "inner_radius_m": 0.114444,
+      "material": "copper_and_steel",
+      "name": "stator_active_region",
+      "outer_radius_m": 0.1666,
+      "slot_count": 60
+    },
+    {
+      "magnet_thickness_m": 0.00612,
+      "material": "ndfeb",
+      "name": "permanent_magnet_array",
+      "pole_count": 20
+    }
+  ],
+  "units": "m"
+}

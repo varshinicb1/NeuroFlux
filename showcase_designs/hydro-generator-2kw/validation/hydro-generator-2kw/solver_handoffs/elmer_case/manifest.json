@@ -1,0 +1,14 @@
+{
+  "case_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\validation\\hydro-generator-2kw\\solver_handoffs\\elmer_case",
+  "config_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\validation\\hydro-generator-2kw\\solver_handoffs\\elmer_case\\case.sif",
+  "geometry_geo_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\validation\\hydro-generator-2kw\\solver_handoffs\\elmer_case\\geometry.geo",
+  "gui_tool": "ElmerGUI",
+  "mesh_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\validation\\hydro-generator-2kw\\solver_handoffs\\elmer_case\\mesh",
+  "notes": [
+    "Open geometry/mesh in ElmerGUI for GUI-based material, boundary, and solver review.",
+    "Generate mesh with Gmsh/ElmerGrid before running ElmerSolver.",
+    "This handoff is a solver deck; it does not claim Elmer was executed."
+  ],
+  "run_command": "ElmerSolver case.sif",
+  "solver_name": "Elmer FEM"
+}

@@ -1,0 +1,13 @@
+{
+  "ambient_temp_c": 40.0,
+  "convective_area_m2": 0.43248819208999595,
+  "copper_losses_w": 17.935032139577594,
+  "iron_losses_w": 0.0,
+  "max_magnet_temp_c": 40.80634972798234,
+  "max_winding_temp_c": 43.56149582601179,
+  "pm_losses_w": 0.0,
+  "status": "pass",
+  "thermal_resistance_k_per_w": 0.1284556586090449,
+  "total_losses_w": 27.725488036702313,
+  "warnings": []
+}

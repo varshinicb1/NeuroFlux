@@ -1,0 +1,15 @@
+parameter,value
+name,wind-turbine-1kw
+target_power_w,1000.0
+target_speed_rpm,200.0
+outer_diameter_m,0.34
+inner_diameter_m,0.22440000000000002
+pole_count,20
+slot_count,60
+air_gap_m,0.0025
+magnet_thickness_m,0.00612
+torque_nm,73.23655979902519
+power_w,1497.1029503866118
+efficiency,0.9760343830677638
+thermal_status,pass
+winding_temp_c,53.981471584440165

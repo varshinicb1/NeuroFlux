@@ -1,0 +1,51 @@
+{
+  "Boundaries": {
+    "PEC": {
+      "Attributes": []
+    },
+    "Postprocessing": {
+      "Surfaces": []
+    }
+  },
+  "Domains": {
+    "Materials": [
+      {
+        "Attributes": [
+          1
+        ],
+        "Conductivity": 59594755.661501795,
+        "Name": "homogenized_machine_domain",
+        "Permeability": 0.006283185306999999
+      }
+    ]
+  },
+  "Model": {
+    "L0": 1.0,
+    "Mesh": "geometry.msh",
+    "Refinement": 0
+  },
+  "Postprocessing": {
+    "Fields": {
+      "B": true,
+      "H": true
+    },
+    "Metadata": {
+      "frequency_hz": 250.0,
+      "turns_per_phase": 12
+    },
+    "Output": "postpro"
+  },
+  "Problem": {
+    "Type": "Magnetostatic",
+    "Verbose": 1
+  },
+  "Solver": {
+    "Linear": {
+      "KSPType": "GMRES",
+      "MaxIts": 1000,
+      "Tol": 1e-08,
+      "Type": "AMS"
+    },
+    "Order": 2
+  }
+}

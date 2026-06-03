@@ -1,0 +1,15 @@
+parameter,value
+name,aerospace-250w
+target_power_w,250.0
+target_speed_rpm,8000.0
+outer_diameter_m,0.11025000000000001
+inner_diameter_m,0.063945
+pole_count,8
+slot_count,24
+air_gap_m,0.0025
+magnet_thickness_m,0.004
+torque_nm,0.2414926173840151
+power_w,179.77616595687428
+efficiency,0.8886068373048958
+thermal_status,pass
+winding_temp_c,112.56967824989121

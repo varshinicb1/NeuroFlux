@@ -1,0 +1,31 @@
+{
+  "formats": {
+    "browser_viewer": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\viewer.html",
+    "gmsh_geo": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\geometry.geo",
+    "openscad": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\assembly.scad",
+    "scene3d": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\scene3d.json",
+    "stl": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\hydro-generator-2kw\\assembly.stl"
+  },
+  "parts": [
+    {
+      "inner_radius_m": 0.16008,
+      "material": "electrical_steel",
+      "name": "rotor_back_iron",
+      "outer_radius_m": 0.276
+    },
+    {
+      "inner_radius_m": 0.1632816,
+      "material": "copper_and_steel",
+      "name": "stator_active_region",
+      "outer_radius_m": 0.27048,
+      "slot_count": 72
+    },
+    {
+      "magnet_thickness_m": 0.009936,
+      "material": "ndfeb",
+      "name": "permanent_magnet_array",
+      "pole_count": 24
+    }
+  ],
+  "units": "m"
+}

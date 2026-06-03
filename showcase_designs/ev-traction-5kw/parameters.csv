@@ -1,0 +1,15 @@
+parameter,value
+name,ev-traction-5kw
+target_power_w,5000.0
+target_speed_rpm,3000.0
+outer_diameter_m,0.2625
+inner_diameter_m,0.15225
+pole_count,16
+slot_count,48
+air_gap_m,0.0025
+magnet_thickness_m,0.004725
+torque_nm,16.929262490396507
+power_w,5270.434444058682
+efficiency,0.9909654298166398
+thermal_status,pass
+winding_temp_c,67.29406287341587

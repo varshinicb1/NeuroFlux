@@ -1,0 +1,14 @@
+{
+  "case_dir": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case",
+  "config_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\palace.json",
+  "geometry_geo_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\geometry.geo",
+  "gui_tool": null,
+  "mesh_path": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\test-validation\\validation\\test-validation\\solver_handoffs\\palace_case\\geometry.msh",
+  "notes": [
+    "Palace is a command-line 3D finite-element electromagnetics solver.",
+    "Generate geometry.msh before execution, then run palace palace.json.",
+    "Expected outputs include JSON metadata, CSV postprocessing, and VTK/PVD fields."
+  ],
+  "run_command": "palace palace.json",
+  "solver_name": "Palace"
+}

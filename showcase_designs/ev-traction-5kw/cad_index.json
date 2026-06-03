@@ -1,0 +1,31 @@
+{
+  "formats": {
+    "browser_viewer": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\ev-traction-5kw\\viewer.html",
+    "gmsh_geo": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\ev-traction-5kw\\geometry.geo",
+    "openscad": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\ev-traction-5kw\\assembly.scad",
+    "scene3d": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\ev-traction-5kw\\scene3d.json",
+    "stl": "C:\\Users\\varsh\\.codex\\worktrees\\a9d3\\NeuroFlux\\showcase_designs\\ev-traction-5kw\\assembly.stl"
+  },
+  "parts": [
+    {
+      "inner_radius_m": 0.076125,
+      "material": "electrical_steel",
+      "name": "rotor_back_iron",
+      "outer_radius_m": 0.13125
+    },
+    {
+      "inner_radius_m": 0.0776475,
+      "material": "copper_and_steel",
+      "name": "stator_active_region",
+      "outer_radius_m": 0.128625,
+      "slot_count": 48
+    },
+    {
+      "magnet_thickness_m": 0.004725,
+      "material": "ndfeb",
+      "name": "permanent_magnet_array",
+      "pole_count": 16
+    }
+  ],
+  "units": "m"
+}

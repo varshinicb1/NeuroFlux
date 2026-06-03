@@ -1,0 +1,15 @@
+parameter,value
+name,test-validation
+target_power_w,250.0
+target_speed_rpm,600.0
+outer_diameter_m,0.2432
+inner_diameter_m,0.150784
+pole_count,16
+slot_count,48
+air_gap_m,0.0025
+magnet_thickness_m,0.0043776
+torque_nm,6.048044938433288
+power_w,371.54902958717344
+efficiency,0.9777352063642869
+thermal_status,pass
+winding_temp_c,45.913209319629615

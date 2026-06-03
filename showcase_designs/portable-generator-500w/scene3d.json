@@ -1,0 +1,380 @@
+{
+  "camera": {
+    "x": 0.0,
+    "y": -0.28113750000000004,
+    "z": 0.18191250000000003
+  },
+  "meshes": [
+    {
+      "color": "#58616a",
+      "dimensions": {
+        "inner_radius": 0.04795875,
+        "outer_radius": 0.08268750000000001,
+        "thickness": 0.008
+      },
+      "kind": "rotor_disk",
+      "material": "electrical_steel",
+      "name": "rotor_back_iron",
+      "transform": {
+        "z": -0.006500000000000001
+      }
+    },
+    {
+      "color": "#b66a2c",
+      "dimensions": {
+        "inner_radius": 0.048917925,
+        "outer_radius": 0.08103375000000002,
+        "slots": 60.0,
+        "thickness": 0.019845
+      },
+      "kind": "stator",
+      "material": "copper_and_steel",
+      "name": "stator_core_or_winding",
+      "transform": {
+        "z": 0.0
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 0.0,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_01",
+      "transform": {
+        "rotation_z": 0.0,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 0.3141592653589793,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_02",
+      "transform": {
+        "rotation_z": 0.3141592653589793,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 0.6283185307179586,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_03",
+      "transform": {
+        "rotation_z": 0.6283185307179586,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 0.9424777960769379,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_04",
+      "transform": {
+        "rotation_z": 0.9424777960769379,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 1.2566370614359172,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_05",
+      "transform": {
+        "rotation_z": 1.2566370614359172,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 1.5707963267948966,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_06",
+      "transform": {
+        "rotation_z": 1.5707963267948966,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 1.8849555921538759,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_07",
+      "transform": {
+        "rotation_z": 1.8849555921538759,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 2.199114857512855,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_08",
+      "transform": {
+        "rotation_z": 2.199114857512855,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 2.5132741228718345,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_09",
+      "transform": {
+        "rotation_z": 2.5132741228718345,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 2.827433388230814,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_10",
+      "transform": {
+        "rotation_z": 2.827433388230814,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 3.141592653589793,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_11",
+      "transform": {
+        "rotation_z": 3.141592653589793,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 3.455751918948772,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_12",
+      "transform": {
+        "rotation_z": 3.455751918948772,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 3.7699111843077517,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_13",
+      "transform": {
+        "rotation_z": 3.7699111843077517,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 4.084070449666731,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_14",
+      "transform": {
+        "rotation_z": 4.084070449666731,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 4.39822971502571,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_15",
+      "transform": {
+        "rotation_z": 4.39822971502571,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 4.71238898038469,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_16",
+      "transform": {
+        "rotation_z": 4.71238898038469,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 5.026548245743669,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_17",
+      "transform": {
+        "rotation_z": 5.026548245743669,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 5.340707511102648,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_18",
+      "transform": {
+        "rotation_z": 5.340707511102648,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#1f77b4",
+      "dimensions": {
+        "angle_rad": 5.654866776461628,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_19",
+      "transform": {
+        "rotation_z": 5.654866776461628,
+        "z": -0.00125
+      }
+    },
+    {
+      "color": "#d62728",
+      "dimensions": {
+        "angle_rad": 5.969026041820607,
+        "arc_width": 0.014775742771886001,
+        "radial_width": 0.029866725000000007,
+        "radius": 0.06532312500000001,
+        "thickness": 0.004
+      },
+      "kind": "magnet",
+      "material": "ndfeb",
+      "name": "pm_20",
+      "transform": {
+        "rotation_z": 5.969026041820607,
+        "z": -0.00125
+      }
+    }
+  ],
+  "title": "portable-generator-500w 3D AFPM design scene",
+  "units": "m"
+}

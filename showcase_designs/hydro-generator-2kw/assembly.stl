@@ -1,0 +1,86 @@
+solid neuroflux_afpm_inspection_envelope
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 -0.27600000 -0.03312000
+      vertex 0.27600000 -0.27600000 -0.03312000
+      vertex 0.27600000 0.27600000 -0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 -0.27600000 -0.03312000
+      vertex 0.27600000 0.27600000 -0.03312000
+      vertex -0.27600000 0.27600000 -0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 -0.27600000 0.03312000
+      vertex 0.27600000 0.27600000 0.03312000
+      vertex 0.27600000 -0.27600000 0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 -0.27600000 0.03312000
+      vertex -0.27600000 0.27600000 0.03312000
+      vertex 0.27600000 0.27600000 0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 -0.27600000 -0.03312000
+      vertex -0.27600000 -0.27600000 0.03312000
+      vertex 0.27600000 -0.27600000 0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 -0.27600000 -0.03312000
+      vertex 0.27600000 -0.27600000 0.03312000
+      vertex 0.27600000 -0.27600000 -0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 0.27600000 -0.27600000 -0.03312000
+      vertex 0.27600000 -0.27600000 0.03312000
+      vertex 0.27600000 0.27600000 0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 0.27600000 -0.27600000 -0.03312000
+      vertex 0.27600000 0.27600000 0.03312000
+      vertex 0.27600000 0.27600000 -0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 0.27600000 0.27600000 -0.03312000
+      vertex 0.27600000 0.27600000 0.03312000
+      vertex -0.27600000 0.27600000 0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 0.27600000 0.27600000 -0.03312000
+      vertex -0.27600000 0.27600000 0.03312000
+      vertex -0.27600000 0.27600000 -0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 0.27600000 -0.03312000
+      vertex -0.27600000 0.27600000 0.03312000
+      vertex -0.27600000 -0.27600000 0.03312000
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -0.27600000 0.27600000 -0.03312000
+      vertex -0.27600000 -0.27600000 0.03312000
+      vertex -0.27600000 -0.27600000 -0.03312000
+    endloop
+  endfacet
+endsolid neuroflux_afpm_inspection_envelope
